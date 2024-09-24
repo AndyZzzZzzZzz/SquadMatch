@@ -25,11 +25,6 @@ build-iPhoneOS/
 build-iPhoneSimulator/
 
 ## Specific to RubyMotion (use of CocoaPods):
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
-#
 # vendor/Pods/
 
 ## Documentation cache and generated files:
@@ -52,5 +47,35 @@ build-iPhoneSimulator/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
-# Used by RuboCop. Remote config files pulled in from inherit_from directive.
-# .rubocop-https?--*
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+# Logs and temp files
+/log/*
+!/log/.keep
+/tmp/spring
+/tmp/pids
+
+# Ignore compiled assets
+/public/assets
+/public/packs
+/public/packs-test
+/public/packs-dev
+
+# Node modules
+/node_modules/
+
+# macOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# Docker files
+/docker/*
+
+# VS Code settings
+/.vscode/
+
+# Capistrano
+/capistrano/tmp
