@@ -96,12 +96,12 @@ jobs:
       #     psql -U postgres -h localhost -d postgres -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'postgres' AND pid <> pg_backend_pid();"
       #     bin/rails db:drop db:create db:schema:load
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          # DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare #test test:system
+      # - name: Run tests
+      #   env:
+      #     RAILS_ENV: test
+      #     # DATABASE_URL: postgres://postgres:postgres@localhost:5432
+      #     # REDIS_URL: redis://localhost:6379/0
+      #   run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
