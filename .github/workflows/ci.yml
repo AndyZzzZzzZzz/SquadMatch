@@ -87,18 +87,21 @@ jobs:
 
       - name: Set environment to test
         run: bin/rails db:environment:set RAILS_ENV=test
-
+      
+      - name: Drop and recreate test database
+        env:
+          RAILS_ENV: test
+          # DATABASE_URL: postgres://postgres:postgres@localhost:5432/my_app_test
+        run: |
+          psql -U postgres -h localhost -d postgres -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = 'postgres' AND pid <> pg_backend_pid();"
+          bin/rails db:drop db:create db:schema:load
 
       - name: Run tests
         env:
           RAILS_ENV: test
           # DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
-        # run: bin/rails db:test:prepare test test:system
-        run: |
-            bin/rails db:create db:schema:load # Prepare the test database
-            bin/rails test # Run tests
-            bin/rails test:system # Run system tests
+        run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
