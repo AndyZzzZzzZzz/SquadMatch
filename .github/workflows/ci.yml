@@ -88,15 +88,17 @@ jobs:
       - name: Set environment to test
         run: bin/rails db:environment:set RAILS_ENV=test
 
+
       - name: Run tests
         env:
           RAILS_ENV: test
           # DATABASE_URL: postgres://postgres:postgres@localhost:5432
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
-            # bin/rails db:create db:schema:load # Prepare the test database
-            # bin/rails test # Run tests
-            # bin/rails test:system # Run system tests
+        # run: bin/rails db:test:prepare test test:system
+        run: |
+            bin/rails db:create db:schema:load # Prepare the test database
+            bin/rails test # Run tests
+            bin/rails test:system # Run system tests
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
