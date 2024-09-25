@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-    belongs_to :host, class_name: 'User'
+    belongs_to :host, class_name: "User"
     belongs_to :club
     belongs_to :event_type
     belongs_to :category
@@ -14,5 +14,4 @@ class Event < ApplicationRecord
             errors.add(:event_datetime, "must be in the future")
         end
     end
-
 end
