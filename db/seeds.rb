@@ -18,7 +18,7 @@
 # # User.delete_all
 
 # #Category
-# cat = Category.create!(name: "Badminton") 
+# cat = Category.create!(name: "Badminton")
 # Category.create!(name: "Tennis", description: "Clubs/Events related to Tennis")
 
 # # User
@@ -57,16 +57,13 @@
 
 # # create event
 # Event.create!(
-#   host: user,       
-#   club: club,       
+#   host: user,
+#   club: club,
 #   event_type: evtype,
-#   category: cat,     
-#   capacity: 100,          
+#   category: cat,
+#   capacity: 100,
 #   location: "Local Stadium",
 #   description: "an badminton event",
 #   title: "Badminton Event",
-#   event_datetime: DateTime.new(2024, 12, 15, 14, 30)  
+#   event_datetime: DateTime.new(2024, 12, 15, 14, 30)
 # )
-
-
-
