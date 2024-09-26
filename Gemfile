@@ -4,7 +4,12 @@ ruby "3.1.6"
 
 gem "rails", "~> 7.2.1"
 gem "sprockets-rails"
-gem "sqlite3", ">= 1.4"
+
+# # Use sqlite3 as the database for Active Record
+# gem "sqlite3", ">= 1.4"
+# Use postgreSql
+gem "pg"
+# Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -12,6 +17,14 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
+
+
+# Encrpyt password
+gem "bcrypt", "~> 3.1.7"
+gem "dotenv-rails", groups: [ :development, :test ]
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
