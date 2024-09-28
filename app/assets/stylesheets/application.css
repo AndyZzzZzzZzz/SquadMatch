@@ -1,15 +1,85 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* app/assets/stylesheets/application.css */
+
+/* Import Bootstrap (optional if already included via CDN) */
+/* @import "bootstrap"; */
+
+/* Custom Variables */
+:root {
+    --primary-color: #0d6efd; /* Bootstrap primary */
+    --secondary-color: #6c757d; /* Bootstrap secondary */
+    --dark-bg: #121212; /* Custom dark background */
+    --card-bg: #1e1e1e; /* Custom card background */
+    --footer-bg: #1a1a1a; /* Custom footer background */
+    --text-color: #e0e0e0; /* Light gray text */
+    --muted-text: #a0a0a0; /* Muted text color */
+  }
+  
+  /* Global Styles */
+  body {
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+  }
+
+  
+  /* Card Styles */
+  .card {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: none; /* Remove default borders */
+  }
+  
+  .card-title {
+    color: var(--primary-color);
+  }
+  
+  .card-subtitle {
+    color: var(--muted-text);
+  }
+  
+  .card-footer {
+    background-color: var(--footer-bg);
+    border-top: 1px solid var(--secondary-color);
+  }
+  
+  /* Button Styles */
+  .btn-outline-light {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-light:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  /* User Avatars */
+  .avatar {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+  }
+  
+  /* Hover Effects */
+  .hover-shadow:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-4px);
+    transition: all 0.3s ease;
+  }
+  
+  /* Custom Borders */
+  .border-custom {
+    border-color: var(--secondary-color) !important;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 767.98px) {
+    .card-body {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .card-body .me-3 {
+      margin-bottom: 1rem;
+    }
+  }
+  
