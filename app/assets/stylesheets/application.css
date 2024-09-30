@@ -70,6 +70,21 @@
   .border-custom {
     border-color: var(--secondary-color) !important;
   }
+
+  /* Modal */
+    .modal-content {
+        background-color: var(--secondary-color);
+        border: 10px solid #888;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        animation-name: animatetop;
+        animation-duration: 1s
+    }
+
+    .muted-text {
+    color: var(--muted-text);
+    }
+
+
   
   /* Responsive Adjustments */
   @media (max-width: 767.98px) {
