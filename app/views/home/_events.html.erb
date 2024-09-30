@@ -1,11 +1,20 @@
-<!-- app/views/events/index.html.erb or relevant view file -->
+<h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
 
+<!--
+  Creates a scrollable-container class that represent the events list 
+  add paddings around the content, apply a custom boarder and make the corner roudned 
+  apply a secondary color inside the container while chaing the text color to white
+-->
 <div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="upcoming-events">
-  <h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
 
+  <-- Ruby block that checks if any events present. If exist, loop through the event collection-->
   <% if @events.any? %>
     <% @events.each do |event| %>
-      <!-- Event Card -->
+
+      <!-- 
+        Uses the class card from bootstrap, apply dark background, adds a small shadow to make the card stand out,
+        add bottom margins, and apply a hover effect. The fole name is for reference purposes
+      -->
       <article class="card bg-dark text-white shadow-sm mb-3 hover-shadow" role="article">
         <div class="card-body d-flex">
           <!-- Event Icon -->
@@ -51,7 +60,11 @@
           </div>
         </div>
 
-        <!-- Card Footer -->
+        <!-- 
+          Card Footer
+          uses custom class to styling the footer backgoround. Apply a top border with a secondary color. 
+          Placeholder avatars with initials are displayed as circular with centered text
+        -->
         <footer class="card-footer bg-footer border-top border-secondary">
           <div class="d-flex align-items-center">
             <span class="me-2">Current Users:</span>
@@ -64,6 +77,7 @@
         </footer>
       </article>
     <% end %>
+    <!-- If no events are fetched, the below block of code will be executed -->
   <% else %>
     <!-- No Events Message -->
     <p class="text-center">No upcoming events at the moment. Please check back later!</p>

@@ -7,75 +7,177 @@
    Custom CSS Variables
 =================================================================== */
 :root {
-    --primary-color: #0d6efd; /* Bootstrap primary */
-    --secondary-color: #6c757d; /* Bootstrap secondary */
-    --dark-bg: #121212; /* Custom dark background */
-    --card-bg: #1e1e1e; /* Custom card background */
-    --footer-bg: #1a1a1a; /* Custom footer background */
-    --text-color: #e0e0e0; /* Light gray text */
-    --muted-text: #a0a0a0; /* Muted text color */
-  }
-  
-  /* Global Styles */
-  body {
-    background-color: var(--dark-bg);
-    color: var(--text-color);
-  }
+  /* Primary Colors */
+  --primary-color: #0d6efd; /* Bootstrap primary */
+  --secondary-color: #6c757d; /* Bootstrap secondary */
 
-  
-  /* Card Styles */
-  .card {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: none; /* Remove default borders */
-  }
-  
-  .card-title {
-    color: var(--primary-color);
-  }
-  
-  .card-subtitle {
-    color: var(--muted-text);
-  }
-  
-  .card-footer {
-    background-color: var(--footer-bg);
-    border-top: 1px solid var(--secondary-color);
-  }
-  
-  /* Button Styles */
-  .btn-outline-light {
-    color: var(--primary-color);
-    border-color: var(--primary-color);
-  }
-  
-  .btn-outline-light:hover {
-    background-color: var(--primary-color);
-    color: #fff;
-  }
-  
-  /* User Avatars */
-  .avatar {
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-  }
-  
-  /* Hover Effects */
-  .hover-shadow:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    transform: translateY(-4px);
-    transition: all 0.3s ease;
-  }
-  
-  /* Custom Borders */
-  .border-custom {
-    border-color: var(--secondary-color) !important;
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 767.98px) {
-    .card-body {
+  /* Background Colors */
+  --dark-bg: #121212; /* Custom dark background */
+  --card-bg: #1e1e1e; /* Custom card background */
+  --footer-bg: #1a1a1a; /* Custom footer background */
+  --scrollable-bg: #2c2c2c; /* Scrollable container background */
+
+  /* Text Colors */
+  --text-color: #e0e0e0; /* Light gray text */
+  --muted-text: #a0a0a0; /* Muted text color */
+
+  /* Border Radius */
+  --border-radius: 12px; /* Consistent border radius */
+
+  /* Transition Speed */
+  --transition-speed: 0.3s; /* Consistent transition speed */
+}
+
+/* ===================================================================
+  Global Styles
+=================================================================== */
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* ===================================================================
+  Card Component Styles
+=================================================================== */
+.card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: none; /* Remove default borders */
+  border-radius: var(--border-radius);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+.card-title {
+  color: var(--primary-color);
+}
+
+.card-subtitle {
+  color: var(--muted-text);
+}
+
+.card-footer {
+  background-color: var(--footer-bg);
+  border-top: 1px solid var(--secondary-color);
+}
+
+/* ===================================================================
+  Button Styles
+=================================================================== */
+.btn-outline-light {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.btn-outline-light:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transition: background-color var(--transition-speed), border-color var(--transition-speed);
+}
+
+.btn-primary:hover {
+  background-color: darken(var(--primary-color), 10%);
+  border-color: darken(var(--primary-color), 10%);
+}
+
+/* ===================================================================
+  User Avatars
+=================================================================== */
+.avatar {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: transform var(--transition-speed);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-speed);
+}
+
+.avatar:hover img {
+  transform: scale(1.1);
+}
+
+/* ===================================================================
+  Hover Effects
+=================================================================== */
+.hover-shadow:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+/* ===================================================================
+  Custom Borders
+=================================================================== */
+.border-custom {
+  border-color: var(--secondary-color) !important;
+}
+
+/* ===================================================================
+  Scrollable Container Styles
+=================================================================== */
+.scrollable-container {
+  max-height: 80vh; /* 80% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+  background-color: var(--scrollable-bg); /* Use CSS variable for consistency */
+  position: relative;
+
+  /* Hide the scrollbar initially */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  transition: box-shadow var(--transition-speed), background-color var(--transition-speed);
+}
+
+/* For Chrome, Safari, and Edge */
+.scrollable-container::-webkit-scrollbar {
+  width: 0;  /* Hide the scrollbar */
+  background: transparent;  /* Make scrollbar background transparent */
+  transition: width var(--transition-speed);
+}
+
+/* Show scrollbar on hover */
+.scrollable-container:hover {
+  scrollbar-width: thin; /* For Firefox */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scrollable-container:hover::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+/* Style the scrollbar when it's visible */
+.scrollable-container:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.6); /* Lighter color for better visibility */
+  border-radius: 4px;
+}
+
+/* ===================================================================
+  Responsive Adjustments
+=================================================================== */
+@media (max-width: 767.98px) {
+  .card-body {
       flex-direction: column;
       align-items: flex-start;
   }
@@ -95,7 +197,7 @@
 }
 
 /* ===================================================================
- Accessibility Enhancements
+  Accessibility Enhancements
 =================================================================== */
 /* Focus states for interactive elements */
 a.btn:focus,
@@ -114,7 +216,7 @@ button:focus {
 }
 
 /* ===================================================================
- Animations
+  Animations
 =================================================================== */
 /* Smooth hover transitions for buttons */
 .btn {
@@ -140,7 +242,7 @@ button:focus {
 }
 
 /* ===================================================================
- Utility Classes
+  Utility Classes
 =================================================================== */
 /* Flexbox utilities for alignment */
 .d-flex {
@@ -170,63 +272,4 @@ a {
 
 a:hover {
   color: var(--primary-color);
-}
-
-/* ===================================================================
-   Navbar Icon Styles
-=================================================================== */
-.navbar .navbar-toggler-icon {
-  filter: brightness(0) invert(1); /* Ensures the toggler icon is visible on dark backgrounds */
-}
-
-/* ===================================================================
-   Navbar Brand Styles
-=================================================================== */
-.navbar-brand {
-  font-weight: bold;
-  font-size: 1.5rem;
-}
-
-/* ===================================================================
-   Navbar Link Styles
-=================================================================== */
-.navbar-nav .nav-link {
-  color: var(--text-color);
-  transition: color var(--transition-speed);
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
-  color: var(--primary-color);
-}
-
-/* ===================================================================
-   Active Navbar Link Styles
-=================================================================== */
-.navbar-nav .nav-link.active {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-/* ===================================================================
-   Adjustments for Dark Theme
-=================================================================== */
-[data-bs-theme="dark"] .navbar-nav .nav-link {
-  color: var(--text-color);
-}
-
-[data-bs-theme="dark"] .navbar-nav .nav-link:hover,
-[data-bs-theme="dark"] .navbar-nav .nav-link:focus {
-  color: var(--primary-color);
-}
-
-/* ===================================================================
-   Responsive Adjustments for Navbar
-=================================================================== */
-@media (max-width: 767.98px) {
-  .navbar-nav .nav-link {
-    padding-left: 0;
-    padding-right: 0;
-    text-align: center;
-  }
 }
