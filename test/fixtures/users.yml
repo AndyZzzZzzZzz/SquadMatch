@@ -1,13 +1,15 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/users.yml
 
-one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password: MyString
+john_doe:
+  first_name: John
+  last_name: Doe
+  email: john.doe@example.com
+  password_digest: <%= BCrypt::Password.create('password123') %>
+  username: johndoe
 
-two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  password: MyString
+jane_smith:
+  first_name: Jane
+  last_name: Smith
+  email: jane.smith@example.com
+  password_digest: <%= BCrypt::Password.create('securepass') %>
+  username: janesmith

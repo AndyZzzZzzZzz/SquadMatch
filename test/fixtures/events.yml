@@ -1,11 +1,40 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/events.yml
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+chess_tournament:
+  host: john_doe
+  club: chess_club
+  event_type: conference
+  title: Annual Chess Tournament
+  capacity: 50
+  location: Community Hall
+  description: The biggest chess tournament of the year.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  category: technology
+  event_datetime: 2024-10-10 10:00:00
+
+book_club_meeting:
+  host: jane_smith
+  club: book_club
+  event_type: seminar
+  title: Monthly Book Club Meeting
+  capacity: 30
+  location: Library Conference Room
+  description: Discussing the latest book selection.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  category: arts
+  event_datetime: 2024-10-15 18:00:00
+
+art_workshop:
+  host: john_doe
+  club: book_club
+  event_type: workshop
+  title: Acrylic Painting Workshop
+  capacity: 20
+  location: Art Studio
+  description: Learn the basics of acrylic painting.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  category: arts
+  event_datetime: 2024-10-20 14:00:00
