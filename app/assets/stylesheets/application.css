@@ -3,7 +3,9 @@
 /* Import Bootstrap (optional if already included via CDN) */
 /* @import "bootstrap"; */
 
-/* Custom Variables */
+/* ===================================================================
+   Custom CSS Variables
+=================================================================== */
 :root {
     --primary-color: #0d6efd; /* Bootstrap primary */
     --secondary-color: #6c757d; /* Bootstrap secondary */
@@ -70,31 +72,161 @@
   .border-custom {
     border-color: var(--secondary-color) !important;
   }
-
-  /* Modal */
-    .modal-content {
-        background-color: var(--secondary-color);
-        border: 10px solid #888;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-        animation-name: animatetop;
-        animation-duration: 1s
-    }
-
-    .muted-text {
-    color: var(--muted-text);
-    }
-
-
   
   /* Responsive Adjustments */
   @media (max-width: 767.98px) {
     .card-body {
       flex-direction: column;
       align-items: flex-start;
-    }
-  
-    .card-body .me-3 {
-      margin-bottom: 1rem;
-    }
   }
-  
+
+  .card-body .me-3 {
+      margin-bottom: 1rem;
+  }
+
+  .btn {
+      width: 100%;
+      text-align: center;
+  }
+
+  .avatar {
+      margin-bottom: 8px;
+  }
+}
+
+/* ===================================================================
+ Accessibility Enhancements
+=================================================================== */
+/* Focus states for interactive elements */
+a.btn:focus,
+button:focus {
+  outline: 2px dashed var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient color contrast */
+.text-white {
+  color: #ffffff !important;
+}
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
+
+/* ===================================================================
+ Animations
+=================================================================== */
+/* Smooth hover transitions for buttons */
+.btn {
+  transition: background-color var(--transition-speed), transform 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Fade-in animation for cards */
+.card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* ===================================================================
+ Utility Classes
+=================================================================== */
+/* Flexbox utilities for alignment */
+.d-flex {
+  display: flex !important;
+}
+
+.justify-content-center {
+  justify-content: center !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+/* Button Utility for Dark Mode Toggle */
+#darkModeToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Optional: Add transitions to other interactive elements */
+a {
+  transition: color var(--transition-speed);
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+/* ===================================================================
+   Navbar Icon Styles
+=================================================================== */
+.navbar .navbar-toggler-icon {
+  filter: brightness(0) invert(1); /* Ensures the toggler icon is visible on dark backgrounds */
+}
+
+/* ===================================================================
+   Navbar Brand Styles
+=================================================================== */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* ===================================================================
+   Navbar Link Styles
+=================================================================== */
+.navbar-nav .nav-link {
+  color: var(--text-color);
+  transition: color var(--transition-speed);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  color: var(--primary-color);
+}
+
+/* ===================================================================
+   Active Navbar Link Styles
+=================================================================== */
+.navbar-nav .nav-link.active {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* ===================================================================
+   Adjustments for Dark Theme
+=================================================================== */
+[data-bs-theme="dark"] .navbar-nav .nav-link {
+  color: var(--text-color);
+}
+
+[data-bs-theme="dark"] .navbar-nav .nav-link:hover,
+[data-bs-theme="dark"] .navbar-nav .nav-link:focus {
+  color: var(--primary-color);
+}
+
+/* ===================================================================
+   Responsive Adjustments for Navbar
+=================================================================== */
+@media (max-width: 767.98px) {
+  .navbar-nav .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+  }
+}

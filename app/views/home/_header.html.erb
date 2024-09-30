@@ -1,15 +1,19 @@
-<nav class="navbar bg-dark border-bottom border-body navbar-expand-lg" data-bs-theme="dark">
+<!-- app/views/layouts/application.html.erb or relevant layout file -->
+
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark" role="navigation">
   <div class="container-fluid">
-    <!-- Brand link with Ruby -->
+    <!-- Brand Link -->
     <%= link_to 'Home', root_path, class: 'navbar-brand' %>
 
-    <!-- Toggler for mobile view -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- Toggler for Mobile View -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Collapsible content -->
+    <!-- Collapsible Content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Left-Aligned Navigation Links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <%= link_to 'Dashboard', home_dashboard_path, class: 'nav-link' %>
@@ -19,13 +23,13 @@
         </li>
       </ul>
 
-      <!-- Right-aligned links for Profile and Login -->
+      <!-- Right-Aligned Navigation Links -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <%= link_to 'Profile', home_profile_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+          <%= link_to 'Login', home_login_path, class: 'nav-link' %>
         </li>
       </ul>
     </div>

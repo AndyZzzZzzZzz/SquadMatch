@@ -1,54 +1,71 @@
-<!-- app/views/home/_events.html.erb -->
-<div class="p-2 border-custom rounded bg-secondary text-white">
-  <h4 class="mb-3">Upcoming Events</h4>
+<!-- app/views/events/index.html.erb or relevant view file -->
 
-  <!-- Event Card Template -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex">
-      <div class="me-3">
-        <i class="bi bi-calendar-event" style="font-size: 2rem; color: var(--primary-color);" aria-hidden="true"></i>
-      </div>
-      <div>
-        <h5 class="card-title fw-bold">Placeholder Event 1</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Sport: Basketball</h6>
-        <p class="card-text">This is a placeholder description for the event. The real description will go here once it's dynamic.</p>
-      </div>
-    </div>
-    <div class="card-footer bg-footer border-top border-secondary">
-      <div class="d-flex align-items-center">
-        <span class="me-2">Current Users:</span>
-        <div class="d-flex">
-          <div class="avatar d-flex justify-content-center align-items-center me-2" style="width: 35px; height: 35px;">AB</div>
-          <div class="avatar d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">CD</div>
-          <!-- Add more user avatars as needed -->
+<div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="upcoming-events">
+  <h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
+
+  <% if @events.any? %>
+    <% @events.each do |event| %>
+      <!-- Event Card -->
+      <article class="card bg-dark text-white shadow-sm mb-3 hover-shadow" role="article">
+        <div class="card-body d-flex">
+          <!-- Event Icon -->
+          <div class="me-3 event-icon">
+            <i class="bi bi-calendar-event" aria-hidden="true"></i>
+          </div>
+          
+          <!-- Event Details -->
+          <div class="event-details">
+            <h5 class="card-title fw-bold"><%= event.title %></h5>
+
+            <h6 class="card-subtitle mb-2 text-muted">
+              Type: <%= event.event_type.type_name %>
+            </h6>
+
+            <h6 class="card-subtitle mb-2 text-muted">
+              Category: <%= event.category.name %>
+            </h6>
+
+            <p class="card-text">
+              Hosted by: <%= event.host.first_name %> <%= event.host.last_name %>
+            </p>
+
+            <% if event.club.present? %>
+              <p class="card-text">
+                Organized by Club: <%= event.club.club_name %>
+              </p>
+            <% end %>
+
+            <p class="card-text"><%= event.description %></p>
+
+            <p class="card-text">
+              Capacity: <%= event.capacity %> participants
+            </p>
+
+            <p class="card-text">
+              Location: <%= event.location %>
+            </p>
+
+            <p class="card-text">
+              Date: <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %>
+            </p>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Repeat Event Cards as Needed -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex">
-      <div class="me-3">
-        <i class="bi bi-calendar-event" style="font-size: 2rem; color: var(--primary-color);" aria-hidden="true"></i>
-      </div>
-      <div>
-        <h5 class="card-title fw-bold">Placeholder Event 2</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Sport: Soccer</h6>
-        <p class="card-text">This is another placeholder description for the second event. Replace this with actual data later.</p>
-      </div>
-    </div>
-    <div class="card-footer bg-footer border-top border-secondary">
-      <div class="d-flex align-items-center">
-        <span class="me-2">Current Users:</span>
-        <div class="d-flex">
-          <div class="avatar d-flex justify-content-center align-items-center me-2" style="width: 35px; height: 35px;">EF</div>
-          <div class="avatar d-flex justify-content-center align-items-center" style="width: 35px; height: 35px;">GH</div>
-          <!-- Add more user avatars as needed -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Add more event cards as needed -->
+        <!-- Card Footer -->
+        <footer class="card-footer bg-footer border-top border-secondary">
+          <div class="d-flex align-items-center">
+            <span class="me-2">Current Users:</span>
+            <div class="d-flex">
+              <!-- Participant Avatars -->
+              <div class="avatar me-2 d-flex justify-content-center align-items-center">AB</div>
+              <div class="avatar d-flex justify-content-center align-items-center">CD</div>
+            </div>
+          </div>
+        </footer>
+      </article>
+    <% end %>
+  <% else %>
+    <!-- No Events Message -->
+    <p class="text-center">No upcoming events at the moment. Please check back later!</p>
+  <% end %>
 </div>
