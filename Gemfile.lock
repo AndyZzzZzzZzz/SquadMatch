@@ -103,10 +103,6 @@ GEM
     dotenv-rails (3.1.4)
       dotenv (= 3.1.4)
       railties (>= 6.1)
-    dotenv (3.1.4)
-    dotenv-rails (3.1.4)
-      dotenv (= 3.1.4)
-      railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -166,7 +162,6 @@ GEM
     parser (3.3.5.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.8)
     pg (1.5.8)
     psych (5.1.2)
       stringio
@@ -307,16 +302,13 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
-  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   capybara
   debug
   dotenv-rails
-  dotenv-rails
   importmap-rails
   jbuilder
-  pg
   pg
   puma (>= 5.0)
   rails (~> 7.2.1)
