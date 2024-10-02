@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "home#index"
   get "home/dashboard"
+  get "home/login"
+  get "home/profile"
   get "home/clubs"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

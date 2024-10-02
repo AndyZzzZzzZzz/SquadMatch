@@ -1,17 +1,21 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/clubs.yml
 
-one:
-  club_name: MyString
-  description: MyText
-  created_date: 2024-09-24 19:22:44
-  category: one
-  leader: 1
-  member_count: 1
+chess_club:
+  club_name: Chess Club
+  description: A club for chess enthusiasts.
+  created_date: 2024-09-24
+  category: technology
+  leader: john_doe
+  member_count: 10
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
-two:
-  club_name: MyString
-  description: MyText
-  created_date: 2024-09-24 19:22:44
-  category: two
-  leader: 1
-  member_count: 1
+book_club:
+  club_name: Book Club
+  description: A club for book lovers.
+  created_date: 2024-09-25
+  category: arts
+  leader: jane_smith
+  member_count: 15
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>

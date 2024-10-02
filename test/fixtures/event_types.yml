@@ -1,9 +1,16 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/event_types.yml
 
-one:
-  event_type_id: 1
-  description: MyText
+conference:
+  type_name: Conference
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
-two:
-  event_type_id: 1
-  description: MyText
+workshop:
+  type_name: Workshop
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+
+seminar:
+  type_name: Seminar
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
