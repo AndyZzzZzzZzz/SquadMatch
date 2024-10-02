@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_25_040844) do
+ActiveRecord::Schema[7.2].define(version: 2024_10_02_182623) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -74,6 +74,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_25_040844) do
     t.index ["club_id"], name: "index_events_on_club_id"
     t.index ["event_type_id"], name: "index_events_on_event_type_id"
     t.index ["host_id"], name: "index_events_on_host_id"
+  end
+
+  create_table "news", force: :cascade do |t|
+    t.string "title", limit: 250, null: false
+    t.text "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
