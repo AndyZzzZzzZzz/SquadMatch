@@ -1,9 +1,13 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/categories.yml
 
-one:
-  name: MyString
-  description: MyText
+technology:
+  name: Technology
+  description: All tech-related clubs and events.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
 
-two:
-  name: MyString
-  description: MyText
+arts:
+  name: Arts
+  description: Clubs and events related to various forms of art.
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
