@@ -38,7 +38,7 @@ Details of other dependencies are saved in Gemfile.
 
 ## Iterations 
 
-* see iteration 1 documents [here](document/Iteration%201)
+* see iteration 1 documents [here](document/Iteration_1.md)
 
 <!---
 Things you may want to cover:
