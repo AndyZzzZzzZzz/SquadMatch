@@ -9,5 +9,27 @@ We use JIRA to track features/issues. Following is a screeshot of our current pr
 
 ## Retrospective
 
+#### What did we do well?
+* Holding group meetings twice a week and maintaining close collaboration among team members.
+* Properly organizing tasks and assigning them to individuals as they begin working on them.
+* Excellent design of the home page and dashboard.
 
-## Test Cases
+#### What should we have done better?
+* 
+
+#### What should we start doing?
+* Having separate database for developing and testing
+
+#### What should we stop doing?
+* 
+
+#### What should we keep doing?
+* 
+
+## Testing
+
+### Database Test
+
+### Feature Test
+
+### UI Test
