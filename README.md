@@ -36,7 +36,9 @@ Details of other dependencies are saved in Gemfile.
 * Run `rails server`
 * Using `http://localhost:3000/`
 
+## Iterations 
 
+* see iteration 1 documents [here](document/Iteration%201)
 
 <!---
 Things you may want to cover:
