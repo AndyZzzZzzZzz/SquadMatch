@@ -3,28 +3,42 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title"> <%= event.title %> </h5>
+                    <h5 class="modal-title"> <%= event.title %></h5>
                     <h5 class="muted-text"> <%= event.event_type.type_name %> </h5>
                 </div>
                 <div class="modal-body">
                     <div>
                         <p> Hosted by: <%= event.host.first_name %> <%=event.host.last_name %> </p>
-                        <br>
-                        <p> <%= event.description %> </p>
-                        <br>
-                        <p> Capacity: <%= event.capacity %> </p>
-                        <p> At:  <%= event.location %> </p>
-                        <p> Date: <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %> </p>
-    
+                        <p> <i class="bi bi-person-standing"></i> <%= event.capacity %> </p> 
+                        <p> <i class="bi bi-geo icon-blue"></i>  <%= event.location %> </p>
+                        <p> <i class="bi bi-calendar-event icon-yellow"></i> <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %> </p>
                     </div>
-                    <div>
+                    <div class="mt-4">
+                        <p><span class="muted-text"> Note:</span> <%= event.description %> </p>
                     </div>
                 </div>
-                <div class="modal-footer d-flex justify-content-between align-items-center">
-                    <button class="btn btn-primary"><i class="bi bi-geo"></i></button>
-                    <button type="button" class="btn btn-warning" data-dismiss="modal"> Close </button>
+                <div class="modal-footer d-flex justify-content-end align-items-center">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"> Close </button>
                 </div>
             </div>
         </div>
     </div>
 <% end %>
+
+<div class="modal fade" id="detailModal-news" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex">
+                    <h5 class="modal-title"> Breaking news </h5>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        This is a placeholder for breaking news. The actual content will be added here soon.
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-end align-items-center">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal"> Close </button>
+                </div>
+            </div>
+        </div>
+    </div>

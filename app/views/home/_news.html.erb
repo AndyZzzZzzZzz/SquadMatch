@@ -1,16 +1,17 @@
 <!-- app/views/home/_news.html.erb -->
+<%= render 'home/modal' %>
 <h4 class="mb-3" id="latest-news-updates">Latest News & Updates</h4>
 
 <div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="latest-news-updates">
 
   <!-- News Card 1 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
+  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow" >
     <div class="card-body d-flex flex-column">
       <h5 class="card-title fw-bold">Breaking News 1</h5>
       <p class="card-text">This is a placeholder for breaking news. The actual content will be added here soon.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
+      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+        Read more
+      </button>
     </div>
   </div>
 
@@ -19,9 +20,9 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title fw-bold">Update 2</h5>
       <p class="card-text">Another placeholder for an important update. Stay tuned for more information.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
+      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+        Read more
+      </button>
     </div>
   </div>
 
@@ -30,9 +31,9 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title fw-bold">Announcement 3</h5>
       <p class="card-text">Placeholder text for an upcoming announcement. Details will be provided shortly.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
+      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+        Read more
+      </button>
     </div>
   </div>
 
@@ -41,9 +42,9 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title fw-bold">Event Highlight 4</h5>
       <p class="card-text">This is a placeholder for an event highlight. More information will be available soon.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
+      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+        Read more
+      </button>
     </div>
   </div>
 
@@ -52,53 +53,9 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title fw-bold">Feature Story 5</h5>
       <p class="card-text">Placeholder for a feature story. The full story will be published in the near future.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
-    </div>
-  </div>
-
-  <!-- News Card 5 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Feature Story 5</h5>
-      <p class="card-text">Placeholder for a feature story. The full story will be published in the near future.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
-    </div>
-  </div>
-
-  <!-- News Card 5 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Feature Story 5</h5>
-      <p class="card-text">Placeholder for a feature story. The full story will be published in the near future.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
-    </div>
-  </div>
-
-  <!-- News Card 5 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Feature Story 5</h5>
-      <p class="card-text">Placeholder for a feature story. The full story will be published in the near future.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
-    </div>
-  </div>
-
-  <!-- News Card 5 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Feature Story 5</h5>
-      <p class="card-text">Placeholder for a feature story. The full story will be published in the near future.</p>
-      <div class="mt-auto">
-        <%= link_to 'Read More', '#', class: 'btn btn-outline-light btn-sm' %>
-      </div>
+      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+        Read more
+      </button>
     </div>
   </div>
 

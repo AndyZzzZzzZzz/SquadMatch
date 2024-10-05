@@ -1,0 +1,16 @@
+<!-- app/views/home/_sports_icon.html.erb -->
+<% case event.category.name %>
+    <% when 'Soccer' %>
+        <i class="material-symbols-outlined" aria-hidden="true">sports_and_outdoors</i>
+    <% when 'Basketball' %>
+        <i class="material-symbols-outlined" aria-hidden="true">sports_basketball</i>
+    <% when 'Tennis' %>
+        <i class="material-symbols-outlined" aria-hidden="true">sports_tennis</i>
+    <% when 'Badminton' %>
+        <i class="material-symbols-outlined" aria-hidden="true">search</i>
+    <% when 'Pickleball' %>
+        <i class="material-symbols-outlined" aria-hidden="true">sports_cricket</i>
+    <% else %>
+        <i class="material-symbols-outlined" aria-hidden="true">excercise</i>
+<% end %>
+

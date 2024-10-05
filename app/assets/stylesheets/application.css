@@ -290,3 +290,31 @@ a {
 a:hover {
   color: var(--primary-color);
 }
+
+/* ===================================================================
+  Icon colors
+=================================================================== */
+.icon-blue {
+  color: var(--primary-color);
+}
+
+.icon-red {
+  color: red;
+}
+
+.icon-green {
+  color: green;
+}
+
+.icon-yellow {
+  color: yellow;
+}
+
+/* ===================================================================
+  Material Icon for sport card
+=================================================================== */
+.material-symbols-outlined {
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+
