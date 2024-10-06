@@ -3,60 +3,20 @@
 <h4 class="mb-3" id="latest-news-updates">Latest News & Updates</h4>
 
 <div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="latest-news-updates">
+    <% if @latest_news.any? %>
+        <% @latest_news.each do |news| %>
 
-  <!-- News Card 1 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow" >
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Breaking News 1</h5>
-      <p class="card-text">This is a placeholder for breaking news. The actual content will be added here soon.</p>
-      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
-        Read more
-      </button>
-    </div>
-  </div>
-
-  <!-- News Card 2 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Update 2</h5>
-      <p class="card-text">Another placeholder for an important update. Stay tuned for more information.</p>
-      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
-        Read more
-      </button>
-    </div>
-  </div>
-
-  <!-- News Card 3 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Announcement 3</h5>
-      <p class="card-text">Placeholder text for an upcoming announcement. Details will be provided shortly.</p>
-      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
-        Read more
-      </button>
-    </div>
-  </div>
-
-  <!-- News Card 4 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Event Highlight 4</h5>
-      <p class="card-text">This is a placeholder for an event highlight. More information will be available soon.</p>
-      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
-        Read more
-      </button>
-    </div>
-  </div>
-
-  <!-- News Card 5 -->
-  <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title fw-bold">Feature Story 5</h5>
-      <p class="card-text">Placeholder for a feature story. The full story will be published in the near future.</p>
-      <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
-        Read more
-      </button>
-    </div>
-  </div>
-
+            <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold">Breaking News 1</h5>
+                    <p class="card-text">This is a placeholder for breaking news. The actual content will be added here soon.</p>
+                    <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+                    Read more
+                    </button>
+                </div>
+            </div>
+        <%end %>
+    <% else %>
+        <p class = "text_center"> No news at the moment. </p>
+    <% end %>
 </div>
