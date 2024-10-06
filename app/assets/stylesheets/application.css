@@ -265,6 +265,23 @@ button:focus {
   z-index: 1000;
 }
 
+
+/* ===================================================================
+  Modal
+=================================================================== */
+.modal-content {
+    background-color: var(--secondary-color);
+    border: 10px solid #888;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 1s
+}
+
+.muted-text {
+color: var(--muted-text);
+}
+
+
 /* Optional: Add transitions to other interactive elements */
 a {
   transition: color var(--transition-speed);
@@ -273,3 +290,31 @@ a {
 a:hover {
   color: var(--primary-color);
 }
+
+/* ===================================================================
+  Icon colors
+=================================================================== */
+.icon-blue {
+  color: var(--primary-color);
+}
+
+.icon-red {
+  color: red;
+}
+
+.icon-green {
+  color: green;
+}
+
+.icon-yellow {
+  color: yellow;
+}
+
+/* ===================================================================
+  Material Icon for sport card
+=================================================================== */
+.material-symbols-outlined {
+  font-size: 3rem;
+  color: var(--primary-color);
+}
+

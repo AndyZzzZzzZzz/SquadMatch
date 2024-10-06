@@ -28,6 +28,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  prepared_statement: false
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   adapter: postgresql
