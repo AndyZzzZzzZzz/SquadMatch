@@ -75,10 +75,9 @@
 #     join_at: DateTime.now
 # )
 
-#create participants
+# create participants
 # Participant.create!(
 #     event_id: 1,
 #     user_id: 1,
 #     join_at: DateTime.now
 # )
-
