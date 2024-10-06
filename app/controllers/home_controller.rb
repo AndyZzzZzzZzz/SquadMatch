@@ -5,4 +5,10 @@ class HomeController < ApplicationController
       .where("event_datetime >= ?", DateTime.now)
       .order(event_datetime: :asc) # Order by datetime, default to ascending
   end
+
+  def dashboard
+    @events = Event.includes(:host, :club, :event_type, :category)
+      .where("event_datetime >= ?", DateTime.now)
+      .order(event_datetime: :asc) # Order by datetime, default to ascending
+  end
 end

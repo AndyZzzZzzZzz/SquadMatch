@@ -2,12 +2,12 @@
 
 <!--
   Creates a scrollable-container class that represent the events list 
-  add paddings around the content, apply a custom boarder and make the corner roudned 
-  apply a secondary color inside the container while chaing the text color to white
+  add paddings around the content, apply a custom border and make the corner rounded 
+  apply a secondary color inside the container while changing the text color to white
 -->
 <div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="upcoming-events">
 
-  <-- Ruby block that checks if any events present. If exist, loop through the event collection-->
+  <!-- Ruby block that checks if any events present. If exist, loop through the event collection-->
   <% if @events.any? %>
     <% @events.each do |event| %>
 
@@ -19,19 +19,18 @@
         <div class="card-body d-flex">
           <!-- Event Icon -->
           <div class="me-3 event-icon">
-            <i class="bi bi-calendar-event" aria-hidden="true"></i>
+            <%= render partial:'home/sports_icon', locals: {event: event}%>
           </div>
           
           <!-- Event Details -->
           <div class="event-details">
             <h5 class="card-title fw-bold"><%= event.title %></h5>
-
             <h6 class="card-subtitle mb-2 text-muted">
               Type: <%= event.event_type.type_name %>
             </h6>
 
             <h6 class="card-subtitle mb-2 text-muted">
-              Category: <%= event.category.name %>
+              Sport: <%= event.category.name %>
             </h6>
 
             <p class="card-text">
@@ -40,29 +39,29 @@
 
             <% if event.club.present? %>
               <p class="card-text">
-                Organized by Club: <%= event.club.club_name %>
+                Organized by: <%= event.club.club_name %>
               </p>
             <% end %>
 
-            <p class="card-text"><%= event.description %></p>
+            <p class="card-text"> <span class="muted-text">Notes: </span><%= event.description %></p>
 
             <p class="card-text">
-              Capacity: <%= event.capacity %> participants
+              <i class="bi bi-person-standing"></i> <%= event.capacity %> participants
             </p>
 
             <p class="card-text">
-              Location: <%= event.location %>
+              <i class="bi bi-geo icon-blue"></i> <%= event.location %>
             </p>
 
             <p class="card-text">
-              Date: <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %>
+              <i class="bi bi-calendar-event icon-yellow"></i> <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %>
             </p>
           </div>
         </div>
 
         <!-- 
           Card Footer
-          uses custom class to styling the footer backgoround. Apply a top border with a secondary color. 
+          uses custom class to styling the footer background. Apply a top border with a secondary color. 
           Placeholder avatars with initials are displayed as circular with centered text
         -->
         <footer class="card-footer bg-footer border-top border-secondary">
