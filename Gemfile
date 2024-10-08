@@ -23,6 +23,9 @@ gem "bootsnap", require: false
 gem "bcrypt", "~> 3.1.7"
 gem "dotenv-rails", groups: [ :development, :test ]
 
+# db dev: composite primary key
+# gem 'composite_primary_keys'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

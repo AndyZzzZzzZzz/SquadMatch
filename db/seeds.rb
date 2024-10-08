@@ -67,3 +67,17 @@
 #   title: "Badminton Event",
 #   event_datetime: DateTime.new(2024, 12, 15, 14, 30)
 # )
+
+# create members
+# Member.create!(
+#     club_id: 1,
+#     user_id: 1,
+#     join_at: DateTime.now
+# )
+
+# create participants
+# Participant.create!(
+#     event_id: 1,
+#     user_id: 1,
+#     join_at: DateTime.now
+# )
