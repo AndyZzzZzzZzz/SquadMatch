@@ -8,9 +8,9 @@
 
             <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title fw-bold">Breaking News 1</h5>
-                    <p class="card-text">This is a placeholder for breaking news. The actual content will be added here soon.</p>
-                    <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal-news">
+                    <h5 class="card-title fw-bold"> <%= news.title %></h5>
+                    <p class="card-text"> <%= news.content %></p>
+                    <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal_News-<%= news.id %>">
                     Read more
                     </button>
                 </div>
