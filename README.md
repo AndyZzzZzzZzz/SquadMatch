@@ -47,7 +47,7 @@ Details of other dependencies are saved in Gemfile.
 
 ## Submissions 
 
-* see iteration 1 documents [here](document/Iteration_1.md)
+* Checkout our notes for iteration 1 document [here](document/Iteration_1.md)
 
 ## Retrospective Documentation
 ### Scope of the Project
