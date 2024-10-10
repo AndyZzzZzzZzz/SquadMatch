@@ -79,4 +79,21 @@ Comprehensive Testing: We will include more thorough tests for backend developme
 Conducted thorough testing of cloud-stored data, ensuring accurate retrieval and proper display during website development mode. Verified that all information is correctly presented on the front-end, maintaining data integrity and consistency.
 ![image](https://github.com/user-attachments/assets/5152a2ee-cd0a-4888-9f81-091ae1b58f72)
 
+### HomeController Test: Ensuring Successful Response for HTTP GET Request
+![image](https://github.com/user-attachments/assets/38d0924b-5487-4f79-b338-b07e591df435)
+Create a controller test file for the HomeController to validate that the root URL responds successfully. This test will simulate an HTTP GET request to the root path and include assertions to verify that the response status is successful (HTTP status code 200).
+
+### Database Behavior Testing with Mock Data in Fixtures
+![image](https://github.com/user-attachments/assets/f1e1d2a4-1f30-4036-a3b7-dadca8329236)
+Created mock data under the fixture files to simulate and test database behavior in the test environment. This ensures that the test cases have access to predefined data, allowing validation of database interactions, queries, and relationships without affecting the actual production data.
+
+
+
+
+
+
+
+
+
+
 
