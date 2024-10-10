@@ -1,22 +1,29 @@
 <!-- app/views/home/_news.html.erb -->
+
+<!-- Render the modal partial, which likely contains a modal template for displaying detailed news content -->
 <%= render 'home/modal' %>
+
+<!-- Header for the news section -->
 <h4 class="mb-3" id="latest-news-updates">Latest News & Updates</h4>
+
 
 <div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="latest-news-updates">
     <% if @latest_news.any? %>
-        <% @latest_news.each do |news| %>
-
-            <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title fw-bold"> <%= news.title %></h5>
-                    <p class="card-text"> <%= news.content %></p>
-                    <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal_News-<%= news.id %>">
-                    Read more
-                    </button>
-                </div>
-            </div>
-        <%end %>
-    <% else %>
-        <p class = "text_center"> No news at the moment. </p>
+    
+    <!-- Loop through each news item in the @latest_news array -->
+    <% @latest_news.each do |news| %>
+      <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold"><%= news.title %></h5>
+          <p class="card-text"><%= news.content %></p>  
+          <button class="mt-auto btn btn-primary" data-toggle="modal" data-target="#detailModal_News-<%= news.id %>">
+            Read more
+          </button>
+        </div>
+      </div>
     <% end %>
+  <!-- If there are no news items, display this message -->
+  <% else %>
+    <p class="text_center">No news at the moment.</p>
+  <% end %>
 </div>

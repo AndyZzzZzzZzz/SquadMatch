@@ -1,24 +1,33 @@
 <% @events.each do |event| %>
+    <!-- Modal for each event, triggered when event card is clicked -->
     <div class="modal fade" id="detailModal-<%= event.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+        <!-- Large-sized modal dialog -->
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
+                <!-- Modal header displaying event title and type -->
                 <div class="modal-header d-flex justify-content-between">
-                    <h5 class="modal-title"> <%= event.title %></h5>
-                    <h5 class="muted-text"> <%= event.event_type.type_name %> </h5>
+                    <h5 class="modal-title"><%= event.title %></h5>
+                    <h5 class="muted-text"><%= event.event_type.type_name %></h5>
                 </div>
+                
+                <!-- Modal body displaying detailed event information -->
                 <div class="modal-body">
                     <div>
-                        <p> Hosted by: <%= event.host.first_name %> <%=event.host.last_name %> </p>
+                        <!-- Event host's name -->
+                        <p> Hosted by: <%= event.host.first_name %> <%= event.host.last_name %> </p>
                         <p> <i class="bi bi-person-standing"></i> <%= event.capacity %> </p> 
-                        <p> <i class="bi bi-geo icon-blue"></i>  <%= event.location %> </p>
+                        <p> <i class="bi bi-geo icon-blue"></i> <%= event.location %> </p>
                         <p> <i class="bi bi-calendar-event icon-yellow"></i> <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %> </p>
                     </div>
                     <div class="mt-4">
+                        <!-- Event description -->
                         <p><span class="muted-text"> Note:</span> <%= event.description %> </p>
                     </div>
                 </div>
+                
+                <!-- Modal footer with a close button -->
                 <div class="modal-footer d-flex justify-content-end align-items-center">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"> Close </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -27,21 +36,27 @@
 
 
 <% @latest_news.each do |news| %>
+    <!-- Modal for each news article, triggered by 'Read more' button -->
     <div class="modal fade" id="detailModal_News-<%= news.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header d-flex">
-                        <h5 class="modal-title"> <%= news.title %> </h5>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <%= news.content %>
-                        </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-end align-items-center">
-                        <button type="button" class="btn btn-warning" data-dismiss="modal"> Close </button>
+        <!-- Large-sized modal dialog -->
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">        
+                <div class="modal-header d-flex">
+                    <h5 class="modal-title"><%= news.title %></h5>
+                </div>
+                
+                <!-- Modal body displaying the full content of the news article -->
+                <div class="modal-body">
+                    <div>
+                        <%= news.content %>
                     </div>
                 </div>
+                
+                <!-- Modal footer with a close button -->
+                <div class="modal-footer d-flex justify-content-end align-items-center">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
             </div>
+        </div>
     </div>
 <% end %>
