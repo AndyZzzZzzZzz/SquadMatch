@@ -36,9 +36,9 @@ The initialization of the PostgreSQL database went smoothly, and we were able to
 The cloud database connection worked seamlessly, allowing us to fetch data in real time and send it to the frontend for display.
 The initial build of the frontend interfaces looks modern, with a clean and functional UI design.
 ### Challenges
-Integrating the PostgreSQL database with Rails presented some challenges. We encountered an ActiveRecord error that persisted for a few days, where Rails’ prepared statements would expire, causing the website to throw an error. We eventually found a solution by disabling prepared statements in the database configuration for development mode. However, we’ll need to address this issue for future deployment.
-We ran into dependency issues with the Gemfile and Ruby version when everyone was setting up Ruby on Rails individually. This was resolved through in-person collaboration, which helped us troubleshoot and sync our environments.
-We also encountered some issues with inconsistent CSS rendering across different pages. Some styles appeared differently on various pages, causing layout misalignment and visual inconsistencies that stemmed from conflicting CSS classes and improper asset precompilation. To resolve this, we ensured that all CSS files were properly organized and refactored to remove redundancies. 
+Integrating the PostgreSQL database with Rails presented some challenges. We faced an ActiveRecord error that persisted for a few days, where Rails’ prepared statements would expire, causing the website to throw errors. We resolved this by disabling prepared statements in the database configuration for development mode but will need a permanent solution for deployment. 
+Additionally, we ran into dependency issues with the Gemfile and Ruby version during setup. These were resolved through in-person collaboration, allowing us to troubleshoot and sync our environments.
+We also encountered inconsistent CSS rendering across pages, caused by conflicting CSS classes and improper asset precompilation. Refactoring and organizing the CSS files fixed the issue.
 
 ### Improvements for the Next Stage
 Feature Expansion: We plan to include additional features, such as API integration for real-time location display, a messaging channel for user communication, and login functionality.
