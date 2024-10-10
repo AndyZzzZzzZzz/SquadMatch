@@ -24,6 +24,22 @@ Features in progress:
 * user profile
 * club page
 
+## Dependencies
+
+SquadMatch it built with Ruby on Rails, React.js and PostgreSql.
+
+To run the application locally, SquadMatch requires 
+* ruby 3.1.6
+* rails 7.2.1
+
+Details of other dependencies are saved in Gemfile.
+
+### How to run SquadMatch locally
+
+* Run `bundle install` to ensure all dependencies are installed properly.
+* Run `rails server`
+* Using `http://localhost:3000/`
+
 ## Submissions 
 
 * see iteration 1 documents [here](document/Iteration_1.md)
