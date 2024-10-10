@@ -38,6 +38,8 @@ The initial build of the frontend interfaces looks modern, with a clean and func
 ### Challenges
 Integrating the PostgreSQL database with Rails presented some challenges. We encountered an ActiveRecord error that persisted for a few days, where Rails’ prepared statements would expire, causing the website to throw an error. We eventually found a solution by disabling prepared statements in the database configuration for development mode. However, we’ll need to address this issue for future deployment.
 We ran into dependency issues with the Gemfile and Ruby version when everyone was setting up Ruby on Rails individually. This was resolved through in-person collaboration, which helped us troubleshoot and sync our environments.
+We also encountered some issues with inconsistent CSS rendering across different pages. Some styles appeared differently on various pages, causing layout misalignment and visual inconsistencies that stemmed from conflicting CSS classes and improper asset precompilation. To resolve this, we ensured that all CSS files were properly organized and refactored to remove redundancies. 
+
 ### Improvements for the Next Stage
 Feature Expansion: We plan to include additional features, such as API integration for real-time location display, a messaging channel for user communication, and login functionality.
 UI Improvement: We’re considering switching to a more modern UI framework like React or Next.js. We’re also exploring the use of JavaScript over HTML for a more dynamic frontend experience.
