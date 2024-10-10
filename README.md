@@ -14,15 +14,20 @@ Do you love sports but find it tough to track down someone to play with? You're 
 ## Version History
 ### Version 0.1
 
-Features:
+#### Features:
+- **Home Page**: Displays all recently added events with logos, descriptions, number of participants, and capacities. Events are fetched dynamically from cloud databases and sorted by time, with the most recent event displayed first.
+  
+- **News Page**: Displays all recent news, dynamically fetched from cloud databases.
+  
+- **Navbar**: Helps users navigate between different pages.
 
-* Home Page: displays all upcoming events, and most recent news dynamicly.
-* Dashboard: displays upcoming activities for registered users. 
+- **Dashboard**: Displays upcoming activities for registered users, sorted by time with the most recent events displayed first.
 
-Features in progress:
+#### Features in Progress:
+- **User Profile**: Displays user information, achievements, and clubs a particular user is registered with, along with their profile photo.
 
-* user profile
-* club page
+- **Club Page**: Displays information for specific clubs, including descriptions, management teams, and current members.
+
 
 ## Dependencies
 
