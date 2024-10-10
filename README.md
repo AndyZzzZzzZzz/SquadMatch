@@ -51,9 +51,6 @@ Details of other dependencies are saved in Gemfile.
 * Run `rails server`
 * Using `http://localhost:3000/`
 
-## Submissions 
-
-* Checkout our notes for iteration 1 document [here](document/Iteration_1.md)
 
 ## Retrospective Documentation
 ### Scope of the Project
