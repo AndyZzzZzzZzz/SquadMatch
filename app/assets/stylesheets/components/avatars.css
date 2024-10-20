@@ -1,0 +1,26 @@
+/* ===================================================================
+   components/avatars.css
+=================================================================== */
+.avatar {
+    background-color: var(--teal);
+    color: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform var(--transition-speed);
+  }
+  
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-speed);
+  }
+  
+  .avatar:hover img {
+    transform: scale(1.1);
+  }
+  

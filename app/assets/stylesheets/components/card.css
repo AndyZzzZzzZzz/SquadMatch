@@ -1,0 +1,68 @@
+/* ===================================================================
+   components/card.css
+=================================================================== */
+
+#upcoming-events {
+  font-size: 1.5rem; /* Larger font for visibility */
+  color: #ffffff; /* Warm color to complement the news card */
+  margin-bottom: 20px; /* Space below the header */
+  text-align: center;
+  text-transform: uppercase; /* Optional: Make the text uppercase */
+  letter-spacing: 1px; /* Slight letter spacing for modern feel */
+} 
+
+/* Custom Card Styles */
+.card.custom-card {
+  background-color: #212121; /* Dark gray */
+  color: #D6D6D6;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Card Title */
+.card.custom-card .card-title {
+  color: #F58F7C;
+  font-size: 1.8rem;
+  font-weight: bold; 
+  margin: 0; /* Align with the row neatly */
+}
+
+/* Event Details Right (Type and Sport) */
+.card.custom-card .event-details-right {
+  text-align: right;
+  flex: 0 0 auto;
+}
+
+.card-custom-card .event-details-right .card-subtitle {
+  color: #F58F7C;
+  font-size: 1rem; /* Smaller font size for subtitles */
+  margin: 0;
+}
+
+/* Align Left and Right Columns */
+.card-body .d-flex {
+  margin-bottom: 10px; /* Space between rows */
+}
+
+/* Card Text (Remove Default Paragraph Margin) */
+.card-text {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Ensure Padding and Spacing for Card Body */
+.card.custom-card .card-body {
+  padding: 15px;
+}
+
+/* Card Footer */
+.card-footer.custom-card-footer {
+  background-color: #051747; /* Dark blue */
+  border-top: 1px solid #AAABB8; /* Cool gray border */
+  padding: 10px;
+}
+
+/* Remove Notes Section */
+.card.custom-card .card-text span.text-muted {
+  display: none;
+}

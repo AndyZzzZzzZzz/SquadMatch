@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.2"
+ruby "3.1.6"
 
 gem "rails", "~> 7.2.1"
 gem "sprockets-rails"
@@ -17,7 +17,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
-
+gem 'sassc-rails'
 
 # Encrpyt password
 gem "bcrypt", "~> 3.1.7"

@@ -1,0 +1,80 @@
+/* ===================================================================
+   components/custom-navbar.css
+=================================================================== */
+
+/* Custom Navbar */
+.navbar.custom-navbar {
+  background-color: #4F4F51; /* Dark background */
+  color: #EAEAEA; /* Light text */
+  border-bottom: none; /* Remove border */
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+/* Navbar Brand - Home Button (Non-Bold) */
+.navbar-brand.custom-brand {
+  font-size: 1.7rem;
+  font-weight: normal; /* Keep non-bold */
+  color: #D6D6D6; /* Same size and color */
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar-brand.custom-brand:hover {
+  color: #F58F7C; /* Subtle hover effect */
+}
+
+/* Navbar Links */
+.nav-link.custom-nav-link {
+  color: #D6D6D6;
+  font-size: 1rem;
+  margin: 0 15px;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
+  position: relative; /* For underline effect */
+}
+
+/* Hover Effect for Links: Underline + Red Hover */
+.nav-link.custom-nav-link:hover {
+  color: #F25C5C; /* Bright red for hover */
+  text-decoration: underline; /* Underline effect */
+}
+
+/* Login Button */
+.custom-login-btn {
+  color: white !important; /* Set login button text to white */
+  border-color: white; /* White border for consistency */
+  border-radius: 25px;
+  padding: 8px 20px;
+  transition: all 0.4s ease;
+}
+
+.custom-login-btn:hover {
+  background-color: #446DF6;
+  color: white;
+  box-shadow: 0 0 15px rgba(68, 109, 246, 0.7); /* Glow effect */
+}
+
+/* Navbar Toggler Button */
+.navbar-toggler.custom-toggler {
+  border: none;
+}
+
+.navbar-toggler-icon {
+  filter: brightness(1);
+}
+
+/* Navbar Collapse Alignment */
+.navbar-collapse {
+  justify-content: space-between;
+}
+
+/* Adjustments for Small Screens */
+@media (max-width: 992px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .custom-nav-item {
+    margin-bottom: 10px;
+  }
+}
