@@ -6,7 +6,7 @@ function initializeEvents() {
     const eventsContainer = document.getElementById("events-container");
     const loadingMessage = document.getElementById("loading-message");
     
-      // Show the loading message and clear previous content
+    // Show the loading message and clear previous content
     loadingMessage.style.display = "block";
     eventsContainer.innerHTML = "";
   

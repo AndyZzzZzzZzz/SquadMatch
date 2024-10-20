@@ -1,25 +1,22 @@
 Rails.application.routes.draw do
   root "home#index"
-  get "home/dashboard"
-  get "home/login"
-  get "home/profile"
-  get "home/clubs"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  # Organize with resources for consistency
+  resources :login, only: [:index]
+  resources :clubs, only: [:index]
+  resources :dashboard, only: [:index]
+  resources :profile, only: [:index]
 
-  # Exposes the events data through an API endpoint
+  # API routes without versioning
   namespace :api do
     resources :events, only: [:index]
     resources :news, only: [:index]
   end  
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check endpoint
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/*
+  # PWA service worker and manifest
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
