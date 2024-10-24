@@ -1,0 +1,26 @@
+/* ===================================================================
+   layouts/global.css
+=================================================================== */
+:root {
+    /* Colors */
+    --background: #4F4F51; 
+    --darker: #2C2B30; 
+    --text: #D6D6D6; 
+    --highlight1: #F2C4Ce; 
+    --highlight2: #F58F7C;
+    --dark: #243642;
+    --primary-color: var(--background);         /* Primary Brand Color */
+    --secondary-color: var(--darker);      /* Secondary Brand Color */
+    --muted-text: var(--text);       /* Muted Text Color */
+    
+  }
+  
+  /* ===================================================================
+    Global Styles
+  =================================================================== */
+  body {
+    background-color: var(--background)  !important;
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  

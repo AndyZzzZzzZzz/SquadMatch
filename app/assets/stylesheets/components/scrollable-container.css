@@ -1,0 +1,22 @@
+/* ===================================================================
+   components/scrollable-container.css
+=================================================================== */
+.scrollable-container {
+  max-height: 80vh; /* 80% of the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background-color: #2C2B30; 
+  position: relative;
+
+  /* Hide the scrollbar initially */
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+}
+
+/* Optional: Customize Scrollbar Width and Track */
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+}
+
