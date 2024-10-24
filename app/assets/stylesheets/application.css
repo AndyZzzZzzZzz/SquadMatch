@@ -19,7 +19,7 @@
 
   /* Text Colors */
   --text-color: #e0e0e0; /* Light gray text */
-  --muted-text: #a0a0a0; /* Muted text color */
+  --muted-text: #A8B8B5; /* Muted text color */
 
   /* Border Radius */
   --border-radius: 12px; /* Consistent border radius */
@@ -318,3 +318,30 @@ a:hover {
   color: var(--primary-color);
 }
 
+
+/* ===================================================================
+  User dashboard components
+=================================================================== */
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Left section styling */
+.left-section {
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 50%; /* Match full screen height */
+}
+
+/* Right section styling */
+.right-section {
+  flex: 1;
+  margin-left: 20px;
+  background-color: var(--scrollable-bg);
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 30%; /* Match full screen height */
+  overflow-y: auto; /* Allows scrolling if content overflows */
+}

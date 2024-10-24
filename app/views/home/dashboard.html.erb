@@ -1,17 +1,5 @@
 <style>
-    .container {
-        display: flex;
-    }
-
-    .right-section{
-        width: 80%;
-        padding: 20px;
-    }
-    .events {
-        height: 800px;
-        overflow-y: auto;
-    }
-
+    
 
 </style>
 
@@ -20,7 +8,7 @@
 <!-- app/views/activities/index.html.erb -->
 <div >
 <div class="container">
-    <div class= "left-section col-lg-2 col-md-3 md-4">
+    <div class= "left-section col-lg-2 col-md-2 md-4">
         <h2>Time</h2>
         <select class="form-control">
             <option value="all">All times </option>
@@ -35,11 +23,10 @@
     
 
     <div class="right-section">
-    
+        <!-- User's activities -->
         <h2>Your upcoming activities</h2>
-        
-         <!-- Events Section (Right Column) -->
-            <div class="col-lg-10 col-md-9 mb-4 events">
+         <!-- Dynamically load the activity cards -->
+            <div class="col-lg-14 col-md-12 mb-14 events">
                 <%= render 'home/events_for_dash' %>
             </div>
 
