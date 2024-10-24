@@ -5,5 +5,4 @@ module Api
         render json: news, status: :ok
       end
     end
-  end
-  
+end
