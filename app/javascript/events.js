@@ -1,3 +1,5 @@
+let cachedEvents = []
+
 document.addEventListener("turbo:load", () => {
     initializeEvents();
 });
@@ -25,7 +27,9 @@ function initializeEvents() {
           eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
           return;
         }
-  
+        //overwirte event array
+        cachedEvents = events;
+        
         // Render each event
         events.forEach((event) => {
           const eventHTML = renderEventCard(event);
