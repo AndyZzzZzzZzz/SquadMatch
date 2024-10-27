@@ -1,84 +1,24 @@
-<h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upcoming Events</title>
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="path/to/scrollable-container.css">
+  <!-- Include Bootstrap CSS if not already included -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
 
-<!--
-  Creates a scrollable-container class that represent the events list 
-  add paddings around the content, apply a custom border and make the corner rounded 
-  apply a secondary color inside the container while changing the text color to white
--->
-<div class="scrollable-container p-4 border-custom rounded bg-secondary text-white" role="region" aria-labelledby="upcoming-events">
+  <!-- Scrollable Container for Events -->
+  <div class="scrollable-container p-4 border-custom rounded" id="events-container" role="region" aria-labelledby="upcoming-events">
+    <!-- Event cards will be dynamically inserted here by JavaScript -->
+  </div>
 
-  <!-- Ruby block that checks if any events present. If exist, loop through the event collection -->
-  <% if @events.any? %>
-    <% @events.each do |event| %>
+  <!-- Loading Message -->
+  <div id="loading-message" class="text-center my-3" style="display: none;">Loading events...</div>
 
-      <!-- 
-        Uses the class card from bootstrap, apply dark background, adds a small shadow to make the card stand out,
-        add bottom margins, and apply a hover effect. The fole name is for reference purposes
-      -->
-      <article class="card bg-dark text-white shadow-sm mb-3 hover-shadow" role="article">
-        <div class="card-body d-flex">
-          <!-- Event Icon -->
-          <div class="me-3 event-icon">
-            <%= render partial:'home/sports_icon', locals: {event: event}%>
-          </div>
-          
-          <!-- Event Details -->
-          <div class="event-details">
-            <h5 class="card-title fw-bold"><%= event.title %></h5>
-            <h6 class="card-subtitle mb-2 muted-text">
-              Type: <%= event.event_type.type_name %>
-            </h6>
-
-            <h6 class="card-subtitle mb-2 muted-text">
-              Sport: <%= event.category.name %>
-            </h6>
-
-            <p class="card-text">
-              Hosted by: <%= event.host.first_name %> <%= event.host.last_name %>
-            </p>
-
-            <% if event.club.present? %>
-              <p class="card-text">
-                Organized by: <%= event.club.club_name %>
-              </p>
-            <% end %>
-
-            <p class="card-text"> <span class="muted-text">Notes: </span><%= event.description %></p>
-
-            <p class="card-text">
-              <i class="bi bi-person-standing"></i> <%= event.capacity %> participants
-            </p>
-
-            <p class="card-text">
-              <i class="bi bi-geo icon-blue"></i> <%= event.location %>
-            </p>
-
-            <p class="card-text">
-              <i class="bi bi-calendar-event icon-yellow"></i> <%= event.event_datetime.strftime('%A, %B %d, %Y at %I:%M %p') %>
-            </p>
-          </div>
-        </div>
-
-        <!-- 
-          Card Footer
-          uses custom class to styling the footer background. Apply a top border with a secondary color. 
-          Placeholder avatars with initials are displayed as circular with centered text
-        -->
-        <footer class="card-footer bg-footer border-top border-secondary">
-          <div class="d-flex align-items-center">
-            <span class="me-2">Current Users:</span>
-            <div class="d-flex">
-              <!-- Participant Avatars -->
-              <div class="avatar me-2 d-flex justify-content-center align-items-center">AB</div>
-              <div class="avatar d-flex justify-content-center align-items-center">CD</div>
-            </div>
-          </div>
-        </footer>
-      </article>
-    <% end %>
-    <!-- If no events are fetched, the below block of code will be executed -->
-  <% else %>
-    <!-- No Events Message -->
-    <p class="text-center">No upcoming events at the moment. Please check back later!</p>
-  <% end %>
-</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+/* ===================================================================
+   components/animations.css
+=================================================================== */
+.card {
+    animation: fadeInUp 0.5s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
