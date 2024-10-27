@@ -1,8 +1,11 @@
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+let originalEvents = cachedEvents.slice();
 
 document.addEventListener("turbo:load", () => {
   if (cachedEvents.length > 0) {
     renderEvents(cachedEvents); // Render from cache immediately
+    populateFilters();
+    addSearchAndFilterListeners();
   } else {
     initializeEvents(); // Fetch events if not in cache
   }
@@ -11,6 +14,128 @@ document.addEventListener("turbo:load", () => {
 function arraysAreEqual(arr1, arr2) {
   if (arr1.length !== arr2.length) return false;
   return arr1.every((event, index) => event.id === arr2[index].id);
+}
+
+function populateFilters(){
+  const categories = new Set();
+  const hosts = new Set();
+  const clubs = new Set();
+  const locations = new Set();
+
+  originalEvents.forEach(event => {
+    if (event.category && event.category.name) {
+      categories.add(event.category.name);
+    }
+    if (event.host && event.host.first_name && event.host.last_name) {
+      hosts.add(`${event.host.first_name} ${event.host.last_name}`);
+    }
+    if (event.club && event.club.club_name) {
+      clubs.add(event.club.club_name);
+    }
+    if (event.location) {
+      locations.add(event.location);
+    }
+  });
+
+  // Populate category filter
+  const categoryFilter = document.getElementById("category-filter");
+  categories.forEach(category => {
+    const option = document.createElement("option");
+    option.value = category;
+    option.textContent = category;
+    categoryFilter.appendChild(option);
+  });
+
+  // Populate host filter
+  const hostFilter = document.getElementById("host-filter");
+  hosts.forEach(host => {
+    const option = document.createElement("option");
+    option.value = host;
+    option.textContent = host;
+    hostFilter.appendChild(option);
+  });
+
+  // Populate club filter
+  const clubFilter = document.getElementById("club-filter");
+  clubs.forEach(club => {
+    const option = document.createElement("option");
+    option.value = club;
+    option.textContent = club;
+    clubFilter.appendChild(option);
+  });
+
+  // Populate location filter
+  const locationFilter = document.getElementById("location-filter");
+  locations.forEach(location => {
+    const option = document.createElement("option");
+    option.value = location;
+    option.textContent = location;
+    locationFilter.appendChild(option);
+  });
+}
+
+let listenersAdded = false;
+
+function addSearchAndFilterListeners() {
+  if (listenersAdded) return; // Prevent adding multiple listeners
+  listenersAdded = true;
+
+  const searchInput = document.getElementById("search-input");
+  const categoryFilter = document.getElementById("category-filter");
+  const hostFilter = document.getElementById("host-filter");
+  const clubFilter = document.getElementById("club-filter");
+  const locationFilter = document.getElementById("location-filter");
+
+  if (searchInput) {
+    searchInput.addEventListener("input", filterAndRenderEvents);
+  }
+  if (categoryFilter) {
+    categoryFilter.addEventListener("change", filterAndRenderEvents);
+  }
+  if (hostFilter) {
+    hostFilter.addEventListener("change", filterAndRenderEvents);
+  }
+  if (clubFilter) {
+    clubFilter.addEventListener("change", filterAndRenderEvents);
+  }
+  if (locationFilter) {
+    locationFilter.addEventListener("change", filterAndRenderEvents);
+  }
+}
+
+function filterAndRenderEvents() {
+  const searchInput = document.getElementById("search-input").value.toLowerCase();
+  const categoryValue = document.getElementById("category-filter").value;
+  const hostValue = document.getElementById("host-filter").value;
+  const clubValue = document.getElementById("club-filter").value;
+  const locationValue = document.getElementById("location-filter").value;
+
+  
+  let filteredEvents = originalEvents.filter(event => {
+    // Check search input
+    const titleMatch = event.title && event.title.toLowerCase().includes(searchInput);
+    const descriptionMatch = event.description && event.description.toLowerCase().includes(searchInput);
+    const searchMatch = !searchInput || titleMatch || descriptionMatch;
+
+    // Check category filter
+    const categoryMatch = !categoryValue || (event.category && event.category.name === categoryValue);
+
+    // Check host filter
+    const hostName = event.host ? `${event.host.first_name} ${event.host.last_name}` : "";
+    const hostMatch = !hostValue || hostName === hostValue;
+
+    // Check club filter
+    const clubName = event.club ? event.club.club_name : "";
+    const clubMatch = !clubValue || clubName === clubValue;
+
+    // Check location filter
+    const locationMatch = !locationValue || event.location === locationValue;
+
+    return searchMatch && categoryMatch && hostMatch && clubMatch && locationMatch;
+  });
+
+  // Render filtered events
+  renderEvents(filteredEvents);
 }
 
 function initializeEvents() {
@@ -36,7 +161,12 @@ function initializeEvents() {
 
         //overwirte event array
         cachedEvents = events;
+        originalEvents = events.slice();
         localStorage.setItem("cachedEvents", JSON.stringify(events)); // Save to local storage
+        
+        // Populate filters and add listeners
+        populateFilters();
+        addSearchAndFilterListeners();
 
         renderEvents(events);
       })
