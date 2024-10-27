@@ -5,8 +5,12 @@ document.addEventListener("turbo:load", () => {
 });
 
 function initializeEvents() {
-  const eventsContainer = document.getElementById("events-container");
-  const loadingMessage = document.getElementById("loading-message");
+    const eventsContainer = document.getElementById("events-container");
+    const loadingMessage = document.getElementById("loading-message");
+    
+    // Show the loading message and clear previous content
+    loadingMessage.style.display = "block";
+    eventsContainer.innerHTML = "";
   
     // Fetch events from the API
     fetch("/api/events")
@@ -39,29 +43,21 @@ function initializeEvents() {
         console.error("Error fetching events:", error);
         loadingMessage.style.display = "none"; // Hide loading message on error
         eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
-
       });
-
-      // Add event listeners for enhanced functionality (e.g., modals)
-      addEventCardListeners();
-    })
-    .catch((error) => {
-      console.error("Error fetching events:", error);
-      loadingMessage.style.display = "none"; // Hide loading message on error
-      eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
-    });
-}
-
-// Function to render an event card
-// Function to render an event card
-function renderEventCard(event) {
-  const eventDate = new Date(event.event_datetime).toLocaleString();
-
-  const eventType = event.event_type || {};
-  const eventTypeName = eventType.type_name || 'Event';
-
-  return `
-  <article class="card custom-card mb-3 hover-shadow" role="article" data-event-id="${event.id}">
+  }
+  
+ 
+  
+  // Function to render an event card
+  function renderEventCard(event) {
+    const eventDate = new Date(event.event_datetime).toLocaleString();
+  
+    // Provide default values if event_type or icon is missing
+    const eventType = event.event_type || {};
+    const eventTypeName = eventType.type_name || 'Event';
+  
+    return `
+      <article class="card custom-card mb-3 hover-shadow" role="article" data-event-id="${event.id}">
     <div class="card-body">
       <!-- Title and Subtitles (Aligned Left and Right) -->
       <div class="d-flex justify-content-between align-items-center">
@@ -102,17 +98,14 @@ function renderEventCard(event) {
       </div>
     </footer>
   </article>
-  `;
-}
-
-
-
-
-// Function to add event listeners to event cards
-function addEventCardListeners() {
-  const eventsContainer = document.getElementById("events-container");
-
-  eventsContainer.addEventListener("click", (event) => {
+    `;
+  }
+  
+  // Function to add event listeners to event cards
+  function addEventCardListeners() {
+    const eventsContainer = document.getElementById("events-container");
+  
+    eventsContainer.addEventListener("click", (event) => {
       const card = event.target.closest("[data-event-id]");
       if (card) {
           const eventId = card.getAttribute("data-event-id");
