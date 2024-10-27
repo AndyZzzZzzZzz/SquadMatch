@@ -7,6 +7,7 @@ document.addEventListener("turbo:load", () => {
   }else{
     initializeNews();
   }
+
 });
 
 function arraysAreEqual(arr1, arr2) {
@@ -36,6 +37,7 @@ function initializeNews() {
       originalNews = newsItems.slice();
       localStorage.setItem("cachedNews", JSON.stringify(newsItems));
       renderNews(newsItems);
+
     })
     .catch(function (error) {
       console.error(error);
@@ -61,6 +63,7 @@ function renderNews(newsItems){
   // Add event listeners for interactive functionality
   addNewsCardListeners();
 }
+
 // Function to render a news card
 function renderNewsCard(news) {
   return (

@@ -139,6 +139,7 @@ function filterAndRenderEvents() {
 }
 
 function initializeEvents() {
+
     const eventsContainer = document.getElementById("events-container");
     const loadingMessage = document.getElementById("loading-message");
     
