@@ -1,3 +1,5 @@
+let cachedEvents = []
+
 document.addEventListener("turbo:load", () => {
   initializeEvents();
 });
@@ -6,30 +8,38 @@ function initializeEvents() {
   const eventsContainer = document.getElementById("events-container");
   const loadingMessage = document.getElementById("loading-message");
   
-  // Show the loading message and clear previous content
-  loadingMessage.style.display = "block";
-  eventsContainer.innerHTML = "";
+    // Fetch events from the API
+    fetch("/api/events")
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to fetch events");
+        return response.json();
+      })
+      .then((events) => {
+        // Hide the loading message
+        loadingMessage.style.display = "none";
+  
+        // Check if there are events
+        if (events.length === 0) {
+          eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
+          return;
+        }
+        //overwirte event array
+        cachedEvents = events;
+        
+        // Render each event
+        events.forEach((event) => {
+          const eventHTML = renderEventCard(event);
+          eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+        });
+  
+        // Add event listeners for enhanced functionality (e.g., modals)
+        addEventCardListeners();
+      })
+      .catch((error) => {
+        console.error("Error fetching events:", error);
+        loadingMessage.style.display = "none"; // Hide loading message on error
+        eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
 
-  // Fetch events from the API
-  fetch("/api/events")
-    .then((response) => {
-      if (!response.ok) throw new Error("Failed to fetch events");
-      return response.json();
-    })
-    .then((events) => {
-      // Hide the loading message
-      loadingMessage.style.display = "none";
-
-      // Check if there are events
-      if (events.length === 0) {
-        eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
-        return;
-      }
-
-      // Render each event
-      events.forEach((event) => {
-        const eventHTML = renderEventCard(event);
-        eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
       });
 
       // Add event listeners for enhanced functionality (e.g., modals)

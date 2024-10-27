@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   root "home#index"
-  
+
   # Organize with resources for consistency
-  resources :login, only: [:index]
-  resources :clubs, only: [:index]
-  resources :dashboard, only: [:index]
-  resources :profile, only: [:index]
+  resources :login, only: [ :index ]
+  resources :clubs, only: [ :index ]
+  resources :dashboard, only: [ :index ]
+  resources :profile, only: [ :index ]
 
   # API routes without versioning
   namespace :api do
-    resources :events, only: [:index]
-    resources :news, only: [:index]
-  end  
+    resources :events, only: [ :index ]
+    resources :news, only: [ :index ]
+  end
 
   # Health check endpoint
   get "up" => "rails/health#show", as: :rails_health_check
