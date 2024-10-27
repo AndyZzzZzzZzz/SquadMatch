@@ -85,43 +85,15 @@ function addNewsCardListeners() {
 }
 
 // Function to open news modal
-function openNewsModal(newsId) {
-  // Find the news data
+function openNewsModal(newsId){
   const news = cachedNews.find((n) => n.id == newsId);
-  if (!news) return;
+  if(!news) return;
 
-  // Create modal content
-  const modalContent = `
-    <div class="modal fade" id="newsModal-${newsId}" tabindex="-1" aria-labelledby="newsModalLabel-${newsId}" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-dark text-white">
-          <div class="modal-header">
-            <h5 class="modal-title" id="newsModalLabel-${newsId}">${news.title}</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <!-- Detailed news content -->
-            <p>${news.content}</p>
-            <!-- Add more details as needed -->
-          </div>
-          <div class="modal-footer">
-            <!-- Modal actions -->
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <!-- Add more buttons if needed -->
+  //Update modal content
+  document.getElementById("newsModalLabel").textContent = news.title;
+  document.getElementById("newsModalBody").textContent = news.content;
 
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Append modal to body if not already present
-  if (!document.getElementById(`newsModal-${newsId}`)) {
-    document.body.insertAdjacentHTML("beforeend", modalContent);
-  }
-
-  // Show the modal
-  const newsModal = new bootstrap.Modal(document.getElementById(`newsModal-${newsId}`));
+  // Show modal using bootstrap
+  const newsModal = new bootstrap.Modal(document.getElementById("news-modal"));
   newsModal.show();
 }
-
