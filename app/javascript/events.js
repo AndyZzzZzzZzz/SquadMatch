@@ -1,5 +1,7 @@
+let cachedEvents = []
+
 document.addEventListener("turbo:load", () => {
-    initializeEvents();
+  initializeEvents();
 });
 
 function initializeEvents() {
@@ -25,7 +27,9 @@ function initializeEvents() {
           eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
           return;
         }
-  
+        //overwirte event array
+        cachedEvents = events;
+        
         // Render each event
         events.forEach((event) => {
           const eventHTML = renderEventCard(event);
@@ -96,50 +100,48 @@ function initializeEvents() {
     eventsContainer.addEventListener("click", (event) => {
       const card = event.target.closest("[data-event-id]");
       if (card) {
-        const eventId = card.getAttribute("data-event-id");
-        openEventModal(eventId);
+          const eventId = card.getAttribute("data-event-id");
+          openEventModal(eventId);
       }
-    });
-  }
-  
-  
-  // Function to open event modal (enhanced functionality)
-  function openEventModal(eventId) {
-    const modalId = `eventModal-${eventId}`;
-    let modalElement = document.getElementById(modalId);
-  
-    if (!modalElement) {
+  });
+}
+
+// Function to open event modal (enhanced functionality)
+function openEventModal(eventId) {
+  const modalId = `eventModal-${eventId}`;
+  let modalElement = document.getElementById(modalId);
+
+  if (!modalElement) {
+      // Assuming you have a way to cache or retrieve events
       const event = cachedEvents.find((e) => e.id == eventId);
       if (!event) return;
-  
+
       const modalContent = `
-        <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="eventModalLabel-${eventId}" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white">
-              <div class="modal-header">
-                <h5 class="modal-title" id="eventModalLabel-${eventId}">${event.title}</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p>${event.description}</p>
-                <!-- Add more details as needed -->
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- Add more buttons if needed -->
+          <div class="modal fade" id="${modalId}" tabindex="-1" aria-labelledby="eventModalLabel-${eventId}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="eventModalLabel-${eventId}">${event.title}</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>${event.description}</p>
+                  <!-- Add more details as needed -->
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <!-- Add more buttons if needed -->
+                </div>
               </div>
             </div>
           </div>
-        </div>
       `;
-  
+
       document.body.insertAdjacentHTML("beforeend", modalContent);
       modalElement = document.getElementById(modalId);
-    }
-  
-    // Show the modal
-    const eventModal = new bootstrap.Modal(modalElement);
-    eventModal.show();
   }
-  
-  
+
+  // Show the modal using Bootstrap's modal functionality
+  const eventModal = new bootstrap.Modal(modalElement);
+  eventModal.show();
+}
