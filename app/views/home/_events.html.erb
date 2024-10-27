@@ -1,16 +1,24 @@
-<!-- Events Section Header -->
-<h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upcoming Events</title>
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="path/to/scrollable-container.css">
+  <!-- Include Bootstrap CSS if not already included -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  
+  <h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
 
-<!-- Events Container -->
-<div
-  class="scrollable-container p-4 border-custom rounded bg-secondary text-white"
-  role="region"
-  aria-labelledby="upcoming-events"
-  id="events-container"
-></div>
+  <!-- Scrollable Container for Events -->
+  <div class="scrollable-container p-4 border-custom rounded" id="events-container" role="region" aria-labelledby="upcoming-events">
+    <!-- Event cards will be dynamically inserted here by JavaScript -->
+  </div>
 
-<!-- Loading Message -->
-<p class="text-center" id="loading-message">
-  <span class="spinner-border text-light" role="status"></span>
-  Loading events...
-</p>
+  <!-- Loading Message -->
+  <div id="loading-message" class="text-center my-3" style="display: none;">Loading events...</div>
+
+</body>
+</html>

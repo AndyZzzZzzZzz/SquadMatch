@@ -42,6 +42,8 @@ function initializeNews() {
 }
 
 
+
+
 // Function to render a news card
 function renderNewsCard(news) {
   return `
@@ -52,10 +54,12 @@ function renderNewsCard(news) {
         <button class="mt-auto btn btn-primary read-more-btn">
           Read more
         </button>
+
       </div>
     </div>
   `;
 }
+
 
 // Function to add event listeners to news cards
 // function addNewsCardListeners() {
@@ -105,6 +109,7 @@ function openNewsModal(newsId) {
             <!-- Modal actions -->
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <!-- Add more buttons if needed -->
+
           </div>
         </div>
       </div>
