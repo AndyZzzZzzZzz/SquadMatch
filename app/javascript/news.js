@@ -47,14 +47,13 @@ function initializeNews() {
 // Function to render a news card
 function renderNewsCard(news) {
   return `
-    <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow" data-news-id="${news.id}">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title fw-bold">${news.title}</h5>
-        <p class="card-text">${news.content}</p>
-        <button class="mt-auto btn btn-primary read-more-btn">
-          Read more
-        </button>
-
+   <div class="news-card custom-card shadow-sm mb-3 hover-shadow" data-news-id="${news.id}">
+      <div class="news-card-body">
+        <h5 class="news-card-title">${news.title}</h5>
+        <p class="news-card-content">${news.content}</p>
+        <div class="news-card-footer d-flex justify-content-end">
+          <button class="btn btn-secondary read-more-btn">Read more</button>
+        </div>
       </div>
     </div>
   `;
