@@ -1,0 +1,77 @@
+/* ===================================================================
+   components/news-card.css
+=================================================================== */
+
+#latest-news-updates {
+    font-size: 1.5rem; /* Larger font for visibility */
+    color: #ffffff; /* Warm color to complement the news card */
+    margin-bottom: 20px; /* Space below the header */
+    text-align: center;
+    text-transform: uppercase; /* Optional: Make the text uppercase */
+    letter-spacing: 1px; /* Slight letter spacing for modern feel */
+  }
+
+/* News Card Styles */
+.news-card {
+    background-color: #2E2E38; /* Softer dark background for contrast */
+    color: #EAEAEA; /* Lighter text for readability */
+    border: none;
+    border-radius: 12px; /* Slightly more rounded corners */
+    padding: 20px;
+  }
+  
+  /* News Card Body */
+  .news-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between title, content, and button */
+    padding: 15px;
+  }
+  
+  /* News Card Title */
+  .news-card-title {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #F2B880; /* Warm contrasting color */
+    margin: 0; /* Remove default margin */
+  }
+  
+  /* News Card Content */
+  .news-card-content {
+    font-size: 1rem;
+    line-height: 1.6; /* Improve readability with more line height */
+    margin: 0; /* Remove default paragraph margins */
+    color: #D6D6D6; /* Softer gray for content */
+  }
+  
+  /* News Card Footer */
+  .news-card-footer {
+    margin-top: auto; /* Push the button to the bottom */
+    padding-top: 10px;
+    border-top: 1px solid #3B3B4A; /* Subtle top border to separate footer */
+  }
+  
+  /* Button Styles */
+  .news-card-footer .read-more-btn {
+    background-color: #446DF6; /* Contrast button color */
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .news-card-footer .read-more-btn:hover {
+    background-color: #3553C7; /* Darker blue on hover */
+  }
+  
+  /* Shadow for News Card */
+  .news-card.shadow-sm {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+  }
+  
+  /* Hover Effect */
+  .news-card.hover-shadow:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* More pronounced hover effect */
+  }
+  

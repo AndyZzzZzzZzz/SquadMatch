@@ -1,16 +1,39 @@
-<!-- Events Section Header -->
-<h4 class="mb-3" id="upcoming-events">Upcoming Events</h4>
+<!-- Search and Filter Controls -->
+<div class="search-filter-container mb-4">
+  <div class="row">
+    <!-- Search Input -->
+    <div class="col-md-4">
+      <input type="text" id="search-input" class="form-control" placeholder="Search events...">
+    </div>
+    <!-- Filter Dropdowns -->
+    <div class="col-md-2">
+      <select id="category-filter" class="form-select">
+        <option value="">All Categories</option>
+        <!-- Categories will be dynamically inserted here -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select id="host-filter" class="form-select">
+        <option value="">All Hosts</option>
+        <!-- Hosts will be dynamically inserted here -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select id="club-filter" class="form-select">
+        <option value="">All Clubs</option>
+        <!-- Clubs will be dynamically inserted here -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select id="location-filter" class="form-select">
+        <option value="">All Locations</option>
+        <!-- Locations will be dynamically inserted here -->
+      </select>
+    </div>
+  </div>
+</div>
 
-<!-- Events Container -->
-<div
-  class="scrollable-container p-4 border-custom rounded bg-secondary text-white"
-  role="region"
-  aria-labelledby="upcoming-events"
-  id="events-container"
-></div>
-
-<!-- Loading Message -->
-<p class="text-center" id="loading-message">
-  <span class="spinner-border text-light" role="status"></span>
-  Loading events...
-</p>
+<!-- Existing Events Container -->
+<div class="scrollable-container p-4 border-custom rounded" id="events-container" role="region" aria-labelledby="upcoming-events">
+  <!-- Event cards will be dynamically inserted here by JavaScript -->
+</div>
