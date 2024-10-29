@@ -1,7 +1,9 @@
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
-let eventCardListenersAdded = false;
-let FilterSortListenersAdded = false;
+
+let eventCardListenersAdded = false; 
+let FilterSortlistenersAdded = false;
+
 let eventModal;
 
 document.addEventListener("turbo:load", () => {
@@ -81,8 +83,9 @@ function populateFilters(){
 
 
 function addSearchAndFilterListeners() {
-  if (FilterSortListenersAdded) return; // Prevent adding multiple listeners
-  FilterSortListenersAdded = true;
+  if (FilterSortlistenersAdded) return; // Prevent adding multiple listeners
+  FilterSortlistenersAdded = true;
+
 
   const searchInput = document.getElementById("search-input");
   const categoryFilter = document.getElementById("category-filter");
@@ -258,8 +261,10 @@ function initializeEvents() {
 
 // Function to add event listeners to event cards
 function addEventCardListeners() {
-  if(eventCardListenersAdded) return;
+
+  if (eventCardListenersAdded) return; 
   eventCardListenersAdded = true;
+
   const eventsContainer = document.getElementById("events-container");
   
   eventsContainer.addEventListener("click", (event) => {
