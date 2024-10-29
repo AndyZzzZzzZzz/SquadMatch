@@ -13,7 +13,7 @@ module Api
       event_type: { only: [ :id, :type_name ] },
       category: { only: [ :id, :name ] },
       host: { only: [ :id, :first_name, :last_name ] },
-      club: { only: [ :id, :club_name ] }
+      club: { only: [ :id, :club_nq1ame ] }
       }
       ), status: :ok
     end
