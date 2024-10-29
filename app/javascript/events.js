@@ -1,5 +1,4 @@
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
-// console.log("Cached Events from localStorage:", cachedEvents); 
 let originalEvents = cachedEvents.slice();
 
 document.addEventListener("turbo:load", () => {

@@ -144,7 +144,7 @@ function initializeDashEvents() {
     const loadingMessage = document.getElementById("loading-message2");
     
     // Show the loading message and clear previous content
-    // loadingMessage.style.display = "block";
+    loadingMessage.style.display = "block";
     eventsContainer.innerHTML = "";
   
     // Fetch events from the API
@@ -156,7 +156,7 @@ function initializeDashEvents() {
       .then((events) => {
         // Hide the loading message
         console.log("API Response:", events);
-        // loadingMessage.style.display = "none";
+        loadingMessage.style.display = "none";
         
         if (arraysAreEqual(events, cachedDashEvents)) return; 
         
