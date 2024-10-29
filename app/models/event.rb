@@ -4,6 +4,10 @@ class Event < ApplicationRecord
     belongs_to :event_type
     belongs_to :category
 
+
+    has_many :participants
+    has_many :users, through: :participants
+
     validates :host, :event_type, :capacity, :location, :title, :event_datetime, :category, presence: true
     validate :event_datetime_must_be_in_future
 

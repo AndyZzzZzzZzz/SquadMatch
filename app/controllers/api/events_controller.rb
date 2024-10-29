@@ -2,7 +2,7 @@ module Api
   class EventsController < Api::ApplicationController
     def index
       # Fetch upcoming events with associated host, club, event_type, and category
-      events = Event.includes(:host, :club, :event_type, :category)
+      events = Event.includes(:users, :host, :club, :event_type, :category)
       .where("event_datetime >= ?", DateTime.now)
       .order(event_datetime: :asc)
 
@@ -10,6 +10,7 @@ module Api
       render json: events.as_json(
       only: [ :id, :title, :description, :event_datetime, :location, :capacity ],
       include: {
+      users: {only: [ :id, :first_name, :last_name]},
       event_type: { only: [ :id, :type_name ] },
       category: { only: [ :id, :name ] },
       host: { only: [ :id, :first_name, :last_name ] },
