@@ -7,6 +7,8 @@ let FilterSortlistenersAdded = false;
 let eventModal;
 
 document.addEventListener("turbo:load", () => {
+  eventCardListenersAdded = false; 
+  FilterSortlistenersAdded = false;
   if (cachedEvents.length > 0) {
     renderEvents(cachedEvents); // Render from cache immediately
     populateFilters();

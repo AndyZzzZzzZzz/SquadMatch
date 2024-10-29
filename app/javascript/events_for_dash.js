@@ -5,7 +5,10 @@ let DashFilterSortListenersAdded = false;
 let eventDashModal;
 
 document.addEventListener("turbo:load", () => {
+    eventDashCardListenersAdded = false;
+    DashFilterSortListenersAdded = false;
   if (cachedDashEvents.length > 0) {
+    
     renderDashEvents(cachedDashEvents); // Render from cache immediately
     populateDashFilters();
     addSearchAndFilterListenersDash();
@@ -16,10 +19,10 @@ document.addEventListener("turbo:load", () => {
   eventDashModal = new bootstrap.Modal(eventModalElement)
 });
 
-function arraysAreEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false;
-  return arr1.every((event, index) => event.id === arr2[index].id);
-}
+// function arraysAreEqual(arr1, arr2) {
+//   if (arr1.length !== arr2.length) return false;
+//   return arr1.every((event, index) => event.id === arr2[index].id);
+// }
 
 function populateDashFilters(){
   const categories = new Set();
