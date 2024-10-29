@@ -1,5 +1,5 @@
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
-console.log("Cached Events from localStorage:", cachedEvents); 
+// console.log("Cached Events from localStorage:", cachedEvents); 
 let originalEvents = cachedEvents.slice();
 
 document.addEventListener("turbo:load", () => {
@@ -145,7 +145,7 @@ function initializeEvents() {
     const loadingMessage = document.getElementById("loading-message");
     
     // Show the loading message and clear previous content
-    // loadingMessage.style.display = "block";
+    loadingMessage.style.display = "block";
     eventsContainer.innerHTML = "";
   
     // Fetch events from the API
@@ -157,7 +157,7 @@ function initializeEvents() {
       .then((events) => {
         // Hide the loading message
         console.log("API Response:", events);
-        // loadingMessage.style.display = "none";
+        loadingMessage.style.display = "none";
         
         if (arraysAreEqual(events, cachedEvents)) return; 
         
