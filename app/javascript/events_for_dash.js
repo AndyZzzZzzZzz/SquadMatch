@@ -1,5 +1,8 @@
 let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
 let originalDashEvents = cachedDashEvents.slice();
+let eventDashCardListenersAdded = false;
+let DashFilterSortListenersAdded = false;
+let eventDashModal;
 
 document.addEventListener("turbo:load", () => {
   if (cachedDashEvents.length > 0) {
@@ -9,6 +12,8 @@ document.addEventListener("turbo:load", () => {
   } else {
     initializeDashEvents(); // Fetch events if not in cache
   }
+  const eventModalElement = document.getElementById("event-modal-2");
+  eventDashModal = new bootstrap.Modal(eventModalElement)
 });
 
 function arraysAreEqual(arr1, arr2) {
@@ -74,11 +79,10 @@ function populateDashFilters(){
   });
 }
 
-let listenersDashAdded = false;
 
 function addSearchAndFilterListenersDash() {
-  if (listenersDashAdded) return; // Prevent adding multiple listeners
-  listenersDashAdded = true;
+  if (DashFilterSortListenersAdded) return; // Prevent adding multiple listeners
+  DashFilterSortListenersAdded = true;
 
   const searchInput = document.getElementById("search-input");
   const categoryFilter = document.getElementById("category-filter");
@@ -260,19 +264,23 @@ function initializeDashEvents() {
 
 // Function to add event listeners to event cards
 function addDashEventCardListeners() {
+    if (eventDashCardListenersAdded) return;
+    eventDashCardListenersAdded = true;
+
+
   const eventsContainer = document.getElementById("events-container2");
   
   eventsContainer.addEventListener("click", (event) => {
     const card = event.target.closest("[data-event-id]");
     if (card) {
       const eventId = card.getAttribute("data-event-id");
-      openEventModal(eventId);
+      openEventModal2(eventId);
     }
   });
 }
 
 // Function to open event modal
-function openEventModal(eventId) {
+function openEventModal2(eventId) {
   const event = cachedDashEvents.find((e) => e.id == eventId);
   if (!event) return;
 
@@ -280,9 +288,7 @@ function openEventModal(eventId) {
   document.getElementById("eventModalLabel").textContent = event.title;
   document.getElementById("eventModalBody").textContent = event.description;
 
-  // Show the modal using Bootstrap's modal functionality
-  const eventModal = new bootstrap.Modal(document.getElementById("event-modal"));
-  eventModal.show();
+  eventDashModal.show();
 }
 
 
