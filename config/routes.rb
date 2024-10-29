@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "users/new"
+  get "users/create"
   root "home#index"
 
   # Organize with resources for consistency
@@ -6,6 +8,15 @@ Rails.application.routes.draw do
   resources :clubs, only: [ :index ]
   resources :dashboard, only: [ :index ]
   resources :profile, only: [ :index ]
+
+  get 'login', to: 'login#index'
+  post 'login', to: 'login#create'
+  delete 'logout', to: 'login#destroy'
+
+  get 'signup', to: 'users#new', as: 'signup'
+  post 'signup', to: 'users#create'
+
+  get 'dashboard', to: 'dashboard#index', as: 'dashboard'
 
   # API routes without versioning
   namespace :api do
