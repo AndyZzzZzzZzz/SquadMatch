@@ -1,5 +1,8 @@
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
+let eventCardListenersAdded = false; 
+let FilterSortlistenersAdded = false;
+let eventModal;
 
 document.addEventListener("turbo:load", () => {
   if (cachedEvents.length > 0) {
@@ -9,6 +12,8 @@ document.addEventListener("turbo:load", () => {
   } else {
     initializeEvents(); // Fetch events if not in cache
   }
+  const eventModalElement = document.getElementById("event-modal");
+  eventModal = new bootstrap.Modal(eventModalElement);
 });
 
 function arraysAreEqual(arr1, arr2) {
@@ -74,11 +79,9 @@ function populateFilters(){
   });
 }
 
-let listenersAdded = false;
-
 function addSearchAndFilterListeners() {
-  if (listenersAdded) return; // Prevent adding multiple listeners
-  listenersAdded = true;
+  if (FilterSortlistenersAdded) return; // Prevent adding multiple listeners
+  FilterSortlistenersAdded = true;
 
   const searchInput = document.getElementById("search-input");
   const categoryFilter = document.getElementById("category-filter");
@@ -252,6 +255,9 @@ function initializeEvents() {
 
 // Function to add event listeners to event cards
 function addEventCardListeners() {
+  if (eventCardListenersAdded) return; 
+  eventCardListenersAdded = true;
+
   const eventsContainer = document.getElementById("events-container");
 
   eventsContainer.addEventListener("click", (event) => {
@@ -272,7 +278,5 @@ function openEventModal(eventId) {
   document.getElementById("eventModalLabel").textContent = event.title;
   document.getElementById("eventModalBody").textContent = event.description;
 
-  // Show the modal using Bootstrap's modal functionality
-  const eventModal = new bootstrap.Modal(document.getElementById("event-modal"));
   eventModal.show();
 }
