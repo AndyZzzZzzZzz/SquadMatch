@@ -8,9 +8,9 @@ module Api
 
       # Define the data to be included in the JSON response
       render json: events.as_json(
-      only: [ :id, :title, :description, :event_datetime, :location, :capacity],
+      only: [ :id, :title, :description, :event_datetime, :location, :capacity ],
       include: {
-      users: {only: [ :id, :first_name, :last_name]},
+      users: { only: [ :id, :first_name, :last_name ] },
       event_type: { only: [ :id, :type_name ] },
       category: { only: [ :id, :name ] },
       host: { only: [ :id, :first_name, :last_name ] },
