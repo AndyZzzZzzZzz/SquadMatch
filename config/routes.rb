@@ -9,16 +9,16 @@ Rails.application.routes.draw do
   resources :dashboard, only: [ :index ]
   resources :profile, only: [ :index ]
 
-  get "login", to: "login#index", as: 'login'
+  get "login", to: "login#index", as: "login"
   post "login", to: "login#create"
-  delete "logout", to: "login#destroy", as: 'logout'
+  delete "logout", to: "login#destroy", as: "logout"
 
-  get "signup", to: "users#new", as: 'signup'
+  get "signup", to: "users#new", as: "signup"
   post "signup", to: "users#create"
 
-  get "dashboard", to: "dashboard#index", as: 'dashboard'
-  get "profile", to: "profile#index", as: 'profile'
-  get "home", to: "home#index", as: 'home'
+  get "dashboard", to: "dashboard#index", as: "dashboard"
+  get "profile", to: "profile#index", as: "profile"
+  get "home", to: "home#index", as: "home"
 
   # Routes for AJAX uniqueness checks
   get "users/check_username", to: "users#check_username"
