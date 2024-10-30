@@ -1,10 +1,10 @@
 cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
-let originalEvents = cachedEvents.slice();
+originalEvents = cachedEvents.slice();
 
-let eventCardListenersAdded = false; 
-let FilterSortlistenersAdded = false;
+eventCardListenersAdded = false; 
+FilterSortlistenersAdded = false;
 
-let eventModal;
+eventModal = null;
 
 document.addEventListener("turbo:load", () => {
   eventCardListenersAdded = false; 
