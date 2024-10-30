@@ -1,91 +1,81 @@
-<!--
-<%= form_with model: @user, url: signup_path, local: true do |form| %>
-    <div>
-      <%= form.label :username %><br>
-      <%= form.text_field :username, required: true %>
-    </div>
-  
-    <div>
-      <%= form.label :first_name %><br>
-      <%= form.text_field :first_name, required: true %>
-    </div>
-  
-    <div>
-      <%= form.label :last_name %><br>
-      <%= form.text_field :last_name, required: true %>
-    </div>
-  
-    <div>
-      <%= form.label :email %><br>
-      <%= form.email_field :email, required: true %>
-    </div>
-  
-    <div>
-      <%= form.label :password %><br>
-      <%= form.password_field :password, required: true %>
-    </div>
-  
-    <div>
-      <%= form.label :password_confirmation %><br>
-      <%= form.password_field :password_confirmation, required: true %>
-    </div>
-  
-    <div>
-      <%= form.submit 'Sign Up' %>
-    </div>
-  <% end %>
--->
-
-<%= form_with model: @user, url: signup_path, local: true do |form| %>
-    <div>
-      <%= form.label :username %><br>
-      <%= form.text_field :username, id: 'user_username', required: true %>
+<div class="register-container">
+  <h2>Registration</h2>
+  <%= form_with model: @user, url: signup_path, local: true do |form| %>
+    
+    <div class="input-box">
+      <%= form.text_field :username, 
+                          id: 'user_username', 
+                          placeholder: 'Enter your username', 
+                          required: true %>
       <% if @user.errors[:username].any? %>
         <span class="error-message"><%= @user.errors[:username].first %></span>
       <% end %>
     </div>
 
-    <div>
-      <%= form.label :first_name %><br>
-      <%= form.text_field :first_name, id: 'user_first_name', required: true %>
+    <div class="input-box">
+      <%= form.text_field :first_name, 
+                          id: 'user_first_name', 
+                          placeholder: 'Enter your first name', 
+                          required: true %>
       <% if @user.errors[:first_name].any? %>
         <span class="error-message"><%= @user.errors[:first_name].first %></span>
       <% end %>
     </div>
-  
-    <div>
-      <%= form.label :last_name %><br>
-      <%= form.text_field :last_name, id: 'user_last_name', required: true %>
+
+    <div class="input-box">
+      <%= form.text_field :last_name, 
+                          id: 'user_last_name', 
+                          placeholder: 'Enter your last name', 
+                          required: true %>
       <% if @user.errors[:last_name].any? %>
         <span class="error-message"><%= @user.errors[:last_name].first %></span>
       <% end %>
     </div>
-  
-    <div>
-      <%= form.label :email %><br>
-      <%= form.email_field :email, id: 'user_email', required: true %>
+
+    <div class="input-box">
+      <%= form.email_field :email, 
+                           id: 'user_email', 
+                           placeholder: 'Enter your email', 
+                           required: true %>
       <% if @user.errors[:email].any? %>
         <span class="error-message"><%= @user.errors[:email].first %></span>
       <% end %>
     </div>
-  
-    <div>
-      <%= form.label :password %><br>
-      <%= form.password_field :password, id: 'user_password', required: true %>
+
+    <div class="input-box">
+      <%= form.password_field :password, 
+                              id: 'user_password', 
+                              placeholder: 'Create password', 
+                              required: true %>
       <% if @user.errors[:password].any? %>
         <span class="error-message"><%= @user.errors[:password].first %></span>
       <% end %>
     </div>
-  
-    <div>
-      <%= form.label :password_confirmation %><br>
-      <%= form.password_field :password_confirmation, id: 'user_password_confirmation', required: true %>
+
+    <div class="input-box">
+      <%= form.password_field :password_confirmation, 
+                              id: 'user_password_confirmation', 
+                              placeholder: 'Confirm password', 
+                              required: true %>
       <% if @user.errors[:password_confirmation].any? %>
-        <span class="error-message"><%= @user.errors[:password_confirmation].first %></span>
+        <span class="error-message">
+          <%= @user.errors[:password_confirmation].first %>
+        </span>
       <% end %>
     </div>
-  
-    <div>
-      <%= form.submit 'Sign Up' %>
+
+    <div class="policy">
+      <input type="checkbox" required />
+      <h3 class="conditions-text">I accept all terms & conditions</h3>
     </div>
+
+    <div class="input-box button">
+      <%= form.submit 'Register Now', class: 'btn' %>
+    </div>
+
+    <div class="text">
+      <%= link_to 'Already have an account? Login', login_path %>
+    </div>
+
   <% end %>
+</div>
