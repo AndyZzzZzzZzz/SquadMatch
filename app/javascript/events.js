@@ -172,7 +172,8 @@ function initializeEvents() {
 
         //overwrite event array
         cachedEvents = events;
-        originalEvents = events.slice();
+        cachedUserEvents = syncDashboardWithUserEvents();
+        originalEvents = cachedUserEvents.slice();
         localStorage.setItem("cachedEvents", JSON.stringify(events)); // Save to local storage
         
         // Populate filters and add listeners
