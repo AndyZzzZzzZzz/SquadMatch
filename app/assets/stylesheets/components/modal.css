@@ -89,3 +89,8 @@
   background-color: #db4437;
   color: #fff;
 }
+
+/* Make the backdrop lighter or transparent */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.2); /* Adjust opacity */
+}

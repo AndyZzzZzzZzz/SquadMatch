@@ -1,10 +1,14 @@
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
+
 let eventCardListenersAdded = false; 
 let FilterSortlistenersAdded = false;
+
 let eventModal;
 
 document.addEventListener("turbo:load", () => {
+  eventCardListenersAdded = false; 
+  FilterSortlistenersAdded = false;
   if (cachedEvents.length > 0) {
     renderEvents(cachedEvents); // Render from cache immediately
     populateFilters();
@@ -79,9 +83,11 @@ function populateFilters(){
   });
 }
 
+
 function addSearchAndFilterListeners() {
   if (FilterSortlistenersAdded) return; // Prevent adding multiple listeners
   FilterSortlistenersAdded = true;
+
 
   const searchInput = document.getElementById("search-input");
   const categoryFilter = document.getElementById("category-filter");
@@ -158,12 +164,13 @@ function initializeEvents() {
       })
       .then((events) => {
         // Hide the loading message
+        console.log("API Response:", events);
         loadingMessage.style.display = "none";
         
         if (arraysAreEqual(events, cachedEvents)) return; 
         
 
-        //overwirte event array
+        //overwrite event array
         cachedEvents = events;
         originalEvents = events.slice();
         localStorage.setItem("cachedEvents", JSON.stringify(events)); // Save to local storage
@@ -208,6 +215,8 @@ function initializeEvents() {
     // Provide default values if event_type or icon is missing
     const eventType = event.event_type || {};
     const eventTypeName = eventType.type_name || 'Event';
+    const loadParticipants = event.users ? event.users.map(user => nameToAvatar(user.first_name, user.last_name)).join("")
+    : '<div> No participants in the event </div>';
   
     return `
       <article class="card custom-card mb-3 hover-shadow" role="article" data-event-id="${event.id}">
@@ -244,8 +253,7 @@ function initializeEvents() {
         <div class="d-flex align-items-center">
           <span class="me-2">Current Users:</span>
           <div class="d-flex">
-            <div class="avatar me-2 d-flex justify-content-center align-items-center">AB</div>
-            <div class="avatar d-flex justify-content-center align-items-center">CD</div>
+            ${loadParticipants}
           </div>
         </div>
       </footer>
@@ -255,11 +263,12 @@ function initializeEvents() {
 
 // Function to add event listeners to event cards
 function addEventCardListeners() {
+
   if (eventCardListenersAdded) return; 
   eventCardListenersAdded = true;
 
   const eventsContainer = document.getElementById("events-container");
-
+  
   eventsContainer.addEventListener("click", (event) => {
     const card = event.target.closest("[data-event-id]");
     if (card) {
