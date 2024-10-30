@@ -15,6 +15,7 @@ document.addEventListener("turbo:load", () => {
       localStorage.setItem("loggedInUserId", userId);
       // syncDashboardWithUserEvents();
       cachedUserEvents = syncDashboardWithUserEvents();
+      originalDashEvents = cachedUserEvents.slice();
       console.log(cachedUserEvents)
   }
 
@@ -182,7 +183,8 @@ function initializeDashEvents() {
       .then((events) => {
         loadingMessage.style.display = "none";
         cachedDashEvents = events;
-        originalDashEvents = events.slice();
+        cachedUserEvents = syncDashboardWithUserEvents();
+        originalDashEvents = cachedUserEvents.slice();
         localStorage.setItem("cachedDashEvents", JSON.stringify(events));
   
         // Populate filters and add listeners
