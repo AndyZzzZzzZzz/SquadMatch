@@ -2,6 +2,10 @@ class User < ApplicationRecord
     # set and authenticate against a BCrypt password
     has_secure_password
 
+
+    has_many :participants
+    has_many :events, through: :participants
+
     # validation
     # validates :password_digest, length: { minimum: 8 }
     # validates :username, length: { minimum: 4 }
