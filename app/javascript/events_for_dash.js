@@ -1,8 +1,8 @@
-let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
-let originalDashEvents = cachedDashEvents.slice();
-let eventDashCardListenersAdded = false;
-let DashFilterSortListenersAdded = false;
-let eventDashModal;
+cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
+originalDashEvents = cachedDashEvents.slice();
+eventDashCardListenersAdded = false;
+DashFilterSortListenersAdded = false;
+eventDashModal = null;
 
 document.addEventListener("turbo:load", () => {
     eventDashCardListenersAdded = false;

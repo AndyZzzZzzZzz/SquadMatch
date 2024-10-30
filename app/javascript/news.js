@@ -1,5 +1,5 @@
-let cachedNews = JSON.parse(localStorage.getItem("cachedNews")) || [];
-let originalNews = cachedNews.slice();
+cachedNews = JSON.parse(localStorage.getItem("cachedNews")) || [];
+originalNews = cachedNews.slice();
 
 document.addEventListener("turbo:load", () => {
   if(cachedNews.length > 0){
