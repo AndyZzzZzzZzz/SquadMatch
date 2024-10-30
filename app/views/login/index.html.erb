@@ -1,1 +1,18 @@
-<h1>This is Login</h1>
+<h1>Login</h1>
+
+<% if flash[:login_notice] %>
+ <div id="flash-notice" class="flash-message notice"><%= flash[:login_notice] %></div>
+<% end %>
+<% if flash.now[:alert] %>
+  <p class="error-message"><%= flash.now[:alert] %></p>
+<% end %>
+
+<div id="login_form">
+  <%= render 'form' %>
+</div>
+
+<p>Don't have an account? <%= link_to 'Sign up', signup_path %></p>
+
+<!-- Include the JavaScript file -->
+<%= javascript_include_tag 'login' %>
+
