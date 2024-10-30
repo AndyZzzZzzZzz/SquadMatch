@@ -1,45 +1,41 @@
-<!-- app/views/home/_events.html.erb -->
-
-<!-- Render the modal partial, which likely contains a modal template for displaying event details -->
-<%= render 'home/modal' %>
-
-<!-- Container for displaying the list of events, styled with padding, custom borders, rounded edges, and background color -->
-<div class="scrollable-container p-2 border-custom rounded bg-secondary text-white">
-  
-  <!-- Check if there are any events in the @events variable -->
-  <% if @events.any? %>
-    
-    <!-- Loop through each event in the @events array -->
-    <% @events.each do |event| %>
-      <div class="card bg-dark text-white shadow-sm mb-3 hover-shadow" data-toggle="modal" data-target="#detailModal-<%= event.id %>">        
-        <div class="card-body d-flex">
-          <!-- Render sports icon for each event, passing event object as a local variable to the partial -->
-          <div class="me-3">
-            <%= render partial:'home/sports_icon', locals: { event: event } %>
-          </div>
-          <div>
-            <h5 class="card-title fw-bold"> <%= event.title %></h5>
-            <h6 class="card-subtitle mb-2"> <%= event.event_type.type_name %></h6>
-            <p class="btn btn-primary mt-2 mb-2"><i class="bi bi-geo"></i>  <%= event.location %> </p>
-          </div>
-        </div>
-        
-        <!-- Card footer contains additional event information like current users -->
-        <div class="card-footer bg-footer border-top border-secondary">
-          <div class="d-flex align-items-center">
-            <span class="me-2">Current Users:</span>            
-            <div class="d-flex">
-              <!-- Example user avatars, static text for now, these could be replaced with dynamic user data -->
-              <div class="avatar d-flex justify-content-center align-items-center me-2" style="width: 35px; height: 35px; border-radius: 50%;">AB</div>
-              <div class="avatar d-flex justify-content-center align-items-center" style="width: 35px; height: 35px; border-radius: 50%;">CD</div>
-              <!-- Add more user avatars as needed or dynamically render based on user data -->
-            </div>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <!-- Message shown if no events are found -->
-    NO UPCOMING EVENTS
-  <% end %>
+<!-- Search and Filter Controls -->
+<div class="search-filter-container mb-4">
+  <div class="row">
+    <!-- Search Input -->
+    <div class="col-md-4">
+      <input type="text" id="search-input" class="form-control" placeholder="Search events...">
+    </div>
+    <!-- Filter Dropdowns -->
+    <div class="col-md-2">
+      <select id="category-filter" class="form-select">
+        <option value="">All Categories</option>
+        <!-- Categories will be dynamically inserted here -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select id="host-filter" class="form-select">
+        <option value="">All Hosts</option>
+        <!-- Hosts will be dynamically inserted here -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select id="club-filter" class="form-select">
+        <option value="">All Clubs</option>
+        <!-- Clubs will be dynamically inserted here -->
+      </select>
+    </div>
+    <div class="col-md-2">
+      <select id="location-filter" class="form-select">
+        <option value="">All Locations</option>
+        <!-- Locations will be dynamically inserted here -->
+      </select>
+    </div>
+  </div>
 </div>
+
+<!-- Existing Events Container -->
+<div class="scrollable-container p-4 border-custom rounded" id="events-container2" role="region" aria-labelledby="upcoming-events">
+  <!-- Event cards will be dynamically inserted here by JavaScript -->
+</div>
+
+<div id="loading-message2" class="text-center my-3" style="display: none;"> Loading events</div>

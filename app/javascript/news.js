@@ -1,6 +1,19 @@
-document.addEventListener("turbo:load", function () {
-  initializeNews();
+let cachedNews = JSON.parse(localStorage.getItem("cachedNews")) || [];
+let originalNews = cachedNews.slice();
+
+document.addEventListener("turbo:load", () => {
+  if(cachedNews.length > 0){
+    renderNews(cachedNews);
+  }else{
+    initializeNews();
+  }
+
 });
+
+function arraysAreEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) return false;
+  return arr1.every((event, index) => event.id === arr2[index].id);
+}
 
 function initializeNews() {
   const newsContainer = document.getElementById("news-container");
@@ -18,24 +31,37 @@ function initializeNews() {
     .then(function (newsItems) {
       loadingMessage.style.display = "none";
 
-      if (newsItems.length === 0) {
-        newsContainer.innerHTML = "<p class=\"text-center\">No news at the moment.</p>";
-        return;
-      }
+      if (arraysAreEqual(newsItems, cachedNews)) return;
 
       cachedNews = newsItems;
-      newsItems.forEach(function (news) {
-        const newsHTML = renderNewsCard(news);
-        newsContainer.insertAdjacentHTML("beforeend", newsHTML);
-      });
+      originalNews = newsItems.slice();
+      localStorage.setItem("cachedNews", JSON.stringify(newsItems));
+      renderNews(newsItems);
 
-      // Add event listeners for interactive functionality
-      addNewsCardListeners();
     })
     .catch(function (error) {
       console.error(error);
       newsContainer.innerHTML = "<p class=\"text-center text-danger\">Failed to load news. Please try again later.</p>";
     });
+}
+
+function renderNews(newsItems){
+  const newsContainer = document.getElementById("news-container");
+
+  newsContainer.innerHTML = "";
+
+  if (newsItems.length === 0) {
+    newsContainer.innerHTML = "<p class=\"text-center\">No news at the moment.</p>";
+    return;
+  }
+
+  newsItems.forEach((news) => {
+    const newsHTML = renderNewsCard(news);
+    newsContainer.insertAdjacentHTML("beforeend", newsHTML);
+  });
+
+  // Add event listeners for interactive functionality
+  addNewsCardListeners();
 }
 
 // Function to render a news card

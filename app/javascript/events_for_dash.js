@@ -1,37 +1,31 @@
-cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
-let originalEvents = cachedEvents.slice();
-
-let eventCardListenersAdded = false; 
-let FilterSortlistenersAdded = false;
-
-let eventModal;
+let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
+let originalDashEvents = cachedDashEvents.slice();
+let eventDashCardListenersAdded = false;
+let DashFilterSortListenersAdded = false;
+let eventDashModal;
 
 document.addEventListener("turbo:load", () => {
-  eventCardListenersAdded = false; 
-  FilterSortlistenersAdded = false;
-  if (cachedEvents.length > 0) {
-    renderEvents(cachedEvents); // Render from cache immediately
-    populateFilters();
-    addSearchAndFilterListeners();
+    eventDashCardListenersAdded = false;
+    DashFilterSortListenersAdded = false;
+  if (cachedDashEvents.length > 0) {
+    
+    renderDashEvents(cachedDashEvents); // Render from cache immediately
+    populateDashFilters();
+    addSearchAndFilterListenersDash();
   } else {
-    initializeEvents(); // Fetch events if not in cache
+    initializeDashEvents(); // Fetch events if not in cache
   }
-  const eventModalElement = document.getElementById("event-modal");
-  eventModal = new bootstrap.Modal(eventModalElement);
+  const eventModalElement = document.getElementById("event-modal-2");
+  eventDashModal = new bootstrap.Modal(eventModalElement)
 });
 
-function arraysAreEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false;
-  return arr1.every((event, index) => event.id === arr2[index].id);
-}
-
-function populateFilters(){
+function populateDashFilters(){
   const categories = new Set();
   const hosts = new Set();
   const clubs = new Set();
   const locations = new Set();
 
-  originalEvents.forEach(event => {
+  originalDashEvents.forEach(event => {
     if (event.category && event.category.name) {
       categories.add(event.category.name);
     }
@@ -84,10 +78,9 @@ function populateFilters(){
 }
 
 
-function addSearchAndFilterListeners() {
-  if (FilterSortlistenersAdded) return; // Prevent adding multiple listeners
-  FilterSortlistenersAdded = true;
-
+function addSearchAndFilterListenersDash() {
+  if (DashFilterSortListenersAdded) return; // Prevent adding multiple listeners
+  DashFilterSortListenersAdded = true;
 
   const searchInput = document.getElementById("search-input");
   const categoryFilter = document.getElementById("category-filter");
@@ -96,23 +89,23 @@ function addSearchAndFilterListeners() {
   const locationFilter = document.getElementById("location-filter");
 
   if (searchInput) {
-    searchInput.addEventListener("input", filterAndRenderEvents);
+    searchInput.addEventListener("input", filterAndRenderDashEvents);
   }
   if (categoryFilter) {
-    categoryFilter.addEventListener("change", filterAndRenderEvents);
+    categoryFilter.addEventListener("change", filterAndRenderDashEvents);
   }
   if (hostFilter) {
-    hostFilter.addEventListener("change", filterAndRenderEvents);
+    hostFilter.addEventListener("change", filterAndRenderDashEvents);
   }
   if (clubFilter) {
-    clubFilter.addEventListener("change", filterAndRenderEvents);
+    clubFilter.addEventListener("change", filterAndRenderDashEvents);
   }
   if (locationFilter) {
-    locationFilter.addEventListener("change", filterAndRenderEvents);
+    locationFilter.addEventListener("change", filterAndRenderDashEvents);
   }
 }
 
-function filterAndRenderEvents() {
+function filterAndRenderDashEvents() {
   const searchInput = document.getElementById("search-input").value.toLowerCase();
   const categoryValue = document.getElementById("category-filter").value;
   const hostValue = document.getElementById("host-filter").value;
@@ -120,7 +113,7 @@ function filterAndRenderEvents() {
   const locationValue = document.getElementById("location-filter").value;
 
   
-  let filteredEvents = originalEvents.filter(event => {
+  let filteredEvents = originalDashEvents.filter(event => {
     // Check search input
     const titleMatch = event.title && event.title.toLowerCase().includes(searchInput);
     const descriptionMatch = event.description && event.description.toLowerCase().includes(searchInput);
@@ -144,13 +137,13 @@ function filterAndRenderEvents() {
   });
 
   // Render filtered events
-  renderEvents(filteredEvents);
+  renderDashEvents(filteredEvents);
 }
 
-function initializeEvents() {
+function initializeDashEvents() {
 
-    const eventsContainer = document.getElementById("events-container");
-    const loadingMessage = document.getElementById("loading-message");
+    const eventsContainer = document.getElementById("events-container2");
+    const loadingMessage = document.getElementById("loading-message2");
     
     // Show the loading message and clear previous content
     loadingMessage.style.display = "block";
@@ -167,19 +160,19 @@ function initializeEvents() {
         console.log("API Response:", events);
         loadingMessage.style.display = "none";
         
-        if (arraysAreEqual(events, cachedEvents)) return; 
+        if (arraysAreEqual(events, cachedDashEvents)) return; 
         
 
         //overwrite event array
-        cachedEvents = events;
-        originalEvents = events.slice();
-        localStorage.setItem("cachedEvents", JSON.stringify(events)); // Save to local storage
+        cachedDashEvents = events;
+        originalDashEvents = events.slice();
+        localStorage.setItem("cachedDashEvents", JSON.stringify(events)); // Save to local storage
         
         // Populate filters and add listeners
-        populateFilters();
-        addSearchAndFilterListeners();
+        populateDashFilters();
+        addSearchAndFilterListenersDash();
 
-        renderEvents(events);
+        renderDashEvents(events);
       })
       .catch((error) => {
         console.error("Error fetching events:", error);
@@ -188,8 +181,8 @@ function initializeEvents() {
       });
   }
   
-  function renderEvents(events) {
-    const eventsContainer = document.getElementById("events-container");
+  function renderDashEvents(events) {
+    const eventsContainer = document.getElementById("events-container2");
   
     eventsContainer.innerHTML = ""; // Clear the container
   
@@ -200,21 +193,27 @@ function initializeEvents() {
   
     // Render each event card
     events.forEach((event) => {
-      const eventHTML = renderEventCard(event);
+      const eventHTML = renderDashEventCard(event);
       eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
     });
   
-    addEventCardListeners(); 
+    addDashEventCardListeners(); 
   }
 
-  
+  function nameToAvatar(first_name, last_name) {
+    const first_char = first_name ? first_name.charAt(0) : "";
+    const last_char = last_name ? last_name.charAt(0) : "";
+    
+    return `<div class="avatar me-2 d-flex justify-content-center align-items-center"> ${first_char} ${last_char} </div>`
+  }
   // Function to render an event card
-  function renderEventCard(event) {
+  function renderDashEventCard(event) {
     const eventDate = new Date(event.event_datetime).toLocaleString();
   
     // Provide default values if event_type or icon is missing
     const eventType = event.event_type || {};
     const eventTypeName = eventType.type_name || 'Event';
+
     const loadParticipants = event.users ? event.users.map(user => nameToAvatar(user.first_name, user.last_name)).join("")
     : '<div> No participants in the event </div>';
   
@@ -262,30 +261,30 @@ function initializeEvents() {
 }
 
 // Function to add event listeners to event cards
-function addEventCardListeners() {
+function addDashEventCardListeners() {
+    if (eventDashCardListenersAdded) return;
+    eventDashCardListenersAdded = true;
 
-  if (eventCardListenersAdded) return; 
-  eventCardListenersAdded = true;
 
-  const eventsContainer = document.getElementById("events-container");
+  const eventsContainer = document.getElementById("events-container2");
   
   eventsContainer.addEventListener("click", (event) => {
     const card = event.target.closest("[data-event-id]");
     if (card) {
       const eventId = card.getAttribute("data-event-id");
-      openEventModal(eventId);
+      openEventModal2(eventId);
     }
   });
 }
 
 // Function to open event modal
-function openEventModal(eventId) {
-  const event = cachedEvents.find((e) => e.id == eventId);
+function openEventModal2(eventId) {
+  const event = cachedDashEvents.find((e) => e.id == eventId);
   if (!event) return;
 
   // Update modal content
   document.getElementById("eventModalLabel").textContent = event.title;
   document.getElementById("eventModalBody").textContent = event.description;
 
-  eventModal.show();
+  eventDashModal.show();
 }

@@ -1,8 +1,96 @@
 /* ===================================================================
    components/modals.css
 =================================================================== */
-.modal-content {
+/* .modal-content {
   background-color: var(--secondary-color);
   border: 10px solid var(--muted-text);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+} */
+
+/* Modal styling */
+/* .modal-pos {
+  position: absolute;
+  z-index: 1000;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+  width: 30rem;
+  height: 30rem;
+  background-color: var(--scrollable-bg);
+} */
+
+/* .modal-header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
+} */
+
+
+/* Custom Modal Header */
+.modal-header {
+  background-image: linear-gradient(135deg, #2a1391 0%, #2d2077 50%, #de67c4 100%);
+  color: #fff;
+}
+
+/* Modal Content */
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+  color: #3b5998;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2rem;
+}
+
+/* Event Image */
+.modal-body img {
+  max-height: 300px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* List Group Items */
+.list-group-item {
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Social Media Buttons */
+.modal-footer .btn-outline-primary {
+  border-color: #3b5998;
+  color: #3b5998;
+}
+
+.modal-footer .btn-outline-primary:hover {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.modal-footer .btn-outline-info {
+  border-color: #00acee;
+  color: #00acee;
+}
+
+.modal-footer .btn-outline-info:hover {
+  background-color: #00acee;
+  color: #383333;
+}
+
+.modal-footer .btn-outline-danger {
+  border-color: #db4437;
+  color: #db4437;
+}
+
+.modal-footer .btn-outline-danger:hover {
+  background-color: #db4437;
+  color: #fff;
+}
+
+/* Make the backdrop lighter or transparent */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.2); /* Adjust opacity */
 }
