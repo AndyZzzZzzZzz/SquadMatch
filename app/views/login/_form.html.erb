@@ -1,0 +1,21 @@
+
+<% if flash.now[:alert] %>
+  <p class="error-message"><%= flash.now[:alert] %></p>
+<% end %>
+
+<%= form_with url: login_path, method: :post do |form| %>
+  <!-- Form fields -->
+  <div>
+    <%= form.label :username %><br>
+    <%= form.text_field :username, id: 'username', name: 'username', required: true %>
+  </div>
+
+  <div>
+    <%= form.label :password %><br>
+    <%= form.password_field :password, id: 'password', name: 'password', required: true %>
+  </div>
+
+  <div>
+    <%= form.submit 'Login' %>
+  </div>
+<% end %>
