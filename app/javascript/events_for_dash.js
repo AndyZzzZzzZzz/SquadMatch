@@ -219,8 +219,8 @@ function initializeDashEvents() {
   }
 
   function nameToAvatar(first_name, last_name) {
-    const first_char = first_name ? first_name.charAt(0) : "";
-    const last_char = last_name ? last_name.charAt(0) : "";
+    const first_char = first_name ? first_name.charAt(0).toUpperCase() : "";
+    const last_char = last_name ? last_name.charAt(0).toUpperCase() : "";
     
     return `<div class="avatar me-2 d-flex justify-content-center align-items-center"> ${first_char} ${last_char} </div>`
   }
