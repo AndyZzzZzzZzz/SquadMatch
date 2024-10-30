@@ -23,12 +23,31 @@
       </ul>
 
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+       <!--
         <li class="nav-item custom-nav-item">
           <%= link_to 'Profile', profile_index_path, class: 'nav-link custom-nav-link' %>
         </li>
         <li class="nav-item custom-nav-item">
           <%= link_to 'Login', login_index_path, class: 'nav-link btn btn-outline-primary custom-login-btn' %>
-        </li>
+        </li> -->
+
+        <% if current_user %>
+          <!-- User is logged in -->
+          <li class="nav-item custom-nav-item">
+            <%= link_to 'Profile', profile_index_path, class: 'nav-link custom-nav-link' %>
+          </li>
+          <li class="nav-item custom-nav-item">
+            <%= button_to 'Logout', logout_path, method: :delete, class: 'nav-link custom-nav-link' %>
+          </li>
+        <% else %>
+          <!-- User is not logged in -->
+          <li class="nav-item custom-nav-item">
+            <%= link_to 'Login', login_index_path, class: 'nav-link btn btn-outline-primary custom-login-btn' %>
+          </li>
+          <li class="nav-item custom-nav-item">
+            <%= link_to 'Register', signup_path, class: 'nav-link btn btn-primary custom-login-btn' %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
