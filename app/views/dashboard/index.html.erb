@@ -1,8 +1,8 @@
 <!-- app/views/dashboard -->
 <div >
-<% if flash[:notice] %>
-  <div id="flash-notice" class="flash-message notice"><%= flash[:notice] %></div>
-<% end %>
+# <% if flash[:notice] %>
+#   <div id="flash-notice" class="flash-message notice"><%= flash[:notice] %></div>
+# <% end %>
 <% if current_user %>
     <div class="container">
         <div class= "left-section col-lg-2 col-md-2 md-4">
@@ -23,8 +23,12 @@
 
     </div>
 <% else %>
-    <p>Please log in to access your dashboard.</p>
-    <%= link_to 'Log In', login_path, class: 'btn btn-primary' %>
+    <div class="container login-container login-msg">
+        <p>Please 
+            <%= link_to 'Log In', login_path, class: 'input-box button' %> 
+            to access your dashboard.</p>
+        
+    </div>
 <% end %>
 
 <%= javascript_include_tag 'flash_message' %>
