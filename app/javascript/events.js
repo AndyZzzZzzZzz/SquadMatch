@@ -1,4 +1,4 @@
-let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
 
 let eventCardListenersAdded = false; 
