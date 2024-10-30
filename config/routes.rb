@@ -9,18 +9,18 @@ Rails.application.routes.draw do
   resources :dashboard, only: [ :index ]
   resources :profile, only: [ :index ]
 
-  get 'login', to: 'login#index'
-  post 'login', to: 'login#create'
-  delete 'logout', to: 'login#destroy'
+  get "login", to: "login#index"
+  post "login", to: "login#create"
+  delete "logout", to: "login#destroy"
 
-  get 'signup', to: 'users#new', as: 'signup'
-  post 'signup', to: 'users#create'
+  get "signup", to: "users#new", as: "signup"
+  post "signup", to: "users#create"
 
-  get 'dashboard', to: 'dashboard#index', as: 'dashboard'
+  get "dashboard", to: "dashboard#index", as: "dashboard"
 
   # Routes for AJAX uniqueness checks
-  get 'users/check_username', to: 'users#check_username'
-  get 'users/check_email', to: 'users#check_email'
+  get "users/check_username", to: "users#check_username"
+  get "users/check_email", to: "users#check_email"
 
   # API routes without versioning
   namespace :api do

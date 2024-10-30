@@ -331,6 +331,7 @@ DEPENDENCIES
   pg
   puma (>= 5.0)
   rails (~> 7.2.1)
+  rubocop
   rubocop-rails-omakase
   sassc-rails
   selenium-webdriver
@@ -341,7 +342,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-  ruby 3.1.6p260
+   ruby 3.1.6p260
 
 BUNDLED WITH
    2.5.19

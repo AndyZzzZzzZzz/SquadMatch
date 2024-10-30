@@ -18,6 +18,7 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "sassc-rails"
+gem "rubocop", require: false
 
 # Encrpyt password
 gem "bcrypt", "~> 3.1.7"

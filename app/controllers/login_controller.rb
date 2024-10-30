@@ -11,15 +11,15 @@ class LoginController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       # redirect_to dashboard_path, notice: 'Logged in successfully'
-      flash[:notice] = 'Logged in sucessfully'
+      flash[:notice] = "Logged in sucessfully"
       redirect_to dashboard_path
     else
       logger.debug "Authentication failed"
       flash.clear
-      flash.now[:alert] = 'Invalid username or password'
+      flash.now[:alert] = "Invalid username or password"
       # render :index
       respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('login_form', partial: 'login/form') }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("login_form", partial: "login/form") }
         format.html { render :index }
       end
     end
@@ -27,6 +27,6 @@ class LoginController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path, notice: 'Logged out successfully'
+    redirect_to login_path, notice: "Logged out successfully"
   end
 end
