@@ -5,8 +5,16 @@ let DashFilterSortListenersAdded = false;
 let eventDashModal;
 
 document.addEventListener("turbo:load", () => {
-    eventDashCardListenersAdded = false;
-    DashFilterSortListenersAdded = false;
+  eventDashCardListenersAdded = false;
+  DashFilterSortListenersAdded = false;
+
+  const userId = document.body.dataset.userId;
+
+  if (userId) {
+      localStorage.setItem("loggedInUserId", userId);
+      syncDashboardWithUserEvents();
+  }
+
   if (cachedDashEvents.length > 0) {
     
     renderDashEvents(cachedDashEvents); // Render from cache immediately
@@ -77,6 +85,18 @@ function populateDashFilters(){
   });
 }
 
+
+function syncDashboardWithUserEvents(){
+  const loggedInUserId = localStorage.getItem("loggedInUserId");
+  if(!loggedInUserId) return; 
+
+  // filter events where the user is aparticipants 
+  const userEvents = originalDashEvents.filter(event => 
+    event.users && event.users.some(user => user.id == loggedInUserId)
+  )  
+
+  renderDashEvents(userEvents);
+}
 
 function addSearchAndFilterListenersDash() {
   if (DashFilterSortListenersAdded) return; // Prevent adding multiple listeners
@@ -156,23 +176,16 @@ function initializeDashEvents() {
         return response.json();
       })
       .then((events) => {
-        // Hide the loading message
-        console.log("API Response:", events);
         loadingMessage.style.display = "none";
-        
-        if (arraysAreEqual(events, cachedDashEvents)) return; 
-        
-
-        //overwrite event array
         cachedDashEvents = events;
         originalDashEvents = events.slice();
-        localStorage.setItem("cachedDashEvents", JSON.stringify(events)); // Save to local storage
-        
+        localStorage.setItem("cachedDashEvents", JSON.stringify(events));
+  
         // Populate filters and add listeners
         populateDashFilters();
         addSearchAndFilterListenersDash();
 
-        renderDashEvents(events);
+        syncDashboardWithUserEvents(); 
       })
       .catch((error) => {
         console.error("Error fetching events:", error);
@@ -264,7 +277,6 @@ function initializeDashEvents() {
 function addDashEventCardListeners() {
     if (eventDashCardListenersAdded) return;
     eventDashCardListenersAdded = true;
-
 
   const eventsContainer = document.getElementById("events-container2");
   
