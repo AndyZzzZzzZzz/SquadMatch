@@ -7,6 +7,9 @@
 
 <!-- app/views/dashboard -->
 <div >
+<% if flash[:notice] %>
+  <div id="flash-notice" class="flash-message notice"><%= flash[:notice] %></div>
+<% end %>
 <div class="container">
     <div class= "left-section col-lg-2 col-md-2 md-4">
         <h2>Time</h2>
@@ -34,3 +37,5 @@
     </div>
 
 </div>
+
+<%= javascript_include_tag 'flash_message' %>

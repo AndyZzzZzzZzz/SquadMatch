@@ -10,9 +10,12 @@ class LoginController < ApplicationController
 
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to dashboard_path, notice: 'Logged in successfully'
+      # redirect_to dashboard_path, notice: 'Logged in successfully'
+      flash[:notice] = 'Logged in sucessfully'
+      redirect_to dashboard_path
     else
       logger.debug "Authentication failed"
+      flash.clear
       flash.now[:alert] = 'Invalid username or password'
       # render :index
       respond_to do |format|

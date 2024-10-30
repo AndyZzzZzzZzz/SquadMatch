@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
 
+  # Routes for AJAX uniqueness checks
+  get 'users/check_username', to: 'users#check_username'
+  get 'users/check_email', to: 'users#check_email'
+
   # API routes without versioning
   namespace :api do
     resources :events, only: [ :index ]

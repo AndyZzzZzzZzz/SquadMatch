@@ -37,15 +37,10 @@
 
     <!-- Rails content -->
     <%= render 'layouts/navbar' %>
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
+    <!--
     <% flash.each do |key, message| %>
       <div class="flash-message <%= key %>"><%= message %></div>
-    <% end %>
+    <% end %> -->
     <%= yield %>
 
     <!-- Bootstrap JS Bundle -->
