@@ -1,25 +1,32 @@
 <!-- app/views/dashboard -->
 <div >
-<% if flash[:notice] %>
-  <div id="flash-notice" class="flash-message notice"><%= flash[:notice] %></div>
-<% end %>
-<div class="container">
-    <div class= "left-section col-lg-2 col-md-2 md-4">
+
+<% if current_user %>
+    <div class="container">
+        <div class= "left-section col-lg-2 col-md-2 md-4">
+            
+        </div>
+        
+
+        <div class="right-section">
+            <!-- User's activities -->
+            <h2><%= @user.first_name %>'s upcoming activities</h2>
+            <!-- Dynamically load the activity cards -->
+                <div class="col-lg-14 col-md-12 mb-14 events">
+                    <%= render 'dashboard/events_for_dash' %>
+                    <%= render 'dashboard/events_for_dash_modal' %>
+                </div>
+
+        </div>
+
+    </div>
+<% else %>
+    <div class="container login-container login-msg">
+        <p>Please 
+            <%= link_to 'Log In', login_path, class: 'input-box button' %> 
+            to access your dashboard.</p>
         
     </div>
-    
-
-    <div class="right-section">
-        <!-- User's activities -->
-        <h2>Your upcoming activities</h2>
-         <!-- Dynamically load the activity cards -->
-            <div class="col-lg-14 col-md-12 mb-14 events">
-                <%= render 'dashboard/events_for_dash' %>
-                <%= render 'dashboard/events_for_dash_modal' %>
-            </div>
-
-    </div>
-
-</div>
+<% end %>
 
 <%= javascript_include_tag 'flash_message' %>

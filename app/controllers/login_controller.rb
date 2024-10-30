@@ -4,8 +4,6 @@ class LoginController < ApplicationController
   end
 
   def create
-    logger.debug "Params received: #{params.inspect}"
-
     user = User.find_by(username: params[:username])
 
     if user && user.authenticate(params[:password])
@@ -14,7 +12,6 @@ class LoginController < ApplicationController
       flash[:notice] = "Logged in sucessfully"
       redirect_to dashboard_path
     else
-      logger.debug "Authentication failed"
       flash.clear
       flash.now[:alert] = "Invalid username or password"
       # render :index

@@ -1,0 +1,8 @@
+/* ===================================================================
+   components/message-effects.css
+=================================================================== */
+.login-msg {
+   width: 50%;            /* Adjust the percentage as needed */
+   margin: 0 20;
+   text-align: center;
+}
