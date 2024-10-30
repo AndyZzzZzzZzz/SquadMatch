@@ -3,6 +3,6 @@ document.addEventListener('turbo:load', () => {
     if (flashNotice) {
       setTimeout(() => {
         flashNotice.style.display = 'none';
-      }, 3000); // Disappear after 3 seconds
+      }, 2000); // Disappear after 2 seconds
     }
   });
