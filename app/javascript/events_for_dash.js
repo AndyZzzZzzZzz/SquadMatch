@@ -3,6 +3,7 @@ let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
 let DashFilterSortListenersAdded = false;
 let eventDashModal;
+let cachedUserEvents;
 
 document.addEventListener("turbo:load", () => {
   eventDashCardListenersAdded = false;
@@ -12,12 +13,14 @@ document.addEventListener("turbo:load", () => {
 
   if (userId) {
       localStorage.setItem("loggedInUserId", userId);
-      syncDashboardWithUserEvents();
+      // syncDashboardWithUserEvents();
+      cachedUserEvents = syncDashboardWithUserEvents();
+      console.log(cachedUserEvents)
   }
 
-  if (cachedDashEvents.length > 0) {
+  if (cachedUserEvents.length > 0) {
     
-    renderDashEvents(cachedDashEvents); // Render from cache immediately
+    renderDashEvents(cachedUserEvents); // Render from cache immediately
     populateDashFilters();
     addSearchAndFilterListenersDash();
   } else {
@@ -95,7 +98,8 @@ function syncDashboardWithUserEvents(){
     event.users && event.users.some(user => user.id == loggedInUserId)
   )  
 
-  renderDashEvents(userEvents);
+  // renderDashEvents(userEvents);
+  return userEvents;
 }
 
 function addSearchAndFilterListenersDash() {
@@ -185,7 +189,8 @@ function initializeDashEvents() {
         populateDashFilters();
         addSearchAndFilterListenersDash();
 
-        syncDashboardWithUserEvents(); 
+        // syncDashboardWithUserEvents();
+        renderDashEvents(cachedUserEvents);
       })
       .catch((error) => {
         console.error("Error fetching events:", error);
