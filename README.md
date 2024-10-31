@@ -43,6 +43,8 @@ Do you love sports but find it tough to track down someone to play with? You're 
 
 - **Extended User Profile**: Adding new functionality to the user profile page, including tracking achievements, displaying clubs the user has joined, and listing recent events they've attended. These enhancements will make profiles more dynamic and engaging.
 
+- **Extended User Functionality**: Adding new functionality to allow the user to join events from home page. Joined event will then appears on the user's dashboard.
+
 - **Google Maps API Integration**: Planning to incorporate Google Maps API to display event locations in a map view within pop-up modals, giving users a visual reference for event locations.
 
 ---
