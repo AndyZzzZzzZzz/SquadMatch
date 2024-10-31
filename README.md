@@ -156,9 +156,24 @@ We encountered a few challenges during this iteration:
 
 
 ## Tests
-### Cloud Database Testing and Front-End Validation
-Conducted thorough testing of cloud-stored data, ensuring accurate retrieval and proper display during website development mode. Verified that all information is correctly presented on the front-end, maintaining data integrity and consistency.
-![image](https://github.com/user-attachments/assets/5152a2ee-cd0a-4888-9f81-091ae1b58f72)
+### Validate user registration input, user authentication, and database interactions, ensuring correct input validation, unique entries, and proper data storage.
+
+#### 1. User Registration Input Validation
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/2a5db6cd-ffa5-47f5-9e68-673f5fd5bc9f" alt="gif1">
+</p>
+Verify that registration inputs meet requirements for email format, unique username/email, and minimum password length.
+
+- **Email Validation**: Enter invalid formats (e.g., `userexample.com`, `user@.com`) to check if an error prompts for a valid email.
+- **Unique Username/Email**: Use an existing username or email to confirm that duplicate entries are blocked.
+- **Password Length**: Test passwords under 6 characters and confirm an error message appears for insufficient length.
+
+#### 2. User Authentication
+
+Test if registered users are saved in the cloud database and login credentials retrieve correctly.
+
+- **Database Confirmation**: Check the database to verify that new registrations appear and contain correct information.
+- **Login Retrieval**: Attempt login with registered details; ensure the database validates and retrieves credentials correctly.
 
 ### HomeController Test: Ensuring Successful Response for HTTP GET Request
 ![image](https://github.com/user-attachments/assets/38d0924b-5487-4f79-b338-b07e591df435)
