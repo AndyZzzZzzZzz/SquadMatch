@@ -19,8 +19,26 @@ Do you love sports but find it tough to track down someone to play with? You're 
 
 
 ## Version History
-### Version 0.1
+### Version 0.2
+#### Updates:
+- **Home Page**: Event filters and search functionality are now available.
 
+- **Dashboard**: Requires user login to view their events. If no user is logged in, a link directs users to the login page.
+
+- **Profile**: Displays a simple user profile with basic information.
+
+- **Navbar**: Provides links for users to log in or register. For logged-in users, links to the profile page are available.
+
+- **UI**: Enhanced with a new, improved design.
+
+#### Features in Progress:
+- **Profile**: Allows users to modify their information.
+
+- **Events**: Enables users to create new events.
+
+- **Home Page**: Includes a button to clear all search and filters; Includes a button to refresh events display.
+
+### Version 0.1
 #### Features:
 - **Home Page**: Displays all recently added events with logos, descriptions, number of participants, and capacities. Events are fetched dynamically from cloud databases and sorted by time, with the most recent event displayed first.
   
