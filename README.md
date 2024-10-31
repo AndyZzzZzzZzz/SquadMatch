@@ -192,9 +192,14 @@ The automated tests include:
 This automated pipeline helps maintain consistent quality, compatibility, and style in the codebase, ensuring a stable integration process for each new contribution.
 
 
-### Database Behavior Testing with Mock Data in Fixtures
-![image](https://github.com/user-attachments/assets/f1e1d2a4-1f30-4036-a3b7-dadca8329236)
-Created mock data under the fixture files to simulate and test database behavior in the test environment. This ensures that the test cases have access to predefined data, allowing validation of database interactions, queries, and relationships without affecting the actual production data.
+### Test Database and Sample Data Setup
+![image](https://github.com/user-attachments/assets/22934eb0-10ea-493f-a078-8bb287389e64)
+
+Sample data for testing is manually created and stored within the `fixtures` folder under `tests`, structured to mirror the cloud database setup. Each `.yml` file in the `fixtures` directory represents a single database table, ensuring consistency between test and production environments.
+
+- **Controller Tests**: Each page in the Rails app has a corresponding controller test file located in `tests/controllers`, validating page-specific logic and interactions.
+- **Test Environment**: The test environment is initialized and configured using `test_helper.rb`, which sets up dependencies and configurations necessary for consistent test execution.
+
 
 
 
