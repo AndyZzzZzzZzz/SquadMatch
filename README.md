@@ -63,6 +63,11 @@ Do you love sports but find it tough to track down someone to play with? You're 
 - **Club Page**: Displays information for specific clubs, including descriptions, management teams, and current members.
 
 
+## Feature Tracking 
+
+![image](https://github.com/user-attachments/assets/206247d5-ab2e-4df2-b6a3-0fd4c6b2dfab)
+![image](https://github.com/user-attachments/assets/a8aa9361-2241-423c-a3dd-17cf31172f64)
+
 ## Dependencies
 
 SquadMatch it built with Ruby on Rails, React.js and PostgreSql.
