@@ -16,8 +16,6 @@ document.addEventListener("turbo:load", () => {
       // syncDashboardWithUserEvents();
       cachedUserEvents = syncDashboardWithUserEvents() || [];
       originalDashEvents = cachedUserEvents.slice();
-      console.log("userid cached user: ", cachedUserEvents);
-      console.log("userid originaldash: ", originalDashEvents);
   }
 
   if (cachedUserEvents.length > 0) {
@@ -183,11 +181,8 @@ function initializeDashEvents() {
       .then((events) => {
         loadingMessage.style.display = "none";
         cachedDashEvents = events;
-        console.log("initial cached dash: ", cachedDashEvents);
         cachedUserEvents = syncDashboardWithUserEvents();
         originalDashEvents = cachedUserEvents.slice();
-        console.log("initialized cachedUser: ", cachedUserEvents);
-        console.log("initialized originaldash: ", originalDashEvents);
         localStorage.setItem("cachedDashEvents", JSON.stringify(events));
   
         // Populate filters and add listeners
