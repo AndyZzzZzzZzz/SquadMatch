@@ -38,9 +38,7 @@ Do you love sports but find it tough to track down someone to play with? You're 
 
 - **Register/Login**: The registration page collects essential user information to create an account. It includes validation to ensure the username and email are unique, the email is valid, and the password meets minimum length requirements. The login page accepts username and password, with server-side validation. Upon successful login, users are directed to their Dashboard.
 
----
-
-## Features in Progress:
+#### Features in Progress:
 
 - **Club Page**: A dedicated page for each club, showcasing club-specific details, including a description, management team, current members, and upcoming events like competitions, trivia, and gatherings. This page will provide users with a central hub to explore and connect with clubs.
 
@@ -52,6 +50,7 @@ Do you love sports but find it tough to track down someone to play with? You're 
 
 - **Google Maps API Integration**: Planning to incorporate Google Maps API to display event locations in a map view within pop-up modals, giving users a visual reference for event locations.
 
+---
 
 ### Version 0.1
 #### Features:
