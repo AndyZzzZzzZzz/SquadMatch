@@ -3,7 +3,7 @@ let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
 let DashFilterSortListenersAdded = false;
 let eventDashModal;
-let cachedUserEvents;
+let cachedUserEvents = [];
 
 document.addEventListener("turbo:load", () => {
   eventDashCardListenersAdded = false;
@@ -14,12 +14,13 @@ document.addEventListener("turbo:load", () => {
   if (userId) {
       localStorage.setItem("loggedInUserId", userId);
       // syncDashboardWithUserEvents();
-      cachedUserEvents = syncDashboardWithUserEvents();
-      console.log(cachedUserEvents)
+      cachedUserEvents = syncDashboardWithUserEvents() || [];
+      originalDashEvents = cachedUserEvents.slice();
+      console.log("userid cached user: ", cachedUserEvents);
+      console.log("userid originaldash: ", originalDashEvents);
   }
 
   if (cachedUserEvents.length > 0) {
-    
     renderDashEvents(cachedUserEvents); // Render from cache immediately
     populateDashFilters();
     addSearchAndFilterListenersDash();
@@ -94,7 +95,7 @@ function syncDashboardWithUserEvents(){
   if(!loggedInUserId) return; 
 
   // filter events where the user is aparticipants 
-  const userEvents = originalDashEvents.filter(event => 
+  const userEvents = cachedDashEvents.filter(event => 
     event.users && event.users.some(user => user.id == loggedInUserId)
   )  
 
@@ -182,7 +183,11 @@ function initializeDashEvents() {
       .then((events) => {
         loadingMessage.style.display = "none";
         cachedDashEvents = events;
-        originalDashEvents = events.slice();
+        console.log("initial cached dash: ", cachedDashEvents);
+        cachedUserEvents = syncDashboardWithUserEvents();
+        originalDashEvents = cachedUserEvents.slice();
+        console.log("initialized cachedUser: ", cachedUserEvents);
+        console.log("initialized originaldash: ", originalDashEvents);
         localStorage.setItem("cachedDashEvents", JSON.stringify(events));
   
         // Populate filters and add listeners

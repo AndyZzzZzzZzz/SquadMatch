@@ -1,0 +1,63 @@
+.register-container {
+  position: relative;
+  margin-left: 10rem;
+  margin-top: 1rem;
+  max-width: 430px;
+  width: 100%;
+  background: var(--darker);
+  padding: 34px;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.register-container form {
+  margin-top: 30px;
+}
+.register-container form .input-box {
+  height: 52px;
+  margin: 18px 0;
+}
+
+form .input-box input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 5px solid #c7bebe;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+.input-box input:focus,
+.input-box input:valid {
+  border-color: #0e4bf1;
+}
+.policy {
+  display: flex;
+  align-items: center;
+}
+.conditions-text {
+  color: #707070;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
+  text-align: center;
+}
+
+.input-box.button input {
+  color: #fff;
+  letter-spacing: 1px;
+  border: none;
+  background: #4070f4;
+  cursor: pointer;
+}
+.input-box.button input:hover {
+  background: #0e4bf1;
+}
+.error-message {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
