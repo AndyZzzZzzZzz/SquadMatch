@@ -70,19 +70,48 @@ Do you love sports but find it tough to track down someone to play with? You're 
 
 ## Dependencies
 
-SquadMatch it built with Ruby on Rails, React.js and PostgreSql.
+**SquadMatch** is built with Ruby on Rails, React.js, and PostgreSQL.
 
-To run the application locally, SquadMatch requires 
-* ruby 3.1.6
-* rails 7.2.1
+To run the application locally, **SquadMatch** requires:
+- **Ruby** 3.1.6
+- **Rails** 7.2.1
+- **PostgreSQL** (as the database for Active Record)
 
-Details of other dependencies are saved in Gemfile.
+Core dependencies managed in the `Gemfile` include:
 
-### How to run SquadMatch locally
+- **Backend Essentials**:
+  - `pg` - PostgreSQL database support
+  - `puma` - Web server for handling requests
+  - `bcrypt` - Password encryption
+  - `dotenv-rails` - Environment variable management (for development and testing)
 
-* Run `bundle install` to ensure all dependencies are installed properly.
-* Run `rails server`
-* Using `http://localhost:3000/`
+- **JavaScript and Frontend**:
+  - `importmap-rails` - Manage JavaScript dependencies
+  - `turbo-rails` and `stimulus-rails` - Enable interactivity and faster page loads
+  - `jbuilder` - Build JSON responses
+
+- **Development and Testing Tools**:
+  - `rubocop` - Code style checks
+  - `brakeman` - Security scanner
+  - `web-console` - Debugging in development
+  - `capybara` and `selenium-webdriver` - Integration testing
+
+---
+
+### How to Run SquadMatch Locally
+
+1. **Install dependencies**:
+   ```bash
+   bundle install
+   ```
+2. **Set up environment variables**:
+   Create a `.env` file in the root directory with necessary environment variables if using `dotenv-rails`.
+3. **Start the Rails server**:
+   ```bash
+   rails server
+   ```
+4. **Access the application**:
+   Open http://localhost:3000 in your browser.
 
 
 ## Retrospective Documentation
