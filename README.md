@@ -6,6 +6,41 @@
 
 Do you love sports but find it tough to track down someone to play with? You're not alone! That’s where SquadMatch steps in. We’re building an online space that not only helps you find teammates but also connects you with others who share your passion for sports. Whether you’re seeking casual games, local tournaments, or even a mentor for one-on-one training, SquadMatch has you covered. Say goodbye to endless social media searches or awkward inquiries. We’ve spotted the need, and we’re here to bring you fun, friendships, and plenty of action-packed sports!
 
+### Project Structure
+
+├── app                     # Main application directory (models, views, controllers)
+│   ├── assets              # Frontend assets (JavaScript, CSS, images)
+│   ├── controllers         # Controller files
+│   ├── helpers             # Helper methods
+│   ├── javascript          # Javascript files
+│   ├── models              # Model files
+│   └── views               # View files
+├── config                  # Configuration files
+│   ├── environments        # Environment-specific settings
+│   ├── initializers        # Initialization scripts
+│   ├── locales             # Localization files
+│   ├── application.rb      # Configuration for application
+│   └── routes.rb           # Route definitions
+├── db                      # Database files
+│   ├── migrate             # Database migrations
+│   ├── schema.rb           # Database schema
+│   └── seeds.rb            # Sample data for seeding the database
+├── log                     # Application log files
+├── public                  # Static files and assets
+├── storage                 # Uploaded files (ActiveStorage)
+├── test                    # Unit tests
+│   ├── controllers         # Controller tests
+│   ├── fixtures            # Sample data for testing
+│   ├── integration         # Integration tests
+│   ├── models              # Model tests
+│   └── system              # System tests
+├── tmp                     # Temporary files
+├── vendor                  # External libraries and dependencies
+├── Gemfile                 # Gem dependencies
+├── Gemfile.lock            # Locked gem dependencies
+└── README.md               # Project documentation
+
+
 ## Version History
 ### Version 0.2
 #### Features:
