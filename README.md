@@ -175,9 +175,22 @@ Test if registered users are saved in the cloud database and login credentials r
 - **Database Confirmation**: Check the database to verify that new registrations appear and contain correct information.
 - **Login Retrieval**: Attempt login with registered details; ensure the database validates and retrieves credentials correctly.
 
-### HomeController Test: Ensuring Successful Response for HTTP GET Request
-![image](https://github.com/user-attachments/assets/38d0924b-5487-4f79-b338-b07e591df435)
-Create a controller test file for the HomeController to validate that the root URL responds successfully. This test will simulate an HTTP GET request to the root path and include assertions to verify that the response status is successful (HTTP status code 200).
+### Automated Testing and CI/CD Workflow
+![image](https://github.com/user-attachments/assets/877fd405-fd08-449f-86d6-bf4d00ae84bc)
+This project leverages GitHub's default CI/CD testing workflow along with Rails' built-in testing functions to ensure code quality and compatibility for each pull request. The testing pipeline is configured to enforce compliance with the main branch's dependency versions, syntax, and code style before merging.
+
+The automated tests include:
+
+- **Dependency and Version Compliance**: Verifies that all dependencies match the main branch’s specified versions, preventing version conflicts.
+- **Code Linting and Style Checks**:
+  - **scan_ruby**: Validates Ruby code for common issues and ensures adherence to defined Ruby style conventions.
+  - **scan_js**: Examines JavaScript files for syntax and style consistency.
+  - **Lint**: Applies additional code linting rules across the project to catch potential errors and improve code readability.
+- **Functionality Testing**:
+  - **test**: Runs Rails’ built-in unit and integration tests to verify core application functionality, checking that changes do not break existing features or introduce regressions.
+
+This automated pipeline helps maintain consistent quality, compatibility, and style in the codebase, ensuring a stable integration process for each new contribution.
+
 
 ### Database Behavior Testing with Mock Data in Fixtures
 ![image](https://github.com/user-attachments/assets/f1e1d2a4-1f30-4036-a3b7-dadca8329236)
