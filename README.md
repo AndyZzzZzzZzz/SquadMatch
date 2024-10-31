@@ -6,6 +6,8 @@
 
 Do you love sports but find it tough to track down someone to play with? You're not alone! That’s where SquadMatch steps in. We’re building an online space that not only helps you find teammates but also connects you with others who share your passion for sports. Whether you’re seeking casual games, local tournaments, or even a mentor for one-on-one training, SquadMatch has you covered. Say goodbye to endless social media searches or awkward inquiries. We’ve spotted the need, and we’re here to bring you fun, friendships, and plenty of action-packed sports!
 
+## Project Structure
+![image](https://github.com/user-attachments/assets/bc4439e0-baaa-4958-84e2-f675d533f291)
 
 
 ## Version History
