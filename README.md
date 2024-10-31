@@ -33,10 +33,12 @@ Do you love sports but find it tough to track down someone to play with? You're 
  <p align="center">
   <img src="https://github.com/user-attachments/assets/e28d54f3-4b10-4fc6-a1f9-9ff47953340b" alt="gif2">
 </p>
+
 - **Register/Login**: The registration page collects essential user information to create an account. It includes validation to ensure the username and email are unique, the email is valid, and the password meets minimum length requirements. The login page accepts username and password, with server-side validation. Upon successful login, users are directed to their Dashboard.
 <p align="center">
   <img src="https://github.com/user-attachments/assets/00a174d0-b373-4634-a3eb-4a6b0812aebc" alt="gif3">
 </p>
+
 #### Features in Progress:
 
 - **Club Page**: A dedicated page for each club, showcasing club-specific details, including a description, management team, current members, and upcoming events like competitions, trivia, and gatherings. This page will provide users with a central hub to explore and connect with clubs.
