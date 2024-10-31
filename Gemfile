@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.1.6"
 
-gem "rails", "~> 7.2.1"
+gem "rails", "~> 7.2.2"
 gem "sprockets-rails"
 
 # # Use sqlite3 as the database for Active Record
