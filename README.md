@@ -20,23 +20,38 @@ Do you love sports but find it tough to track down someone to play with? You're 
 
 ## Version History
 ### Version 0.2
-#### Updates:
-- **Home Page**: Event filters and search functionality are now available.
+#### Features:
 
-- **Dashboard**: Requires user login to view their events. If no user is logged in, a link directs users to the login page.
+- **Home Page**: Showcases all recently added events, with details like event name, host name, host organizations, event type (competition or drop-in session), sports category, current participants, date and time, location, and capacity. Events are dynamically fetched from cloud databases and sorted chronologically, with the newest events displayed first.
+  
+  - **Search and Filter Bar**: Provides a search and filter bar above the events list. Users can search events by keywords, including event name, host, and organization name. They can also filter events based on categories, host names, clubs, and locations for a more tailored experience.
+  
+  - **News and Updates**: A news section on the left side of the homepage displays the latest updates and announcements, fetched dynamically from the database. Each news item includes a brief description and a "read more" option.
+  
+  - **Modal Pop-Ups**: Each event and news item is associated with a pop-up modal that provides a more detailed description, allowing users to explore more specific information about events or news items.
 
-- **Profile**: Displays a simple user profile with basic information.
+- **Navbar**: A responsive navigation bar that provides quick access to key sections of the app. It displays options for Home, Dashboard, Clubs, Login, and Register when the user is not logged in. Once logged in, the Login and Register buttons are replaced with Profile and Logout options, creating a seamless experience.
 
-- **Navbar**: Provides links for users to log in or register. For logged-in users, links to the profile page are available.
+- **Dashboard**: A personalized hub displaying all upcoming activities the logged-in user is registered for, sorted by date with the most imminent events at the top. The Dashboard is secured and accessible only to logged-in users; non-logged-in users are redirected to the login page. Users can search and filter their own events using the same options available on the homepage for consistency.
 
-- **UI**: Enhanced with a new, improved design.
+- **User Profile**: Provides an overview of the user’s profile, including their profile picture, username, registered email, and a personalized biography. Users have the option to edit their profile details and delete their account if they choose.
 
-#### Features in Progress:
-- **Profile**: Allows users to modify their information.
+- **Register/Login**: The registration page collects essential user information to create an account. It includes validation to ensure the username and email are unique, the email is valid, and the password meets minimum length requirements. The login page accepts username and password, with server-side validation. Upon successful login, users are directed to their Dashboard.
 
-- **Events**: Enables users to create new events.
+---
 
-- **Home Page**: Includes a button to clear all search and filters; Includes a button to refresh events display.
+## Features in Progress:
+
+- **Club Page**: A dedicated page for each club, showcasing club-specific details, including a description, management team, current members, and upcoming events like competitions, trivia, and gatherings. This page will provide users with a central hub to explore and connect with clubs.
+
+- **UI/UX Enhancements**: Planned improvements for the user experience on the login, registration, and profile pages, aiming to make interactions more intuitive and visually appealing.
+
+- **Enhanced Dashboard**: Redesigning the user dashboard into a calendar-like format for a more organized and visually distinct experience from the homepage. Users will be able to specify personalized events on specific dates.
+
+- **Extended User Profile**: Adding new functionality to the user profile page, including tracking achievements, displaying clubs the user has joined, and listing recent events they've attended. These enhancements will make profiles more dynamic and engaging.
+
+- **Google Maps API Integration**: Planning to incorporate Google Maps API to display event locations in a map view within pop-up modals, giving users a visual reference for event locations.
+
 
 ### Version 0.1
 #### Features:
