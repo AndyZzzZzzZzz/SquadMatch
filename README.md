@@ -6,23 +6,14 @@
 
 Do you love sports but find it tough to track down someone to play with? You're not alone! That’s where SquadMatch steps in. We’re building an online space that not only helps you find teammates but also connects you with others who share your passion for sports. Whether you’re seeking casual games, local tournaments, or even a mentor for one-on-one training, SquadMatch has you covered. Say goodbye to endless social media searches or awkward inquiries. We’ve spotted the need, and we’re here to bring you fun, friendships, and plenty of action-packed sports!
 
-## Project Demo
-![image](https://github.com/user-attachments/assets/98241799-255c-4c97-a542-cd1e0b51ca6f)
-![image](https://github.com/user-attachments/assets/bbcc4f2a-8a43-4dfc-b8fc-1a8d332141cc)
-![image](https://github.com/user-attachments/assets/a8eb00fa-0a0b-4451-804e-3c5188c5f42d)
-
-
-
-## Feature Tracking
-![image](https://github.com/user-attachments/assets/6887c952-a7f2-4170-9310-7aad58cc6d4b)
-![image](https://github.com/user-attachments/assets/9b49df4a-763e-4315-9763-1354cba1a6b2)
-
-
 ## Version History
 ### Version 0.2
 #### Features:
 
 - **Home Page**: Showcases all recently added events, with details like event name, host name, host organizations, event type (competition or drop-in session), sports category, current participants, date and time, location, and capacity. Events are dynamically fetched from cloud databases and sorted chronologically, with the newest events displayed first.
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/0450fcbb-292a-417a-9c94-d834e180ca1c" alt="gif1">
+</p>
   
   - **Search and Filter Bar**: Provides a search and filter bar above the events list. Users can search events by keywords, including event name, host, and organization name. They can also filter events based on categories, host names, clubs, and locations for a more tailored experience.
   
@@ -35,9 +26,13 @@ Do you love sports but find it tough to track down someone to play with? You're 
 - **Dashboard**: A personalized hub displaying all upcoming activities the logged-in user is registered for, sorted by date with the most imminent events at the top. The Dashboard is secured and accessible only to logged-in users; non-logged-in users are redirected to the login page. Users can search and filter their own events using the same options available on the homepage for consistency.
 
 - **User Profile**: Provides an overview of the user’s profile, including their profile picture, username, registered email, and a personalized biography. Users have the option to edit their profile details and delete their account if they choose.
-
+ <p align="center">
+  <img src="https://github.com/user-attachments/assets/e28d54f3-4b10-4fc6-a1f9-9ff47953340b" alt="gif2">
+</p>
 - **Register/Login**: The registration page collects essential user information to create an account. It includes validation to ensure the username and email are unique, the email is valid, and the password meets minimum length requirements. The login page accepts username and password, with server-side validation. Upon successful login, users are directed to their Dashboard.
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/00a174d0-b373-4634-a3eb-4a6b0812aebc" alt="gif3">
+</p>
 #### Features in Progress:
 
 - **Club Page**: A dedicated page for each club, showcasing club-specific details, including a description, management team, current members, and upcoming events like competitions, trivia, and gatherings. This page will provide users with a central hub to explore and connect with clubs.
