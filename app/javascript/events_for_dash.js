@@ -4,7 +4,6 @@ let eventDashCardListenersAdded = false;
 let DashFilterSortListenersAdded = false;
 let eventDashModal;
 let cachedUserEvents = [];
-let cachedUserEvents = [];
 
 document.addEventListener("turbo:load", () => {
   eventDashCardListenersAdded = false;
