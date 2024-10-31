@@ -81,23 +81,43 @@ Details of other dependencies are saved in Gemfile.
 
 
 ## Retrospective Documentation
+
 ### Scope of the Project
-The goal of this project is to build a web application that connects university students for sports, drop-in games, local competitions, and other events.
+The goal of this project is to develop a web application that connects university students for sports, drop-in games, local competitions, and other social events.
 
 ### What Went Right
-Our team collaborated effectively, holding two in-person meetings each week on Monday and Thursday. This kept everyone on top of the current project stage, any issues that needed to be resolved, and the implementation plans for the next phase.
-The initialization of the PostgreSQL database went smoothly, and we were able to store all necessary data in a well-structured schema.
-The cloud database connection worked seamlessly, allowing us to fetch data in real time and send it to the frontend for display.
-The initial build of the frontend interfaces looks modern, with a clean and functional UI design.
+Our team maintained effective communication and teamwork throughout the last iteration. We successfully held two weekly in-person meetings, with an option to switch to online meetings when necessary for individual team members.
+
+Key improvements included:
+- **Code Refactoring**: We refactored most of the codebase, breaking down the main CSS stylesheet into modular sections. This approach improved manageability and will make future styling work more efficient and consistent.
+  
+- **Dynamic Content with JavaScript**: We converted dynamic HTML code to JavaScript, resulting in a shorter and more maintainable HTML file. Leveraging JavaScript also allowed us to better handle dynamic content loading on the site.
+
+- **Local Storage Caching**: We implemented caching in local storage to reduce unnecessary latency by avoiding repetitive data requests from the remote database. This optimization significantly improved loading times for users.
+
+- **Authentication System**: We implemented login authentication, which allowed us to test more realistic user interactions and scenarios effectively.
+
 ### Challenges
-Integrating the PostgreSQL database with Rails presented some challenges. We faced an ActiveRecord error that persisted for a few days, where Rails’ prepared statements would expire, causing the website to throw errors. We resolved this by disabling prepared statements in the database configuration for development mode but will need a permanent solution for deployment. 
-Additionally, we ran into dependency issues with the Gemfile and Ruby version during setup. These were resolved through in-person collaboration, allowing us to troubleshoot and sync our environments.
-We also encountered inconsistent CSS rendering across pages, caused by conflicting CSS classes and improper asset precompilation. Refactoring and organizing the CSS files fixed the issue.
+We encountered a few challenges during this iteration:
+
+- **Local Storage Caching**: While caching improved load times, ensuring it didn’t interfere with personalized user events on login required careful handling.
+
+- **PostgreSQL Database in Testing**: Using a PostgreSQL database presented issues in the testing environment, particularly with Rails struggling to drop the remote database for tests. We have not yet identified an optimal solution, so for now, we are running individual test cases manually.
+
+- **Code Synchronization**: Modularizing the codebase brought some challenges, as keeping JavaScript files, CSS documents, and HTML scripts synchronized occasionally led to minor conflicts and routing issues within Rails.
+
+- **Deployment**: Deployment has been challenging, with issues similar to an active database connection problem. Our initial attempt on Heroku encountered an “app crashed” message, and we’re investigating solutions to make the deployment process more reliable.
 
 ### Improvements for the Next Stage
-Feature Expansion: We plan to include additional features, such as API integration for real-time location display, a messaging channel for user communication, and login functionality.
-UI Improvement: We’re considering switching to a more modern UI framework like React or Next.js. We’re also exploring the use of JavaScript over HTML for a more dynamic frontend experience.
-Comprehensive Testing: We will include more thorough tests for backend development to ensure reliability and catch issues earlier in the development cycle.
+
+- **Feature Expansion**: We plan to integrate Google Maps API to display event locations on the event modal, giving users a better visual reference. We also aim to enhance user profiles, making them more descriptive and interactive, and strengthen security in the login and registration features, with more secure password encryption.
+
+- **UI Improvements**: We aim to modernize the UI for the login, registration, and profile pages, adopting a more appealing and user-friendly design. Additionally, we’re planning a prototype for the clubs page to display various clubs and members and updating the user dashboard with a calendar-style layout.
+
+- **Debugging**: We’ll focus on resolving existing console bugs, such as minor import and syntax errors. We also want to address the active database connection issue to improve isolated testing, development, and deployment environments. We are looking into deployment issues and hope to establish a more stable deployment process.
+
+- **Comprehensive Testing**: Our goal is to expand automated test coverage for both backend and frontend components, ensuring robust functionality across various areas of the application.
+
 
 ## Tests
 ### Cloud Database Testing and Front-End Validation
