@@ -1,4 +1,8 @@
 <!-- app/views/dashboard -->
+<% content_for :page_specific_js do %>
+    <%= javascript_include_tag 'events_for_dash', 'data-turbo-track': 'reload', defer: true, type: "module" %>
+  <%end %>
+  
 <div >
 
 <% if current_user %>
