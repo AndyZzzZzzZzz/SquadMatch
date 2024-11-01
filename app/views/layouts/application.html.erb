@@ -28,6 +28,7 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <%= javascript_importmap_tags %>
 
     <!-- Rails stylesheet -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -46,11 +47,10 @@
     <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true, type: "module" %>
     <!-- Rails JavaScript -->
-    <%= javascript_include_tag 'events', 'data-turbo-track': 'reload', defer: true %>
-    <%= javascript_include_tag 'events_for_dash', 'data-turbo-track': 'reload', defer: true %>
-    <%= javascript_include_tag 'news', 'data-turbo-track': 'reload', defer: true %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'events', 'data-turbo-track': 'reload', defer: true, type: "module" %>
+    <%= javascript_include_tag 'events_for_dash', 'data-turbo-track': 'reload', defer: true, type: "module" %>
+    <%= javascript_include_tag 'news', 'data-turbo-track': 'reload', defer: true, type: "module"  %>
   </body>
 </html>
