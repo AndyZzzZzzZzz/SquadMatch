@@ -212,10 +212,12 @@ function initializeDashEvents() {
   
   function renderDashEvents(events) {
     const eventsContainer = document.getElementById("events-container2");
+    
+    if(eventsContainer){
+      eventsContainer.innerHTML = "";
+    }
   
-    eventsContainer.innerHTML = ""; // Clear the container
-  
-    if (events.length === 0) {
+    if (events.length === 0 && eventsContainer) {
       eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
       return;
     }
@@ -223,7 +225,9 @@ function initializeDashEvents() {
     // Render each event card
     events.forEach((event) => {
       const eventHTML = renderDashEventCard(event);
-      eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      if(eventsContainer){
+        eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      }
     });
   
     addDashEventCardListeners(); 
@@ -296,13 +300,15 @@ function addDashEventCardListeners() {
 
   const eventsContainer = document.getElementById("events-container2");
   
-  eventsContainer.addEventListener("click", (event) => {
+  if(eventsContainer){
+    eventsContainer.addEventListener("click", (event) => {
     const card = event.target.closest("[data-event-id]");
     if (card) {
       const eventId = card.getAttribute("data-event-id");
       openEventModal2(eventId);
     }
   });
+}
 }
 
 // Function to open event modal
