@@ -49,8 +49,6 @@
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true, type: "module" %>
     <!-- Rails JavaScript -->
-    <%= javascript_include_tag 'events', 'data-turbo-track': 'reload', defer: true, type: "module" %>
-    <%= javascript_include_tag 'events_for_dash', 'data-turbo-track': 'reload', defer: true, type: "module" %>
-    <%= javascript_include_tag 'news', 'data-turbo-track': 'reload', defer: true, type: "module"  %>
+     <%= yield :page_specific_js %>
   </body>
 </html>
