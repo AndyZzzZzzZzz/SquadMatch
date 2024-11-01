@@ -26,7 +26,11 @@ document.addEventListener("turbo:load", () => {
     initializeDashEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal-2");
-  eventDashModal = new bootstrap.Modal(eventModalElement)
+  if(eventModalElement){
+    eventDashModal = new Modal(eventModalElement, {
+      backdrop: 'static' // Explicitly setting backdrop
+    });
+  }
 });
 
 function populateDashFilters(){
@@ -169,8 +173,13 @@ function initializeDashEvents() {
     const loadingMessage = document.getElementById("loading-message2");
     
     // Show the loading message and clear previous content
-    loadingMessage.style.display = "block";
-    eventsContainer.innerHTML = "";
+    if(loadingMessage){
+      loadingMessage.style.display = "block";
+    }
+    if(eventsContainer){
+      eventsContainer.innerHTML = "";
+    }
+    
   
     // Fetch events from the API
     fetch("/api/events")
@@ -179,7 +188,9 @@ function initializeDashEvents() {
         return response.json();
       })
       .then((events) => {
-        loadingMessage.style.display = "none";
+        if(loadingMessage){
+          loadingMessage.style.display = "none";
+        }
         cachedDashEvents = events;
         cachedUserEvents = syncDashboardWithUserEvents();
         originalDashEvents = cachedUserEvents.slice();
@@ -193,9 +204,9 @@ function initializeDashEvents() {
         renderDashEvents(cachedUserEvents);
       })
       .catch((error) => {
-        console.error("Error fetching events:", error);
-        loadingMessage.style.display = "none"; // Hide loading message on error
-        eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        if(eventsContainer){
+          eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        }
       });
   }
   
