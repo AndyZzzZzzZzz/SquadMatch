@@ -30,7 +30,7 @@ document.addEventListener("turbo:load", () => {
   }
   const eventModalElement = document.getElementById("event-modal-2");
   if(eventModalElement){
-    eventDashModal = new Modal(eventModalElement, {
+    eventDashModal = new bootstrap.Modal(eventModalElement, {
       backdrop: 'static' // Explicitly setting backdrop
     });
   }

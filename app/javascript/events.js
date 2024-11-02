@@ -20,7 +20,11 @@ document.addEventListener("turbo:load", () => {
     initializeEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal");
-  eventModal = new bootstrap.Modal(eventModalElement);
+  if(eventModalElement){
+      eventModal = new bootstrap.Modal(eventModalElement, {
+      backdrop: 'static' // Explicitly setting backdrop
+    });
+  }
 });
 
 function arraysAreEqual(arr1, arr2) {
@@ -55,7 +59,9 @@ function populateFilters(){
     const option = document.createElement("option");
     option.value = category;
     option.textContent = category;
-    categoryFilter.appendChild(option);
+    if(categoryFilter){
+      categoryFilter.appendChild(option);
+    }
   });
 
   // Populate host filter
@@ -64,7 +70,9 @@ function populateFilters(){
     const option = document.createElement("option");
     option.value = host;
     option.textContent = host;
-    hostFilter.appendChild(option);
+    if(hostFilter){
+      hostFilter.appendChild(option);
+    }
   });
 
   // Populate club filter
@@ -73,7 +81,9 @@ function populateFilters(){
     const option = document.createElement("option");
     option.value = club;
     option.textContent = club;
-    clubFilter.appendChild(option);
+    if(clubFilter){
+      clubFilter.appendChild(option);
+    }
   });
 
   // Populate location filter
@@ -82,7 +92,9 @@ function populateFilters(){
     const option = document.createElement("option");
     option.value = location;
     option.textContent = location;
-    locationFilter.appendChild(option);
+    if(locationFilter){
+      locationFilter.appendChild(option);
+    }
   });
 }
 
@@ -289,13 +301,15 @@ function addEventCardListeners() {
 
   const eventsContainer = document.getElementById("events-container");
   
-  eventsContainer.addEventListener("click", (event) => {
-    const card = event.target.closest("[data-event-id]");
-    if (card) {
-      const eventId = card.getAttribute("data-event-id");
-      openEventModal(eventId);
-    }
-  });
+  if(eventsContainer){
+    eventsContainer.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-event-id]");
+      if (card) {
+        const eventId = card.getAttribute("data-event-id");
+        openEventModal(eventId);
+      }
+    });
+  }
 }
 
 // Function to open event modal
