@@ -1,3 +1,6 @@
+import "@hotwired/turbo-rails"
+import "controllers"
+
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
 
@@ -153,8 +156,13 @@ function initializeEvents() {
     const loadingMessage = document.getElementById("loading-message");
     
     // Show the loading message and clear previous content
-    loadingMessage.style.display = "block";
-    eventsContainer.innerHTML = "";
+    if(loadingMessage){
+      loadingMessage.style.display = "block";
+    }
+    if(eventsContainer){
+      eventsContainer.innerHTML = "";
+    }
+    
   
     // Fetch events from the API
     fetch("/api/events")
@@ -184,16 +192,20 @@ function initializeEvents() {
       .catch((error) => {
         console.error("Error fetching events:", error);
         loadingMessage.style.display = "none"; // Hide loading message on error
-        eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        if(eventsContainer){
+          eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        }
       });
   }
   
   function renderEvents(events) {
     const eventsContainer = document.getElementById("events-container");
-  
-    eventsContainer.innerHTML = ""; // Clear the container
-  
-    if (events.length === 0) {
+    
+    if(eventsContainer){
+      eventsContainer.innerHTML = ""; // Clear the container
+    }
+   
+    if (events.length === 0 && eventsContainer) {
       eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
       return;
     }
@@ -201,7 +213,9 @@ function initializeEvents() {
     // Render each event card
     events.forEach((event) => {
       const eventHTML = renderEventCard(event);
-      eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      if(eventsContainer){
+        eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      }
     });
   
     addEventCardListeners(); 

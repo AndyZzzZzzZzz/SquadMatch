@@ -21,7 +21,10 @@ function initializeNews() {
 
   // Show the loading message and clear previous content
   loadingMessage.style.display = "block";
-  newsContainer.innerHTML = "";
+  if(newsContainer){
+    newsContainer.innerHTML = "";
+  }
+
 
   fetch("/api/news")
     .then(function (response) {
@@ -41,23 +44,29 @@ function initializeNews() {
     })
     .catch(function (error) {
       console.error(error);
-      newsContainer.innerHTML = "<p class=\"text-center text-danger\">Failed to load news. Please try again later.</p>";
+      if(newsContainer){
+        newsContainer.innerHTML = "<p class=\"text-center text-danger\">Failed to load news. Please try again later.</p>";
+      }
     });
 }
 
 function renderNews(newsItems){
   const newsContainer = document.getElementById("news-container");
 
-  newsContainer.innerHTML = "";
+  if(newsContainer){
+    newsContainer.innerHTML = "";
+  }
 
-  if (newsItems.length === 0) {
+  if (newsItems.length === 0 && newsContainer) {
     newsContainer.innerHTML = "<p class=\"text-center\">No news at the moment.</p>";
     return;
   }
 
   newsItems.forEach((news) => {
     const newsHTML = renderNewsCard(news);
-    newsContainer.insertAdjacentHTML("beforeend", newsHTML);
+    if(newsContainer){
+      newsContainer.insertAdjacentHTML("beforeend", newsHTML);
+    }
   });
 
   // Add event listeners for interactive functionality
@@ -82,14 +91,16 @@ function renderNewsCard(news) {
 // Function to add event listeners to news cards
 function addNewsCardListeners() {
   const newsContainer = document.getElementById("news-container");
-  newsContainer.addEventListener("click", function (event) {
-    if (event.target.classList.contains("read-more-btn")) {
-      event.stopPropagation();
-      const card = event.target.closest("[data-news-id]");
-      const newsId = card.getAttribute("data-news-id");
-      openNewsModal(newsId);
-    }
-  });
+  if(newsContainer){
+    newsContainer.addEventListener("click", function (event) {
+      if (event.target.classList.contains("read-more-btn")) {
+        event.stopPropagation();
+        const card = event.target.closest("[data-news-id]");
+        const newsId = card.getAttribute("data-news-id");
+        openNewsModal(newsId);
+      }
+    });
+  }
 }
 
 // Function to open the news modal

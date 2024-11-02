@@ -1,3 +1,6 @@
+import "@hotwired/turbo-rails"
+import "controllers"
+
 let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
 let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
@@ -60,7 +63,9 @@ function populateDashFilters(){
     const option = document.createElement("option");
     option.value = category;
     option.textContent = category;
-    categoryFilter.appendChild(option);
+    if(categoryFilter){
+      categoryFilter.appendChild(option);
+    }
   });
 
   // Populate host filter
@@ -69,7 +74,9 @@ function populateDashFilters(){
     const option = document.createElement("option");
     option.value = host;
     option.textContent = host;
-    hostFilter.appendChild(option);
+    if(hostFilter){
+      hostFilter.appendChild(option);
+    }
   });
 
   // Populate club filter
@@ -78,7 +85,9 @@ function populateDashFilters(){
     const option = document.createElement("option");
     option.value = club;
     option.textContent = club;
-    clubFilter.appendChild(option);
+    if(clubFilter){
+      clubFilter.appendChild(option);
+    }
   });
 
   // Populate location filter
@@ -87,7 +96,9 @@ function populateDashFilters(){
     const option = document.createElement("option");
     option.value = location;
     option.textContent = location;
-    locationFilter.appendChild(option);
+    if(locationFilter){
+      locationFilter.appendChild(option);
+    }
   });
 }
 
