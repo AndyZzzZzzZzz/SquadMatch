@@ -11,12 +11,14 @@ document.addEventListener('turbo:load', () => {
       const passwordConfirmation = document.getElementById('user_password_confirmation');
   
       // Add event listeners for 'blur' event on each field
-      firstName.addEventListener('blur', validateFirstName);
-      lastName.addEventListener('blur', validateLastName);
-      username.addEventListener('blur', validateUsername);
-      email.addEventListener('blur', validateEmailField);
-      password.addEventListener('blur', validatePassword);
-      passwordConfirmation.addEventListener('blur', validatePasswordConfirmation);
+      if(firstName && lastName && username && email && password && passwordConfirmation){
+        firstName.addEventListener('blur', validateFirstName);
+        lastName.addEventListener('blur', validateLastName);
+        username.addEventListener('blur', validateUsername);
+        email.addEventListener('blur', validateEmailField);
+        password.addEventListener('blur', validatePassword);
+        passwordConfirmation.addEventListener('blur', validatePasswordConfirmation);
+      }
   
       // Submit event listener
       form.addEventListener('submit', function(event) {
@@ -146,6 +148,7 @@ document.addEventListener('turbo:load', () => {
       }
   
       function removeError(input) {
+        if (!input) return;
         const error = input.parentNode.querySelector('.error-message');
         if (error) {
           error.remove();
