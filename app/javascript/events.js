@@ -207,6 +207,12 @@ function initializeEvents() {
     addEventCardListeners(); 
   }
 
+  function nameToAvatar(first_name, last_name) {
+    const first_char = first_name ? first_name.charAt(0).toUpperCase() : "";
+    const last_char = last_name ? last_name.charAt(0).toUpperCase() : "";
+    
+    return `<div class="avatar me-2 d-flex justify-content-center align-items-center"> ${first_char} ${last_char} </div>`
+  }
   
   // Function to render an event card
   function renderEventCard(event) {
@@ -215,7 +221,7 @@ function initializeEvents() {
     // Provide default values if event_type or icon is missing
     const eventType = event.event_type || {};
     const eventTypeName = eventType.type_name || 'Event';
-    const loadParticipants = event.users ? event.users.map(user => `${user.first_name[0] || ''}${user.last_name[0] || ''}`).join("")
+    const loadParticipants = event.users ? event.users.map(user => nameToAvatar(user.first_name, user.last_name)).join("")
     : '<div> No participants in the event </div>';
   
     return `
