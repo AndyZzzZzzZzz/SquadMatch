@@ -13,13 +13,13 @@ document.addEventListener("turbo:load", () => {
   DashFilterSortListenersAdded = false;
 
   const userId = document.body.dataset.userId;
-
-  if (userId) {
-      localStorage.setItem("loggedInUserId", userId);
-      // syncDashboardWithUserEvents();
-      cachedUserEvents = syncDashboardWithUserEvents() || [];
-      originalDashEvents = cachedUserEvents.slice();
-  }
+  if (!userId) return; 
+  
+  localStorage.setItem("loggedInUserId", userId);
+  // syncDashboardWithUserEvents();
+  cachedUserEvents = syncDashboardWithUserEvents() || [];
+  originalDashEvents = cachedUserEvents.slice();
+  
 
   if (cachedUserEvents.length > 0) {
     renderDashEvents(cachedUserEvents); // Render from cache immediately
@@ -63,49 +63,28 @@ function populateDashFilters(){
     }
   });
 
-  // Populate category filter
-  const categoryFilter = document.getElementById("category-filter");
-  categories.forEach(category => {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    if(categoryFilter){
-      categoryFilter.appendChild(option);
-    }
-  });
+  const populateSelect = (selectElement, options) => {
+    if (selectElement) {
+      selectElement.innerHTML = ''; // Clear existing options
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "Select an option"; // Placeholder option
+      selectElement.appendChild(defaultOption);
 
-  // Populate host filter
-  const hostFilter = document.getElementById("host-filter");
-  hosts.forEach(host => {
-    const option = document.createElement("option");
-    option.value = host;
-    option.textContent = host;
-    if(hostFilter){
-      hostFilter.appendChild(option);
+      options.forEach(optionText => {
+        const option = document.createElement("option");
+        option.value = optionText;
+        option.textContent = optionText;
+        selectElement.appendChild(option);
+      });
     }
-  });
+  };
 
-  // Populate club filter
-  const clubFilter = document.getElementById("club-filter");
-  clubs.forEach(club => {
-    const option = document.createElement("option");
-    option.value = club;
-    option.textContent = club;
-    if(clubFilter){
-      clubFilter.appendChild(option);
-    }
-  });
-
-  // Populate location filter
-  const locationFilter = document.getElementById("location-filter");
-  locations.forEach(location => {
-    const option = document.createElement("option");
-    option.value = location;
-    option.textContent = location;
-    if(locationFilter){
-      locationFilter.appendChild(option);
-    }
-  });
+  // Populate each filter with unique values
+  populateSelect(document.getElementById("category-filter-dash"), categories);
+  populateSelect(document.getElementById("host-filter-dash"), hosts);
+  populateSelect(document.getElementById("club-filter-dash"), clubs);
+  populateSelect(document.getElementById("location-filter-dash"), locations);
 }
 
 
@@ -126,11 +105,11 @@ function addSearchAndFilterListenersDash() {
   if (DashFilterSortListenersAdded) return; // Prevent adding multiple listeners
   DashFilterSortListenersAdded = true;
 
-  const searchInput = document.getElementById("search-input");
-  const categoryFilter = document.getElementById("category-filter");
-  const hostFilter = document.getElementById("host-filter");
-  const clubFilter = document.getElementById("club-filter");
-  const locationFilter = document.getElementById("location-filter");
+  const searchInput = document.getElementById("search-input-dash");
+  const categoryFilter = document.getElementById("category-filter-dash");
+  const hostFilter = document.getElementById("host-filter-dash");
+  const clubFilter = document.getElementById("club-filter-dash");
+  const locationFilter = document.getElementById("location-filter-dash");
 
   if (searchInput) {
     searchInput.addEventListener("input", filterAndRenderDashEvents);
@@ -150,11 +129,11 @@ function addSearchAndFilterListenersDash() {
 }
 
 function filterAndRenderDashEvents() {
-  const searchInput = document.getElementById("search-input").value.toLowerCase();
-  const categoryValue = document.getElementById("category-filter").value;
-  const hostValue = document.getElementById("host-filter").value;
-  const clubValue = document.getElementById("club-filter").value;
-  const locationValue = document.getElementById("location-filter").value;
+  const searchInput = document.getElementById("search-input-dash").value.toLowerCase();
+  const categoryValue = document.getElementById("category-filter-dash").value;
+  const hostValue = document.getElementById("host-filter-dash").value;
+  const clubValue = document.getElementById("club-filter-dash").value;
+  const locationValue = document.getElementById("location-filter-dash").value;
 
   
   let filteredEvents = originalDashEvents.filter(event => {
