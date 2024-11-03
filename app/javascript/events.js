@@ -60,12 +60,12 @@ function populateFilters(){
   });
 
     // Helper function to clear and populate select elements
-    const populateSelect = (selectElement, options) => {
+    const populateSelect = (selectElement, options, placeholders) => {
       if (selectElement) {
         selectElement.innerHTML = ''; // Clear existing options
         const defaultOption = document.createElement("option");
         defaultOption.value = "";
-        defaultOption.textContent = "Select an option"; // Placeholder option
+        defaultOption.textContent = placeholders; // Placeholder option
         selectElement.appendChild(defaultOption);
   
         options.forEach(optionText => {
@@ -78,10 +78,10 @@ function populateFilters(){
     };
   
     // Populate each filter with unique values
-    populateSelect(document.getElementById("category-filter"), categories);
-    populateSelect(document.getElementById("host-filter"), hosts);
-    populateSelect(document.getElementById("club-filter"), clubs);
-    populateSelect(document.getElementById("location-filter"), locations);
+    populateSelect(document.getElementById("category-filter"), categories, "All Categories");
+    populateSelect(document.getElementById("host-filter"), hosts, "All Hosts");
+    populateSelect(document.getElementById("club-filter"), clubs, "All Clubs");
+    populateSelect(document.getElementById("location-filter"), locations, "All Locations");
 }
 
 

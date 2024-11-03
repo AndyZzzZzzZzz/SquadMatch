@@ -63,12 +63,12 @@ function populateDashFilters(){
     }
   });
 
-  const populateSelect = (selectElement, options) => {
+  const populateSelect = (selectElement, options, placeholders) => {
     if (selectElement) {
       selectElement.innerHTML = ''; // Clear existing options
       const defaultOption = document.createElement("option");
       defaultOption.value = "";
-      defaultOption.textContent = "Select an option"; // Placeholder option
+      defaultOption.textContent = placeholders; // Placeholder option
       selectElement.appendChild(defaultOption);
 
       options.forEach(optionText => {
@@ -81,10 +81,10 @@ function populateDashFilters(){
   };
 
   // Populate each filter with unique values
-  populateSelect(document.getElementById("category-filter-dash"), categories);
-  populateSelect(document.getElementById("host-filter-dash"), hosts);
-  populateSelect(document.getElementById("club-filter-dash"), clubs);
-  populateSelect(document.getElementById("location-filter-dash"), locations);
+  populateSelect(document.getElementById("category-filter-dash"), categories, "All Categories");
+  populateSelect(document.getElementById("host-filter-dash"), hosts, "All Hosts");
+  populateSelect(document.getElementById("club-filter-dash"), clubs, "All Clubs");
+  populateSelect(document.getElementById("location-filter-dash"), locations, "All Locations");
 }
 
 
