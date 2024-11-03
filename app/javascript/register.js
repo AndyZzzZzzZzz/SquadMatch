@@ -1,7 +1,7 @@
 
 document.addEventListener('turbo:load', () => {
     const form = document.querySelector('form');
-    if (form) {
+    if (form && form == 'register_form') {
       // Get form fields
       const firstName = document.getElementById('user_first_name');
       const lastName = document.getElementById('user_last_name');
