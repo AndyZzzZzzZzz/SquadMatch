@@ -59,49 +59,29 @@ function populateFilters(){
     }
   });
 
-  // Populate category filter
-  const categoryFilter = document.getElementById("category-filter");
-  categories.forEach(category => {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    if(categoryFilter){
-      categoryFilter.appendChild(option);
-    }
-  });
-
-  // Populate host filter
-  const hostFilter = document.getElementById("host-filter");
-  hosts.forEach(host => {
-    const option = document.createElement("option");
-    option.value = host;
-    option.textContent = host;
-    if(hostFilter){
-      hostFilter.appendChild(option);
-    }
-  });
-
-  // Populate club filter
-  const clubFilter = document.getElementById("club-filter");
-  clubs.forEach(club => {
-    const option = document.createElement("option");
-    option.value = club;
-    option.textContent = club;
-    if(clubFilter){
-      clubFilter.appendChild(option);
-    }
-  });
-
-  // Populate location filter
-  const locationFilter = document.getElementById("location-filter");
-  locations.forEach(location => {
-    const option = document.createElement("option");
-    option.value = location;
-    option.textContent = location;
-    if(locationFilter){
-      locationFilter.appendChild(option);
-    }
-  });
+    // Helper function to clear and populate select elements
+    const populateSelect = (selectElement, options) => {
+      if (selectElement) {
+        selectElement.innerHTML = ''; // Clear existing options
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Select an option"; // Placeholder option
+        selectElement.appendChild(defaultOption);
+  
+        options.forEach(optionText => {
+          const option = document.createElement("option");
+          option.value = optionText;
+          option.textContent = optionText;
+          selectElement.appendChild(option);
+        });
+      }
+    };
+  
+    // Populate each filter with unique values
+    populateSelect(document.getElementById("category-filter"), categories);
+    populateSelect(document.getElementById("host-filter"), hosts);
+    populateSelect(document.getElementById("club-filter"), clubs);
+    populateSelect(document.getElementById("location-filter"), locations);
 }
 
 
