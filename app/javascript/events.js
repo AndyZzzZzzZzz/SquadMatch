@@ -25,6 +25,12 @@ document.addEventListener("turbo:load", () => {
       backdrop: 'static' // Explicitly setting backdrop
     });
   }
+
+  refreshButton = document.getElementById("refresh-button");
+  if (renderButton){
+    refreshButton.addEventListener("click", refreshEvents);
+  }
+  
 });
 
 function arraysAreEqual(arr1, arr2) {
@@ -160,6 +166,31 @@ function filterAndRenderEvents() {
 
   // Render filtered events
   renderEvents(filteredEvents);
+}
+
+
+function refreshEvents(){
+  localStorage.removeItem(cachedEvents);
+  cachedEvents = [];
+  originalEvents = [];
+
+  clearFilters();
+  initializeEvents();
+}
+
+function clearFilters(){
+  const searchInput = document.getElementById("search-input");
+  const categoryFilter = document.getElementById("category-filter");
+  const hostFilter = document.getElementById("host-filter");
+  const clubFilter = document.getElementById("club-filter");
+  const locationFilter = document.getElementById("location-filter");
+
+  if (searchInput) searchInput.value = "";
+  if (categoryFilter) categoryFilter.innerHTML = `<option value="">All Categories</option>`;
+  if (hostFilter) hostFilter.innerHTML = `<option value="">All Hosts</option>`;
+  if (clubFilter) clubFilter.innerHTML = `<option value="">All Clubs</option>`;
+  if (locationFilter) locationFilter.innerHTML = `<option value="">All Locations</option>`;
+
 }
 
 function initializeEvents() {
