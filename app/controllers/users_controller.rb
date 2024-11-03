@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    render :index
   end
 
   def create
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
     else
       flash.clear
       flash.now[:alert] = @user.errors.full_messages.join(", ")
-      render :new
+      render :index
     end
   end
 
