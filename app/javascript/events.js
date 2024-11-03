@@ -26,8 +26,8 @@ document.addEventListener("turbo:load", () => {
     });
   }
 
-  refreshButton = document.getElementById("refresh-button");
-  if (renderButton){
+  let refreshButton = document.getElementById("refresh-button");
+  if (refreshButton){
     refreshButton.addEventListener("click", refreshEvents);
   }
   
