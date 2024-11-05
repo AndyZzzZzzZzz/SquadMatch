@@ -1,3 +1,6 @@
+import "@hotwired/turbo-rails"
+import "controllers"
+
 let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
 let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
@@ -10,13 +13,13 @@ document.addEventListener("turbo:load", () => {
   DashFilterSortListenersAdded = false;
 
   const userId = document.body.dataset.userId;
-
-  if (userId) {
-      localStorage.setItem("loggedInUserId", userId);
-      // syncDashboardWithUserEvents();
-      cachedUserEvents = syncDashboardWithUserEvents() || [];
-      originalDashEvents = cachedUserEvents.slice();
-  }
+  if (!userId) return; 
+  
+  localStorage.setItem("loggedInUserId", userId);
+  // syncDashboardWithUserEvents();
+  cachedUserEvents = syncDashboardWithUserEvents() || [];
+  originalDashEvents = cachedUserEvents.slice();
+  
 
   if (cachedUserEvents.length > 0) {
     renderDashEvents(cachedUserEvents); // Render from cache immediately
@@ -26,7 +29,17 @@ document.addEventListener("turbo:load", () => {
     initializeDashEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal-2");
-  eventDashModal = new bootstrap.Modal(eventModalElement)
+  if(eventModalElement){
+    eventDashModal = new bootstrap.Modal(eventModalElement, {
+      backdrop: 'static' // Explicitly setting backdrop
+    });
+  }
+
+  const refreshButton = document.getElementById("refresh-dash-button");
+  if(refreshButton){
+    refreshButton.addEventListener("click", refreshDashEvents);
+  }
+
 });
 
 function populateDashFilters(){
@@ -50,41 +63,28 @@ function populateDashFilters(){
     }
   });
 
-  // Populate category filter
-  const categoryFilter = document.getElementById("category-filter");
-  categories.forEach(category => {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    categoryFilter.appendChild(option);
-  });
+  const populateSelect = (selectElement, options, placeholders) => {
+    if (selectElement) {
+      selectElement.innerHTML = ''; // Clear existing options
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = placeholders; // Placeholder option
+      selectElement.appendChild(defaultOption);
 
-  // Populate host filter
-  const hostFilter = document.getElementById("host-filter");
-  hosts.forEach(host => {
-    const option = document.createElement("option");
-    option.value = host;
-    option.textContent = host;
-    hostFilter.appendChild(option);
-  });
+      options.forEach(optionText => {
+        const option = document.createElement("option");
+        option.value = optionText;
+        option.textContent = optionText;
+        selectElement.appendChild(option);
+      });
+    }
+  };
 
-  // Populate club filter
-  const clubFilter = document.getElementById("club-filter");
-  clubs.forEach(club => {
-    const option = document.createElement("option");
-    option.value = club;
-    option.textContent = club;
-    clubFilter.appendChild(option);
-  });
-
-  // Populate location filter
-  const locationFilter = document.getElementById("location-filter");
-  locations.forEach(location => {
-    const option = document.createElement("option");
-    option.value = location;
-    option.textContent = location;
-    locationFilter.appendChild(option);
-  });
+  // Populate each filter with unique values
+  populateSelect(document.getElementById("category-filter-dash"), categories, "All Categories");
+  populateSelect(document.getElementById("host-filter-dash"), hosts, "All Hosts");
+  populateSelect(document.getElementById("club-filter-dash"), clubs, "All Clubs");
+  populateSelect(document.getElementById("location-filter-dash"), locations, "All Locations");
 }
 
 
@@ -105,11 +105,11 @@ function addSearchAndFilterListenersDash() {
   if (DashFilterSortListenersAdded) return; // Prevent adding multiple listeners
   DashFilterSortListenersAdded = true;
 
-  const searchInput = document.getElementById("search-input");
-  const categoryFilter = document.getElementById("category-filter");
-  const hostFilter = document.getElementById("host-filter");
-  const clubFilter = document.getElementById("club-filter");
-  const locationFilter = document.getElementById("location-filter");
+  const searchInput = document.getElementById("search-input-dash");
+  const categoryFilter = document.getElementById("category-filter-dash");
+  const hostFilter = document.getElementById("host-filter-dash");
+  const clubFilter = document.getElementById("club-filter-dash");
+  const locationFilter = document.getElementById("location-filter-dash");
 
   if (searchInput) {
     searchInput.addEventListener("input", filterAndRenderDashEvents);
@@ -129,11 +129,11 @@ function addSearchAndFilterListenersDash() {
 }
 
 function filterAndRenderDashEvents() {
-  const searchInput = document.getElementById("search-input").value.toLowerCase();
-  const categoryValue = document.getElementById("category-filter").value;
-  const hostValue = document.getElementById("host-filter").value;
-  const clubValue = document.getElementById("club-filter").value;
-  const locationValue = document.getElementById("location-filter").value;
+  const searchInput = document.getElementById("search-input-dash").value.toLowerCase();
+  const categoryValue = document.getElementById("category-filter-dash").value;
+  const hostValue = document.getElementById("host-filter-dash").value;
+  const clubValue = document.getElementById("club-filter-dash").value;
+  const locationValue = document.getElementById("location-filter-dash").value;
 
   
   let filteredEvents = originalDashEvents.filter(event => {
@@ -163,14 +163,44 @@ function filterAndRenderDashEvents() {
   renderDashEvents(filteredEvents);
 }
 
+function refreshDashEvents(){
+  localStorage.removeItem(cachedDashEvents);
+  cachedDashEvents = [];
+  originalDashEvents = [];
+
+  clearDashFilters();
+  initializeDashEvents();
+  
+}
+
+function clearDashFilters(){
+  const searchInput = document.getElementById("search-input");
+  const categoryFilter = document.getElementById("category-filter");
+  const hostFilter = document.getElementById("host-filter");
+  const clubFilter = document.getElementById("club-filter");
+  const locationFilter = document.getElementById("location-filter");
+
+  if (searchInput) searchInput.value = "";
+  if (categoryFilter) categoryFilter.innerHTML = `<option value="">All Categories</option>`;
+  if (hostFilter) hostFilter.innerHTML = `<option value="">All Hosts</option>`;
+  if (clubFilter) clubFilter.innerHTML = `<option value="">All Clubs</option>`;
+  if (locationFilter) locationFilter.innerHTML = `<option value="">All Locations</option>`;
+
+}
+
 function initializeDashEvents() {
 
     const eventsContainer = document.getElementById("events-container2");
     const loadingMessage = document.getElementById("loading-message2");
     
     // Show the loading message and clear previous content
-    loadingMessage.style.display = "block";
-    eventsContainer.innerHTML = "";
+    if(loadingMessage){
+      loadingMessage.style.display = "block";
+    }
+    if(eventsContainer){
+      eventsContainer.innerHTML = "";
+    }
+    
   
     // Fetch events from the API
     fetch("/api/events")
@@ -179,7 +209,9 @@ function initializeDashEvents() {
         return response.json();
       })
       .then((events) => {
-        loadingMessage.style.display = "none";
+        if(loadingMessage){
+          loadingMessage.style.display = "none";
+        }
         cachedDashEvents = events;
         cachedUserEvents = syncDashboardWithUserEvents();
         originalDashEvents = cachedUserEvents.slice();
@@ -193,18 +225,20 @@ function initializeDashEvents() {
         renderDashEvents(cachedUserEvents);
       })
       .catch((error) => {
-        console.error("Error fetching events:", error);
-        loadingMessage.style.display = "none"; // Hide loading message on error
-        eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        if(eventsContainer){
+          eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        }
       });
   }
   
   function renderDashEvents(events) {
     const eventsContainer = document.getElementById("events-container2");
+    
+    if(eventsContainer){
+      eventsContainer.innerHTML = "";
+    }
   
-    eventsContainer.innerHTML = ""; // Clear the container
-  
-    if (events.length === 0) {
+    if (events.length === 0 && eventsContainer) {
       eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
       return;
     }
@@ -212,7 +246,9 @@ function initializeDashEvents() {
     // Render each event card
     events.forEach((event) => {
       const eventHTML = renderDashEventCard(event);
-      eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      if(eventsContainer){
+        eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      }
     });
   
     addDashEventCardListeners(); 
@@ -285,13 +321,15 @@ function addDashEventCardListeners() {
 
   const eventsContainer = document.getElementById("events-container2");
   
-  eventsContainer.addEventListener("click", (event) => {
+  if(eventsContainer){
+    eventsContainer.addEventListener("click", (event) => {
     const card = event.target.closest("[data-event-id]");
     if (card) {
       const eventId = card.getAttribute("data-event-id");
       openEventModal2(eventId);
     }
   });
+}
 }
 
 // Function to open event modal

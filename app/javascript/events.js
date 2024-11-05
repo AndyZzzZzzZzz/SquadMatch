@@ -1,4 +1,7 @@
-cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+import "@hotwired/turbo-rails"
+import "controllers"
+
+let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
 
 let eventCardListenersAdded = false; 
@@ -17,7 +20,17 @@ document.addEventListener("turbo:load", () => {
     initializeEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal");
-  eventModal = new bootstrap.Modal(eventModalElement);
+  if(eventModalElement){
+      eventModal = new bootstrap.Modal(eventModalElement, {
+      backdrop: 'static' // Explicitly setting backdrop
+    });
+  }
+
+  const refreshButton = document.getElementById("refresh-button");
+  if (refreshButton){
+    refreshButton.addEventListener("click", refreshEvents);
+  }
+  
 });
 
 function arraysAreEqual(arr1, arr2) {
@@ -46,41 +59,29 @@ function populateFilters(){
     }
   });
 
-  // Populate category filter
-  const categoryFilter = document.getElementById("category-filter");
-  categories.forEach(category => {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    categoryFilter.appendChild(option);
-  });
-
-  // Populate host filter
-  const hostFilter = document.getElementById("host-filter");
-  hosts.forEach(host => {
-    const option = document.createElement("option");
-    option.value = host;
-    option.textContent = host;
-    hostFilter.appendChild(option);
-  });
-
-  // Populate club filter
-  const clubFilter = document.getElementById("club-filter");
-  clubs.forEach(club => {
-    const option = document.createElement("option");
-    option.value = club;
-    option.textContent = club;
-    clubFilter.appendChild(option);
-  });
-
-  // Populate location filter
-  const locationFilter = document.getElementById("location-filter");
-  locations.forEach(location => {
-    const option = document.createElement("option");
-    option.value = location;
-    option.textContent = location;
-    locationFilter.appendChild(option);
-  });
+    // Helper function to clear and populate select elements
+    const populateSelect = (selectElement, options, placeholders) => {
+      if (selectElement) {
+        selectElement.innerHTML = ''; // Clear existing options
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = placeholders; // Placeholder option
+        selectElement.appendChild(defaultOption);
+  
+        options.forEach(optionText => {
+          const option = document.createElement("option");
+          option.value = optionText;
+          option.textContent = optionText;
+          selectElement.appendChild(option);
+        });
+      }
+    };
+  
+    // Populate each filter with unique values
+    populateSelect(document.getElementById("category-filter"), categories, "All Categories");
+    populateSelect(document.getElementById("host-filter"), hosts, "All Hosts");
+    populateSelect(document.getElementById("club-filter"), clubs, "All Clubs");
+    populateSelect(document.getElementById("location-filter"), locations, "All Locations");
 }
 
 
@@ -147,14 +148,44 @@ function filterAndRenderEvents() {
   renderEvents(filteredEvents);
 }
 
+
+function refreshEvents(){
+  localStorage.removeItem(cachedEvents);
+  cachedEvents = [];
+  originalEvents = [];
+
+  clearFilters();
+  initializeEvents();
+}
+
+function clearFilters(){
+  const searchInput = document.getElementById("search-input");
+  const categoryFilter = document.getElementById("category-filter");
+  const hostFilter = document.getElementById("host-filter");
+  const clubFilter = document.getElementById("club-filter");
+  const locationFilter = document.getElementById("location-filter");
+
+  if (searchInput) searchInput.value = "";
+  if (categoryFilter) categoryFilter.innerHTML = `<option value="">All Categories</option>`;
+  if (hostFilter) hostFilter.innerHTML = `<option value="">All Hosts</option>`;
+  if (clubFilter) clubFilter.innerHTML = `<option value="">All Clubs</option>`;
+  if (locationFilter) locationFilter.innerHTML = `<option value="">All Locations</option>`;
+
+}
+
 function initializeEvents() {
 
     const eventsContainer = document.getElementById("events-container");
     const loadingMessage = document.getElementById("loading-message");
     
     // Show the loading message and clear previous content
-    loadingMessage.style.display = "block";
-    eventsContainer.innerHTML = "";
+    if(loadingMessage){
+      loadingMessage.style.display = "block";
+    }
+    if(eventsContainer){
+      eventsContainer.innerHTML = "";
+    }
+    
   
     // Fetch events from the API
     fetch("/api/events")
@@ -184,16 +215,20 @@ function initializeEvents() {
       .catch((error) => {
         console.error("Error fetching events:", error);
         loadingMessage.style.display = "none"; // Hide loading message on error
-        eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        if(eventsContainer){
+          eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
+        }
       });
   }
   
   function renderEvents(events) {
     const eventsContainer = document.getElementById("events-container");
-  
-    eventsContainer.innerHTML = ""; // Clear the container
-  
-    if (events.length === 0) {
+    
+    if(eventsContainer){
+      eventsContainer.innerHTML = ""; // Clear the container
+    }
+   
+    if (events.length === 0 && eventsContainer) {
       eventsContainer.innerHTML = `<p class="text-center">No upcoming events at the moment. Please check back later!</p>`;
       return;
     }
@@ -201,12 +236,20 @@ function initializeEvents() {
     // Render each event card
     events.forEach((event) => {
       const eventHTML = renderEventCard(event);
-      eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      if(eventsContainer){
+        eventsContainer.insertAdjacentHTML("beforeend", eventHTML);
+      }
     });
   
     addEventCardListeners(); 
   }
 
+  function nameToAvatar(first_name, last_name) {
+    const first_char = first_name ? first_name.charAt(0).toUpperCase() : "";
+    const last_char = last_name ? last_name.charAt(0).toUpperCase() : "";
+    
+    return `<div class="avatar me-2 d-flex justify-content-center align-items-center"> ${first_char} ${last_char} </div>`
+  }
   
   // Function to render an event card
   function renderEventCard(event) {
@@ -269,13 +312,15 @@ function addEventCardListeners() {
 
   const eventsContainer = document.getElementById("events-container");
   
-  eventsContainer.addEventListener("click", (event) => {
-    const card = event.target.closest("[data-event-id]");
-    if (card) {
-      const eventId = card.getAttribute("data-event-id");
-      openEventModal(eventId);
-    }
-  });
+  if(eventsContainer){
+    eventsContainer.addEventListener("click", (event) => {
+      const card = event.target.closest("[data-event-id]");
+      if (card) {
+        const eventId = card.getAttribute("data-event-id");
+        openEventModal(eventId);
+      }
+    });
+  }
 }
 
 // Function to open event modal

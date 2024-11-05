@@ -1,3 +1,9 @@
+
+<% content_for :page_specific_js do %>
+  <%= javascript_include_tag 'events', 'data-turbo-track': 'reload', defer: true, type: "module" %>
+  <%= javascript_include_tag 'news', 'data-turbo-track': 'reload', defer: true, type: "module"  %>
+<% end %>
+
 <div class="container my-4">
   <div class="row">
     <!-- News Section (Left Column) -->
