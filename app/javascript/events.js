@@ -12,6 +12,11 @@ let eventModal;
 document.addEventListener("turbo:load", () => {
   eventCardListenersAdded = false; 
   FilterSortlistenersAdded = false;
+
+  const userId = document.body.dataset.userId;
+  const loggedIn = document.body.dataset.loggedIn === 'true';
+  // console.log("userid: ", userId);
+
   if (cachedEvents.length > 0) {
     renderEvents(cachedEvents); // Render from cache immediately
     populateFilters();
@@ -260,7 +265,24 @@ function initializeEvents() {
     const eventTypeName = eventType.type_name || 'Event';
     const loadParticipants = event.users ? event.users.map(user => nameToAvatar(user.first_name, user.last_name)).join("")
     : '<div> No participants in the event </div>';
-  
+    
+    // Check if user logged in and retrieve user id
+    const userId = document.body.dataset.userId;
+    const loggedIn = document.body.dataset.loggedIn === 'true';
+    const isParticipant = event.users && loggedIn && event.users.some(user => user.id == userId);
+    // console.log("event user is participatn: ", isParticipant)
+
+    let buttonHTML = '';
+    if (loggedIn) {
+      if (isParticipant) {
+        buttonHTML = '<button class="btn btn-secondary join-button disabled" disabled>Joined</button>';
+      } else {
+        buttonHTML = '<button class="btn btn-primary join-button">Join</button>';
+      }
+    } else {
+      buttonHTML = '<button class="btn btn-primary join-button disabled">Login to Join</button>';
+    }
+
     return `
       <article class="card custom-card mb-3 hover-shadow" role="article" data-event-id="${event.id}">
     <div class="card-body">
@@ -287,8 +309,9 @@ function initializeEvents() {
         </div>` : ""}
 
         <!-- Row 3: Date and Time -->
-        <div class="d-flex">
+        <div class="d-flex justify-content-between align-items-center">
           <p class="card-text"><i class="bi bi-calendar-event icon-yellow"></i> ${eventDate}</p>
+          ${buttonHTML}
         </div>
       </div>
 
@@ -304,6 +327,60 @@ function initializeEvents() {
   `;
 }
 
+function handleJoinButtonClick(event, eventId) {
+  event.stopPropagation(); // Prevent the card click event
+
+  const loggedIn = document.body.dataset.loggedIn === 'true';
+
+  if (loggedIn) {
+    // Send AJAX request to join the event
+    joinEvent(eventId, event.target);
+  } else {
+    // Display a message prompting the user to log in
+    alert("Please log in to join the event.");
+  }
+}
+
+function joinEvent(eventId, buttonElement) {
+  // Disable the button to prevent multiple clicks
+  buttonElement.disabled = true;
+  buttonElement.textContent = 'Joining...';
+
+  fetch(`/events/${eventId}/join`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ event_id: eventId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      // Update the button to show that the user has joined
+      buttonElement.classList.remove('btn-primary');
+      buttonElement.classList.add('btn-secondary', 'disabled');
+      buttonElement.disabled = true;
+      buttonElement.textContent = 'Joined';
+      refreshEvents();
+
+      // Optionally, update the participant list on the card
+      // updateParticipantList(eventId);
+    } else {
+      // Handle errors
+      alert(data.message || 'An error occurred while joining the event.');
+      buttonElement.disabled = false;
+      buttonElement.textContent = 'Join';
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred while joining the event.');
+    buttonElement.disabled = false;
+    buttonElement.textContent = 'Join';
+  });
+}
+
 // Function to add event listeners to event cards
 function addEventCardListeners() {
 
@@ -317,7 +394,11 @@ function addEventCardListeners() {
       const card = event.target.closest("[data-event-id]");
       if (card) {
         const eventId = card.getAttribute("data-event-id");
-        openEventModal(eventId);
+        if (event.target.classList.contains("join-button")) {
+          handleJoinButtonClick(event, eventId);
+        } else {
+          openEventModal(eventId);
+        }
       }
     });
   }

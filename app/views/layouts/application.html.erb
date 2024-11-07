@@ -34,7 +34,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
-  <body data-user-id="<%= current_user&.id %>">
+  <body data-user-id="<%= current_user&.id %>" data-logged-in="<%= current_user.present? %>">
 
     <!-- Rails content -->
     <%= render 'layouts/navbar' %>

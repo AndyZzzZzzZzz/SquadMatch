@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user # Ensure the user is logged in
+  # before_action :authenticate_user # Ensure the user is logged in
   # before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   # GET /events
@@ -32,6 +32,28 @@ class EventsController < ApplicationController
       @event_types = EventType.all
       @clubs = Club.all
       render :new
+    end
+  end
+
+  def join
+    @event = Event.find(params[:id])
+  
+    if @event.participants.exists?(user_id: current_user.id)
+      render json: { status: 'error', message: 'You have already joined this event.' }, status: :unprocessable_entity
+      return
+    end
+  
+    if @event.participants.count >= @event.capacity
+      render json: { status: 'error', message: 'This event is full.' }, status: :unprocessable_entity
+      return
+    end
+  
+    participant = Participant.new(user: current_user, event: @event, join_at: Time.current)
+  
+    if participant.save
+      render json: { status: 'success', message: 'You have successfully joined the event.' }, status: :ok
+    else
+      render json: { status: 'error', message: participant.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 

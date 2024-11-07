@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   resources :clubs, only: [ :index ]
   resources :dashboard, only: [ :index ]
   resources :profile, only: [ :index ]
-  resources :events, only: [:new, :create, :edit, :update, :destroy] #user events
+  resources :events, only: [:new, :create, :edit, :update, :destroy] do#user events
+    member do
+      post 'join'
+    end
+  end
+  
 
   get "login", to: "login#index", as: "login"
   post "login", to: "login#create"
@@ -35,6 +40,12 @@ Rails.application.routes.draw do
   namespace :api do
     resources :events, only: [ :index ]
     resources :news, only: [ :index ]
+    # resources :events do
+    #   member do
+    #     post 'join'
+    #   end
+    # end
+  
   end
 
   # Health check endpoint
