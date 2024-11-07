@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "events/new"
+  get "events/create"
+  get "events/index"
   get "users/new"
   get "users/create"
   root "home#index"
@@ -8,6 +11,7 @@ Rails.application.routes.draw do
   resources :clubs, only: [ :index ]
   resources :dashboard, only: [ :index ]
   resources :profile, only: [ :index ]
+  resources :events, only: [:new, :create, :edit, :update, :destroy] #user events
 
   get "login", to: "login#index", as: "login"
   post "login", to: "login#create"
@@ -19,6 +23,9 @@ Rails.application.routes.draw do
   get "dashboard", to: "dashboard#index", as: "dashboard"
   get "profile", to: "profile#index", as: "profile"
   get "home", to: "home#index", as: "home"
+
+  get "newEvent", to: "events#new", as: "newEvent"
+  post "newEvent", to: "events#create"
 
   # Routes for AJAX uniqueness checks
   get "users/check_username", to: "users#check_username"
