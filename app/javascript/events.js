@@ -13,10 +13,6 @@ document.addEventListener("turbo:load", () => {
   eventCardListenersAdded = false; 
   FilterSortlistenersAdded = false;
 
-  const userId = document.body.dataset.userId;
-  const loggedIn = document.body.dataset.loggedIn === 'true';
-  // console.log("userid: ", userId);
-
   if (cachedEvents.length > 0) {
     renderEvents(cachedEvents); // Render from cache immediately
     populateFilters();
