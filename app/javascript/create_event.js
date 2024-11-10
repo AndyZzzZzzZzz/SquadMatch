@@ -1,4 +1,8 @@
 // app/javascript/packs/create_event.js
+import "@hotwired/turbo-rails"
+import "controllers"
+import flatpickr from "flatpickr"
+
 
 document.addEventListener('turbo:load', () => {
     const form = document.getElementById('create_event_form');
@@ -165,10 +169,6 @@ document.addEventListener('turbo:load', () => {
             "X-CSRF-Token": csrfToken
           },
           body: JSON.stringify({ event: data })
-        })
-        .catch(error => {
-          console.error("Error creating event:", error);
-          // Optionally display a global error message
         });
       }
   
@@ -202,92 +202,4 @@ document.addEventListener('turbo:load', () => {
       }
     }
   });
-  
-
-
-// document.addEventListener('turbo:load', () => {
-//     const form = document.getElementById('create-event-form');
-  
-//     if (form && form == 'create-event-form') {
-//       // Add event listener for form submission
-//       form.addEventListener('submit', function(event) {
-//         // Clear existing error messages
-//         const errorMessages = document.querySelectorAll('.error-message');
-//         errorMessages.forEach(msg => msg.remove());
-  
-//         let valid = true;
-  
-//         // Get form fields
-//         const eventTypeId = document.getElementById('event_event_type_id');
-//         const title = document.getElementById('event_title');
-//         const capacity = document.getElementById('event_capacity');
-//         const location = document.getElementById('event_location');
-//         const categoryId = document.getElementById('event_category_id');
-//         const eventDatetime = document.getElementById('event_event_datetime');
-  
-//         // Validate Event Type ID
-//         if (!eventTypeId.value.trim()) {
-//           showError(eventTypeId, "Event Type can't be blank");
-//           valid = false;
-//         }
-  
-//         // Validate Title
-//         if (!title.value.trim()) {
-//           showError(title, "Title can't be blank");
-//           valid = false;
-//         } else if (title.value.length > 255) {
-//           showError(title, "Title can't be longer than 255 characters");
-//           valid = false;
-//         }
-  
-//         // Validate Capacity
-//         if (!capacity.value) {
-//           showError(capacity, "Capacity can't be blank");
-//           valid = false;
-//         } else if (!Number.isInteger(parseFloat(capacity.value)) || parseInt(capacity.value) <= 0) {
-//           showError(capacity, "Capacity must be a positive integer");
-//           valid = false;
-//         }
-  
-//         // Validate Location
-//         if (!location.value.trim()) {
-//           showError(location, "Location can't be blank");
-//           valid = false;
-//         }
-  
-//         // Validate Category ID
-//         if (!categoryId.value.trim()) {
-//           showError(categoryId, "Category can't be blank");
-//           valid = false;
-//         }
-  
-//         // Validate Event Date and Time
-//         if (!eventDatetime.value) {
-//           showError(eventDatetime, "Event Date and Time can't be blank");
-//           valid = false;
-//         } else if (new Date(eventDatetime.value) < new Date()) {
-//           showError(eventDatetime, "Event Date and Time must be in the future");
-//           valid = false;
-//         }
-  
-//         if (!valid) {
-//           event.preventDefault(); // Prevent form submission
-//         }
-//       });
-//     }
-  
-//     function showError(input, message) {
-//       // Remove existing error message if any
-//       const existingError = input.parentNode.querySelector('.error-message');
-//       if (existingError) {
-//         existingError.remove();
-//       }
-  
-//       const error = document.createElement('span');
-//       error.className = 'error-message';
-//       error.style.color = '#c62828';
-//       error.textContent = message;
-//       input.parentNode.insertBefore(error, input.nextSibling);
-//     }
-//   });
   
