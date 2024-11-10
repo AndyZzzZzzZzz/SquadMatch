@@ -6,15 +6,31 @@ let originalEvents = cachedEvents.slice();
 
 let eventCardListenersAdded = false; 
 let FilterSortlistenersAdded = false;
-
+let refreshButtonListenerAdded = false;
 let eventModal;
 
 document.addEventListener("turbo:load", initializeHome);
-document.addEventListener("turbo:render", initializeHome);
+
+document.addEventListener('turbo:before-cache', function() {
+  // Reset flags
+  eventCardListenersAdded = false;
+  FilterSortlistenersAdded = false;
+  refreshButtonListenerAdded = false;
+
+  // Remove event listeners if necessary
+  const refreshButton = document.getElementById("refresh-button");
+  if (refreshButton) {
+    refreshButton.removeEventListener("click", refreshEvents);
+  }
+
+});
 
 function initializeHome() {
+  cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+  originalEvents = cachedEvents.slice();
   eventCardListenersAdded = false; 
   FilterSortlistenersAdded = false;
+  refreshButtonListenerAdded = false;
 
   if (cachedEvents.length == 0) {
     initializeEvents();
@@ -31,8 +47,9 @@ function initializeHome() {
   }
 
   const refreshButton = document.getElementById("refresh-button");
-  if (refreshButton){
+  if (refreshButton && !refreshButtonListenerAdded) {
     refreshButton.addEventListener("click", refreshEvents);
+    refreshButtonListenerAdded = true;
   }
   
 }
@@ -195,7 +212,6 @@ function initializeEvents() {
       .then((events) => {
         // Hide the loading message
         console.log("API Response:", events);
-        loadingMessage.style.display = "none";
         
 
         //overwrite event array
@@ -211,7 +227,6 @@ function initializeEvents() {
       })
       .catch((error) => {
         console.error("Error fetching events:", error);
-        loadingMessage.style.display = "none"; // Hide loading message on error
         if(eventsContainer){
           eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
         }

@@ -6,19 +6,34 @@ let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [
 let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
 let DashFilterSortListenersAdded = false;
+let refreshButtonDashListenerAdded = false;
 let eventDashModal;
 let cachedUserEvents = [];
 
 document.addEventListener("turbo:load", initializeDashboard);
-document.addEventListener("turbo:render", initializeDashboard);
+
+document.addEventListener('turbo:before-cache', function() {
+  // Reset flags
+  eventDashCardListenersAdded = false;
+  DashFilterSortListenersAdded = false;
+  refreshButtonDashListenerAdded = false;
+
+  const eventModalElement = document.getElementById("event-modal-2");
+  if(eventModalElement){
+    eventDashModal = new bootstrap.Modal(eventModalElement, {
+      backdrop: 'static' // Explicitly setting backdrop
+    });
+  }
+
+});
 
 function initializeDashboard() {
+  eventDashCardListenersAdded = false;
+  DashFilterSortListenersAdded = false;
+  refreshButtonDashListenerAdded = false;
   // Check if the URL has the refresh parameter
   const urlParams = new URLSearchParams(window.location.search);
   const shouldRefresh = urlParams.has('refresh');
-
-  eventDashCardListenersAdded = false;
-  DashFilterSortListenersAdded = false;
 
   const userId = document.body.dataset.userId;
   if (!userId) return; 
@@ -47,8 +62,9 @@ function initializeDashboard() {
   }
 
   const refreshButton = document.getElementById("refresh-dash-button");
-  if(refreshButton){
+  if(refreshButton && !refreshButtonDashListenerAdded){
     refreshButton.addEventListener("click", refreshDashEvents);
+    refreshButtonDashListenerAdded = true;
   }
 }
 
