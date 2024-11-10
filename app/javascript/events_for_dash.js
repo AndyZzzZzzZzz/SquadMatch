@@ -31,9 +31,9 @@ function initializeDashboard() {
     initializeDashEvents(); 
 
     urlParams.delete('refresh');
-    const newQueryString = urlParams.toString();
-    const newUrl = newQueryString ? `${window.location.pathname}?${newQueryString}` : window.location.pathname;
-    window.history.replaceState({}, document.title, newUrl);
+  const newQueryString = urlParams.toString();
+  const newUrl = newQueryString ? `${window.location.pathname}?${newQueryString}` : window.location.pathname;
+  window.history.replaceState({}, document.title, newUrl);
   } else {
     renderDashEvents(cachedUserEvents); 
     populateDashFilters();
