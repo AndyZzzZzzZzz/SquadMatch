@@ -17,7 +17,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.host_id = current_user.id  
+    @event.host_id = current_user.id
     if @event.save
       @event.participants.create(user: current_user, join_at: Time.current)
       redirect_to dashboard_path(refresh: true), flash: { event_create_notice: "Event created successfully" }
@@ -33,23 +33,22 @@ class EventsController < ApplicationController
 
   def join
     @event = Event.find(params[:id])
-  
     if @event.participants.exists?(user_id: current_user.id)
-      render json: { status: 'error', message: "You have already joined this event." }, status: :unprocessable_entity
+      render json: { status: "error", message: "You have already joined this event." }, status: :unprocessable_entity
       return
     end
   
     if @event.participants.count >= @event.capacity
-      render json: { status: 'error', message: "This event is full." }, status: :unprocessable_entity
+      render json: { status: "error", message: "This event is full." }, status: :unprocessable_entity
       return
     end
   
     participant = Participant.new(user: current_user, event: @event, join_at: Time.current)
   
     if participant.save
-      render json: { status: 'success', message: "You have successfully joined the event." }, status: :ok
+      render json: { status: "success", message: "You have successfully joined the event." }, status: :ok
     else
-      render json: { status: 'error', message: participant.errors.full_messages.join(', ') }, status: :unprocessable_entity
+      render json: { status: "error", message: participant.errors.full_messages.join(', ') }, status: :unprocessable_entity
     end
   end
 
