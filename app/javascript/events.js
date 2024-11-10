@@ -1,6 +1,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
-
+(function() {
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
 
@@ -9,16 +9,19 @@ let FilterSortlistenersAdded = false;
 
 let eventModal;
 
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbo:load", initializeHome);
+document.addEventListener("turbo:render", initializeHome);
+
+function initializeHome() {
   eventCardListenersAdded = false; 
   FilterSortlistenersAdded = false;
 
-  if (cachedEvents.length > 0) {
+  if (cachedEvents.length == 0) {
+    initializeEvents();
+  } else {
     renderEvents(cachedEvents); // Render from cache immediately
     populateFilters();
     addSearchAndFilterListeners();
-  } else {
-    initializeEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal");
   if(eventModalElement){
@@ -32,11 +35,6 @@ document.addEventListener("turbo:load", () => {
     refreshButton.addEventListener("click", refreshEvents);
   }
   
-});
-
-function arraysAreEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false;
-  return arr1.every((event, index) => event.id === arr2[index].id);
 }
 
 function populateFilters(){
@@ -151,7 +149,7 @@ function filterAndRenderEvents() {
 
 
 function refreshEvents(){
-  localStorage.removeItem(cachedEvents);
+  localStorage.removeItem("cachedEvents");
   cachedEvents = [];
   originalEvents = [];
 
@@ -198,8 +196,6 @@ function initializeEvents() {
         // Hide the loading message
         console.log("API Response:", events);
         loadingMessage.style.display = "none";
-        
-        if (arraysAreEqual(events, cachedEvents)) return; 
         
 
         //overwrite event array
@@ -411,3 +407,4 @@ function openEventModal(eventId) {
 
   eventModal.show();
 }
+})();
