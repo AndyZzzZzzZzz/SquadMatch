@@ -166,16 +166,6 @@ document.addEventListener('turbo:load', () => {
           },
           body: JSON.stringify({ event: data })
         })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'success') {
-            // Redirect to dashboard or desired page
-            window.location.href = '/dashboard'; // Update this path as needed
-          } else if (data.status === 'error') {
-            // Display server-side validation errors
-            displayServerErrors(data.message);
-          }
-        })
         .catch(error => {
           console.error("Error creating event:", error);
           // Optionally display a global error message
