@@ -365,8 +365,18 @@ function openEventModal2(eventId) {
 
   // Update modal content
   document.getElementById("eventModalLabel").textContent = event.title;
-  document.getElementById("eventModalBody").textContent = event.description;
+  document.getElementById("eventDescription").textContent = event.description;
 
+  const eventLocation = event.location || 'Default Location';
+  document.getElementById("eventModalMap").innerHTML = `<iframe
+    width="100%"
+    height="100%"
+    frameborder="0"
+    style="border:0"
+    src="https://www.google.com/maps?q=${encodeURIComponent(eventLocation)}&output=embed"
+    allowfullscreen>
+  </iframe>`;
+  
   eventDashModal.show();
 }
 })();
