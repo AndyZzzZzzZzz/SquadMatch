@@ -3,7 +3,7 @@
 <div class="event-container container">
   <h2>New Event</h2>
 
-  <%= form_with(model: @event, url: events_path, id: "create-event-form", local: false) do |form| %>
+  <%= form_with(model: @event, url: events_path, id: "create_event_form", data: { turbo: "false" }) do |form| %>
     <!-- Title -->
     <div class="input-box">
         <%= form.label :title %>
@@ -96,7 +96,7 @@
     <!--
     <div class="input-box button">
       <%= form.submit "Create Event", class: "btn event-btn" %>
-      <%= link_to "Cancel", dashboard_path, class: "btn btn-secondary event-btn" %>
+      <%= link_to "Cancel", dashboard_path(refresh: true), class: "btn btn-secondary event-btn" %>
     </div>
     -->
     <div class="input-box button">
@@ -104,7 +104,7 @@
     </div>
 
     <div class="text">
-      <%= link_to 'Cancel', dashboard_path %>
+      <%= link_to 'Cancel', dashboard_path(refresh: true) %>
     </div>
   <% end %>
 </div>
