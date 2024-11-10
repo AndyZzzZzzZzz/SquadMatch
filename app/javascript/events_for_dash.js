@@ -1,6 +1,7 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+(function() {
 let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
 let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
@@ -8,7 +9,14 @@ let DashFilterSortListenersAdded = false;
 let eventDashModal;
 let cachedUserEvents = [];
 
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbo:load", initializeDashboard);
+document.addEventListener("turbo:render", initializeDashboard);
+
+function initializeDashboard() {
+  // Check if the URL has the refresh parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const shouldRefresh = urlParams.has('refresh');
+
   eventDashCardListenersAdded = false;
   DashFilterSortListenersAdded = false;
 
@@ -16,17 +24,20 @@ document.addEventListener("turbo:load", () => {
   if (!userId) return; 
   
   localStorage.setItem("loggedInUserId", userId);
-  // syncDashboardWithUserEvents();
   cachedUserEvents = syncDashboardWithUserEvents() || [];
   originalDashEvents = cachedUserEvents.slice();
   
+  if (shouldRefresh || cachedUserEvents.length == 0) {
+    initializeDashEvents(); 
 
-  if (cachedUserEvents.length > 0) {
-    renderDashEvents(cachedUserEvents); // Render from cache immediately
+    urlParams.delete('refresh');
+    const newQueryString = urlParams.toString();
+    const newUrl = newQueryString ? `${window.location.pathname}?${newQueryString}` : window.location.pathname;
+    window.history.replaceState({}, document.title, newUrl);
+  } else {
+    renderDashEvents(cachedUserEvents); 
     populateDashFilters();
     addSearchAndFilterListenersDash();
-  } else {
-    initializeDashEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal-2");
   if(eventModalElement){
@@ -39,8 +50,7 @@ document.addEventListener("turbo:load", () => {
   if(refreshButton){
     refreshButton.addEventListener("click", refreshDashEvents);
   }
-
-});
+}
 
 function populateDashFilters(){
   const categories = new Set();
@@ -164,7 +174,7 @@ function filterAndRenderDashEvents() {
 }
 
 function refreshDashEvents(){
-  localStorage.removeItem(cachedDashEvents);
+  localStorage.removeItem("cachedDashEvents");
   cachedDashEvents = [];
   originalDashEvents = [];
 
@@ -174,11 +184,11 @@ function refreshDashEvents(){
 }
 
 function clearDashFilters(){
-  const searchInput = document.getElementById("search-input");
-  const categoryFilter = document.getElementById("category-filter");
-  const hostFilter = document.getElementById("host-filter");
-  const clubFilter = document.getElementById("club-filter");
-  const locationFilter = document.getElementById("location-filter");
+  const searchInput = document.getElementById("search-input-dash");
+  const categoryFilter = document.getElementById("category-filter-dash");
+  const hostFilter = document.getElementById("host-filter-dash");
+  const clubFilter = document.getElementById("club-filter-dash");
+  const locationFilter = document.getElementById("location-filter-dash");
 
   if (searchInput) searchInput.value = "";
   if (categoryFilter) categoryFilter.innerHTML = `<option value="">All Categories</option>`;
@@ -343,4 +353,4 @@ function openEventModal2(eventId) {
 
   eventDashModal.show();
 }
-
+})();
