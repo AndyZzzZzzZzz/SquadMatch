@@ -17,14 +17,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.host_id = current_user.id  # Set the host to the current user
-
+    @event.host_id = current_user.id  
     if @event.save
       @event.participants.create(user: current_user, join_at: Time.current)
-      # redirect_to dashboard_path, notice: 'Event created successfully.'
       redirect_to dashboard_path(refresh: true), flash: { event_create_notice: "Event created successfully" }
     else
-      # Re-initialize instance variables for rendering the form again
       flash.clear
       flash.now[:alert] = @event.errors.full_messages.join(", ")
       @categories = Category.all
