@@ -1,8 +1,6 @@
 // app/javascript/packs/create_event.js
 import "@hotwired/turbo-rails"
 import "controllers"
-import flatpickr from "flatpickr"
-
 
 document.addEventListener('turbo:load', () => {
     const form = document.getElementById('create_event_form');
