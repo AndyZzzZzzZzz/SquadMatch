@@ -42,9 +42,7 @@ class EventsController < ApplicationController
       render json: { status: "error", message: "This event is full." }, status: :unprocessable_entity
       return
     end
-  
     participant = Participant.new(user: current_user, event: @event, join_at: Time.current)
-  
     if participant.save
       render json: { status: "success", message: "You have successfully joined the event." }, status: :ok
     else
