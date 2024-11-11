@@ -11,12 +11,12 @@ Rails.application.routes.draw do
   resources :clubs, only: [ :index ]
   resources :dashboard, only: [ :index ]
   resources :profile, only: [ :index ]
-  resources :events, only: [:new, :create, :edit, :update, :destroy] do#user events
+  resources :events, only: [ :new, :create, :edit, :update, :destroy ] do
     member do
-      post 'join'
+      post "join"
     end
   end
-  
+
 
   get "login", to: "login#index", as: "login"
   post "login", to: "login#create"
@@ -45,7 +45,6 @@ Rails.application.routes.draw do
     #     post 'join'
     #   end
     # end
-  
   end
 
   # Health check endpoint
