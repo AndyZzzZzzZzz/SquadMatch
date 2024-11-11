@@ -37,7 +37,7 @@ class EventsController < ApplicationController
       render json: { status: "error", message: "You have already joined this event." }, status: :unprocessable_entity
       return
     end
-  
+
     if @event.participants.count >= @event.capacity
       render json: { status: "error", message: "This event is full." }, status: :unprocessable_entity
       return
@@ -46,7 +46,7 @@ class EventsController < ApplicationController
     if participant.save
       render json: { status: "success", message: "You have successfully joined the event." }, status: :ok
     else
-      render json: { status: "error", message: participant.errors.full_messages.join(', ') }, status: :unprocessable_entity
+      render json: { status: "error", message: participant.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
   end
 

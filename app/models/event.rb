@@ -7,7 +7,7 @@ class Event < ApplicationRecord
 
     has_many :participants, dependent: :destroy
     has_many :users, through: :participants
-    
+
 
     # validates :host, :event_type, :capacity, :location, :title, :event_datetime, :category, presence: true
     validates :host, presence: true
