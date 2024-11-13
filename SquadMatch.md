@@ -95,9 +95,34 @@ In our user registration and login process, we combined client-side validation w
 4. **Session Management and Secure Storage**: Upon successful registration or login, we save the `user_id` in the session for session persistence. Additionally, we cache the user ID in `localStorage` for quick access in the client. For password security, we use Supabase’s authentication, leveraging its secure hashing mechanism for password storage and retrieval.
 5. **Turbo Integration for Enhanced UX**: We integrated Turbo Streams for quick DOM updates on login errors, updating only relevant parts of the page rather than refreshing it entirely, which makes the experience faster and smoother.
 
-### How are events being dnamically rendered on homepage?
+### How are events being dynamically rendered on homepage?
 Events are dynamically rendered on the homepage using a combination of HTML, JavaScript, and data stored in `localStorage`
 1. **Initial Fetch and Cache** When the homepage loads, `initializeHome()` is triggered. The function checks `localStorage` for cached event data. If no cached data found, it makes an API request to fetch events from the server, saves them in `localStorage`, and updates `cachedEvents`.
 2. **Rendering Events**: The `renderEvents()` function dynamically generates event cards based on the current dataset (from `cachedEvents` or filtered results) and inserts them into `events-container` HTML elemnt.
 3. **Filtering and Searching**: Users can filter events by category, host, club, and location or search by keywords. The `filterAndRenderEvents()` function reads the filter values and search input, filters the cached events, and re-renders the matching results.
 4. **Updating without Reloads**: Turbo is used to manage page transitions, so users experience smooth interactions without full-page reloads. `localStorage` is used to persist event data across sessions, reducing unnecessary API calls and improving load times.
+
+---
+
+Presentation outline:
+1. self-inttroduction + introduce the scope and purpose of the project
+2. Introduce tech-stack + roles of each member
+Group work:
+1. weekly meeting schedule (in-person usually + online through discord)
+2. for tasks and goals we used Jira board - breakdown larger task into smaller subtasks and assign to group member in meeting. We took Agile approach, relies heavy on development instead of requirements and documentation. Incremental (add features step by step) and iterative (have a potentially presentable project after every major feature).
+   
+4.  Set out general requirements in the first meeting in the beginning of the semester (vagou requirements, follow Agile format), add modifications to requirements as we move along the project
+5. Usecases: we designed specific usecases in the beginning of the semester, talked with our friends (actual users), for more detailed info wait for project demo.
+6. for code changes and reviews we used Github - separate branch by functionalities (special branch shared among group members: styles, testing, bugfix): usually feature-branch -> main and somtimes feature-branch -> another-feature-branch. Modular pull request, small changes means easier review. After pr merged, all group members rebase branches. Small group, so everyone review every pr.
+   
+Demo:
+1. Start with logged in user on homepage
+2. Introduce news, events, modal, filter bar, and refresh button
+3. navigate to user dash board -> back to home -> join events -> dashboard (differece)
+4. create events (dont actually do it)
+5. profile page (show functionalities)
+6. logout -> show register page
+7. show no profile, dashboard and homepage differences
+
+
+
