@@ -95,7 +95,7 @@ In our user registration and login process, we combined client-side validation w
 4. **Session Management and Secure Storage**: Upon successful registration or login, we save the `user_id` in the session for session persistence. Additionally, we cache the user ID in `localStorage` for quick access in the client. For password security, we use Supabase’s authentication, leveraging its secure hashing mechanism for password storage and retrieval.
 5. **Turbo Integration for Enhanced UX**: We integrated Turbo Streams for quick DOM updates on login errors, updating only relevant parts of the page rather than refreshing it entirely, which makes the experience faster and smoother.
 
-### How are events being dnamically rendered on homepage?
+### How are events being dynamically rendered on homepage?
 Events are dynamically rendered on the homepage using a combination of HTML, JavaScript, and data stored in `localStorage`
 1. **Initial Fetch and Cache** When the homepage loads, `initializeHome()` is triggered. The function checks `localStorage` for cached event data. If no cached data found, it makes an API request to fetch events from the server, saves them in `localStorage`, and updates `cachedEvents`.
 2. **Rendering Events**: The `renderEvents()` function dynamically generates event cards based on the current dataset (from `cachedEvents` or filtered results) and inserts them into `events-container` HTML elemnt.
