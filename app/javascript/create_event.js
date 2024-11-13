@@ -16,13 +16,13 @@ document.addEventListener('turbo:load', () => {
       const clubId = document.getElementById('event_club_id');
   
       // Initialize date and time picker (if using one)
-      if (eventDatetime) {
-        flatpickr(eventDatetime, {
-          enableTime: true,
-          dateFormat: "Y-m-d H:i",
-          minDate: "today"
-        });
-      }
+    //   if (eventDatetime) {
+    //     flatpickr(eventDatetime, {
+    //       enableTime: true,
+    //       dateFormat: "Y-m-d H:i",
+    //       minDate: "today"
+    //     });
+    //   }
   
       // Add event listeners for 'blur' event on each field
       if (title && description && eventDatetime && capacity && location && categoryId && eventTypeId) {
