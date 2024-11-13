@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="profile-footer d-flex">
-        <button class="btn btn-primary"> <%= link_to "Edit Profile", edit_profile_path(current_user.id) %> </button>
+        <%= button_to "Edit Profile", edit_profile_path(current_user.id), class: "btn btn-secondary" %> 
         <%= button_to "Delete Profile", profile_path(current_user.id), method: :delete, data: { confirm: "Are you sure you want to delete your profile?" }, class: "btn btn-danger" %>
 
       </div>  
