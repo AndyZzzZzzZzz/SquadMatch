@@ -1,7 +1,19 @@
 let cachedNews = JSON.parse(localStorage.getItem("cachedNews")) || [];
 let originalNews = cachedNews.slice();
 
+// document.addEventListener("turbo:render", () => {
+//   console.log("before render news");
+//   if(cachedNews.length > 0) {
+//     renderNews(cachedNews);
+//   }
+// });
+
+if(cachedNews.length > 0){
+  renderNews(cachedNews);
+}
+
 document.addEventListener("turbo:load", () => {
+  console.log("news turbo load");
   if(cachedNews.length > 0){
     renderNews(cachedNews);
   }else{

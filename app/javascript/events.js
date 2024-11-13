@@ -3,11 +3,12 @@ import "controllers"
 (function() {
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
-
 let eventCardListenersAdded = false; 
 let FilterSortlistenersAdded = false;
 let refreshButtonListenerAdded = false;
 let eventModal;
+
+validateCache();
 
 document.addEventListener("turbo:load", initializeHome);
 
@@ -24,6 +25,21 @@ document.addEventListener('turbo:before-cache', function() {
   }
 
 });
+
+function validateCache() {
+  cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+  console.log("cachedEvents: ", cachedEvents);
+  originalEvents = cachedEvents.slice();
+  eventCardListenersAdded = false; 
+  FilterSortlistenersAdded = false;
+  refreshButtonListenerAdded = false;
+
+  if (cachedEvents.length != 0) {
+    renderEvents(cachedEvents); // Render from cache immediately
+    populateFilters();
+    addSearchAndFilterListeners();
+  }
+}
 
 function initializeHome() {
   cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
