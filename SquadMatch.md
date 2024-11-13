@@ -110,9 +110,11 @@ Presentation outline:
 Group work:
 1. weekly meeting schedule (in-person usually + online through discord)
 2. for tasks and goals we used Jira board - breakdown larger task into smaller subtasks and assign to group member in meeting. We took Agile approach, relies heavy on development instead of requirements and documentation. Incremental (add features step by step) and iterative (have a potentially presentable project after every major feature).
-3.  Set out general requirements in the first meeting in the beginning of the semester (vagou requirements, follow Agile format), add modifications to requirements as we move along the project
+   
+4.  Set out general requirements in the first meeting in the beginning of the semester (vagou requirements, follow Agile format), add modifications to requirements as we move along the project
 5. Usecases: we designed specific usecases in the beginning of the semester, talked with our friends (actual users), for more detailed info wait for project demo.
-4. for code changes and reviews we used Github - separate branch by functionalities (special branch shared among group members: styles, testing, bugfix): usually feature-branch -> main and somtimes feature-branch -> another-feature-branch. Modular pull request, small changes means easier review. After pr merged, all group members rebase branches. Small group, so everyone review every pr.
+6. for code changes and reviews we used Github - separate branch by functionalities (special branch shared among group members: styles, testing, bugfix): usually feature-branch -> main and somtimes feature-branch -> another-feature-branch. Modular pull request, small changes means easier review. After pr merged, all group members rebase branches. Small group, so everyone review every pr.
+   
 Demo:
 1. Start with logged in user on homepage
 2. Introduce news, events, modal, filter bar, and refresh button
