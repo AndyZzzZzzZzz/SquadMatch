@@ -101,3 +101,26 @@ Events are dynamically rendered on the homepage using a combination of HTML, Jav
 2. **Rendering Events**: The `renderEvents()` function dynamically generates event cards based on the current dataset (from `cachedEvents` or filtered results) and inserts them into `events-container` HTML elemnt.
 3. **Filtering and Searching**: Users can filter events by category, host, club, and location or search by keywords. The `filterAndRenderEvents()` function reads the filter values and search input, filters the cached events, and re-renders the matching results.
 4. **Updating without Reloads**: Turbo is used to manage page transitions, so users experience smooth interactions without full-page reloads. `localStorage` is used to persist event data across sessions, reducing unnecessary API calls and improving load times.
+
+---
+
+Presentation outline:
+1. self-inttroduction + introduce the scope and purpose of the project
+2. Introduce tech-stack + roles of each member
+Group work:
+1. weekly meeting schedule (in-person usually + online through discord)
+2. for tasks and goals we used Jira board - breakdown larger task into smaller subtasks and assign to group member in meeting. We took Agile approach, relies heavy on development instead of requirements and documentation. Incremental (add features step by step) and iterative (have a potentially presentable project after every major feature).
+3.  Set out general requirements in the first meeting in the beginning of the semester (vagou requirements, follow Agile format), add modifications to requirements as we move along the project
+5. Usecases: we designed specific usecases in the beginning of the semester, talked with our friends (actual users), for more detailed info wait for project demo.
+4. for code changes and reviews we used Github - separate branch by functionalities (special branch shared among group members: styles, testing, bugfix): usually feature-branch -> main and somtimes feature-branch -> another-feature-branch. Modular pull request, small changes means easier review. After pr merged, all group members rebase branches. Small group, so everyone review every pr.
+Demo:
+1. Start with logged in user on homepage
+2. Introduce news, events, modal, filter bar, and refresh button
+3. navigate to user dash board -> back to home -> join events -> dashboard (differece)
+4. create events (dont actually do it)
+5. profile page (show functionalities)
+6. logout -> show register page
+7. show no profile, dashboard and homepage differences
+
+
+
