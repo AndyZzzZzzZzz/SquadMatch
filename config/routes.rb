@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :login, only: [ :index ]
   resources :clubs, only: [ :index ]
   resources :dashboard, only: [ :index ]
-  resources :profile, only: [ :index ]
+  resources :profile, only: [ :index, :edit, :update, :destroy ]
   resources :events, only: [ :new, :create, :edit, :update, :destroy ] do
     member do
       post "join"
@@ -24,9 +24,10 @@ Rails.application.routes.draw do
 
   get "signup", to: "users#new", as: "signup"
   post "signup", to: "users#create"
+  
 
   get "dashboard", to: "dashboard#index", as: "dashboard"
-  get "profile", to: "profile#index", as: "profile"
+  # get "profile", to: "profile#index", as: "profile"
   get "home", to: "home#index", as: "home"
 
   get "newEvent", to: "events#new", as: "newEvent"

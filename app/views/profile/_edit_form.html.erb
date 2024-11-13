@@ -1,0 +1,70 @@
+<!-- app/views/users/new.html.erb or app/views/profile/edit.html.erb -->
+
+<div class="profile-container container">
+  <h2>Edit Profile</h2>
+
+  <%= form_with(model: @user, url: profile_path(@user), method: :patch, local: true) do |form| %>
+
+    
+    <!-- First Name -->
+    <div class="input-box">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, class: "form-control", required: true %>
+      <% if @user.errors[:first_name].any? %>
+        <span class="error-message"><%= @user.errors[:first_name].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Last Name -->
+    <div class="input-box">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, class: "form-control", required: true %>
+      <% if @user.errors[:last_name].any? %>
+        <span class="error-message"><%= @user.errors[:last_name].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Email -->
+    <div class="input-box">
+      <%= form.label :email %>
+      <%= form.email_field :email, class: "form-control", required: true %>
+      <% if @user.errors[:email].any? %>
+        <span class="error-message"><%= @user.errors[:email].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Username -->
+    <div class="input-box">
+      <%= form.label :username %>
+      <%= form.text_field :username, class: "form-control", required: true %>
+      <% if @user.errors[:username].any? %>
+        <span class="error-message"><%= @user.errors[:username].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Password -->
+    <div class="input-box">
+      <%= form.label :password %>
+      <%= form.password_field :password, class: "form-control", placeholder: "Leave blank to keep current password" %>
+      <% if @user.errors[:password].any? %>
+        <span class="error-message"><%= @user.errors[:password].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Password Confirmation -->
+    <div class="input-box">
+      <%= form.label :password_confirmation %>
+      <%= form.password_field :password_confirmation, class: "form-control" %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <span class="error-message"><%= @user.errors[:password_confirmation].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="input-box button">
+      <%= form.submit "Save Changes", class: "btn btn-primary" %>
+      <%= link_to "Cancel", profile_path, class: "btn btn-secondary" %>
+    </div>
+
+  <% end %>
+</div>
