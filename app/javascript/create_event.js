@@ -147,57 +147,57 @@ document.addEventListener('turbo:load', () => {
         errorMessages.forEach(msg => msg.remove());
       }
   
-      // Form submission via AJAX
-      function submitForm() {
-        // Gather form data
-        const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => {
-          data[key] = value;
-        });
+    //   // Form submission via AJAX
+    //   function submitForm() {
+    //     // Gather form data
+    //     const formData = new FormData(form);
+    //     const data = {};
+    //     formData.forEach((value, key) => {
+    //       data[key] = value;
+    //     });
   
-        // Fetch CSRF token from meta tags
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    //     // Fetch CSRF token from meta tags
+    //     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   
-        // Send AJAX request to create the event
-        fetch(form.action, {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken
-          },
-          body: JSON.stringify({ event: data })
-        });
-      }
+    //     // Send AJAX request to create the event
+    //     fetch(form.action, {
+    //       method: 'POST',
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "X-CSRF-Token": csrfToken
+    //       },
+    //       body: JSON.stringify({ event: data })
+    //     });
+    //   }
   
-      function displayServerErrors(errors) {
-        // Assuming errors is an array of error messages
-        errors.forEach(errorMessage => {
-          const field = getFieldByErrorMessage(errorMessage);
-          if (field) {
-            showError(field, errorMessage);
-          } else {
-            // Handle general errors not associated with a specific field
-            const generalError = document.createElement('div');
-            generalError.className = 'error-message';
-            generalError.style.color = '#c62828';
-            generalError.textContent = errorMessage;
-            form.prepend(generalError);
-          }
-        });
-      }
+    //   function displayServerErrors(errors) {
+    //     // Assuming errors is an array of error messages
+    //     errors.forEach(errorMessage => {
+    //       const field = getFieldByErrorMessage(errorMessage);
+    //       if (field) {
+    //         showError(field, errorMessage);
+    //       } else {
+    //         // Handle general errors not associated with a specific field
+    //         const generalError = document.createElement('div');
+    //         generalError.className = 'error-message';
+    //         generalError.style.color = '#c62828';
+    //         generalError.textContent = errorMessage;
+    //         form.prepend(generalError);
+    //       }
+    //     });
+    //   }
   
-      function getFieldByErrorMessage(errorMessage) {
-        // Map error messages to form fields
-        if (errorMessage.toLowerCase().includes('title')) return title;
-        if (errorMessage.toLowerCase().includes('date')) return eventDatetime;
-        if (errorMessage.toLowerCase().includes('capacity')) return capacity;
-        if (errorMessage.toLowerCase().includes('location')) return location;
-        if (errorMessage.toLowerCase().includes('category')) return categoryId;
-        if (errorMessage.toLowerCase().includes('type')) return eventTypeId;
-        // Add more mappings as needed
-        return null;
-      }
+    //   function getFieldByErrorMessage(errorMessage) {
+    //     // Map error messages to form fields
+    //     if (errorMessage.toLowerCase().includes('title')) return title;
+    //     if (errorMessage.toLowerCase().includes('date')) return eventDatetime;
+    //     if (errorMessage.toLowerCase().includes('capacity')) return capacity;
+    //     if (errorMessage.toLowerCase().includes('location')) return location;
+    //     if (errorMessage.toLowerCase().includes('category')) return categoryId;
+    //     if (errorMessage.toLowerCase().includes('type')) return eventTypeId;
+    //     // Add more mappings as needed
+    //     return null;
+    //   }
     }
   });
   
