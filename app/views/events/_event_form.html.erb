@@ -3,7 +3,7 @@
 <div class="event-container container">
   <h2>New Event</h2>
 
-  <%= form_with(model: @event, url: events_path, id: "create_event_form", data: { turbo: "false" }) do |form| %>
+  <%= form_with(model: @event, url: newEvent_path, id: "create_event_form", data: { turbo: "true" }) do |form| %>
     <!-- Title -->
     <div class="input-box">
         <%= form.label :title %>

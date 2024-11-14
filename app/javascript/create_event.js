@@ -54,7 +54,8 @@ document.addEventListener('turbo:load', () => {
   
         if (valid) {
           // All validations passed, submit the form via AJAX
-          submitForm();
+        //   submitForm();
+            form.submit();
         }
         // If not valid, the error messages have already been displayed
       });
