@@ -8,9 +8,9 @@ let originalNews = cachedNews.slice();
 //   }
 // });
 
-if(cachedNews.length > 0){
-  renderNews(cachedNews);
-}
+// if(cachedNews.length > 0){
+//   renderNews(cachedNews);
+// }
 
 document.addEventListener("turbo:load", () => {
   console.log("news turbo load");

@@ -8,7 +8,7 @@ let FilterSortlistenersAdded = false;
 let refreshButtonListenerAdded = false;
 let eventModal;
 
-validateCache();
+// validateCache();
 
 document.addEventListener("turbo:load", initializeHome);
 
