@@ -1,15 +1,13 @@
 class ProfileController < ApplicationController
   # require user login
   before_action :require_login
-  before_action :set_user, only: [:index, :edit, :update, :destroy]
+  before_action :set_user, only: [ :index, :edit, :update, :destroy ]
 
 
   def index
-  
   end
 
-  def edit 
-    
+  def edit
   end
 
   def destroy
@@ -27,9 +25,8 @@ class ProfileController < ApplicationController
       flash.now[:alert] = @user.errors.full_messages.join(" ")
       render :edit
     end
-    
   end
-  
+
   private
 
   def set_user
@@ -37,7 +34,6 @@ class ProfileController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :password_confirmation) 
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :password_confirmation)
   end
-
 end
