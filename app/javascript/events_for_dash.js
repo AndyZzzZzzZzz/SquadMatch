@@ -1,32 +1,58 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+(function() {
 let cachedDashEvents = JSON.parse(localStorage.getItem("cachedDashEvents")) || [];
 let originalDashEvents = cachedDashEvents.slice();
 let eventDashCardListenersAdded = false;
 let DashFilterSortListenersAdded = false;
+let refreshButtonDashListenerAdded = false;
 let eventDashModal;
 let cachedUserEvents = [];
 
-document.addEventListener("turbo:load", () => {
+document.addEventListener("turbo:load", initializeDashboard);
+
+document.addEventListener('turbo:before-cache', function() {
+  // Reset flags
   eventDashCardListenersAdded = false;
   DashFilterSortListenersAdded = false;
+  refreshButtonDashListenerAdded = false;
+
+  const eventModalElement = document.getElementById("event-modal-2");
+  if(eventModalElement){
+    eventDashModal = new bootstrap.Modal(eventModalElement, {
+      backdrop: 'static' // Explicitly setting backdrop
+    });
+  }
+
+});
+
+function initializeDashboard() {
+  eventDashCardListenersAdded = false;
+  DashFilterSortListenersAdded = false;
+  refreshButtonDashListenerAdded = false;
+  // Check if the URL has the refresh parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const shouldRefresh = urlParams.has('refresh');
 
   const userId = document.body.dataset.userId;
   if (!userId) return; 
   
   localStorage.setItem("loggedInUserId", userId);
-  // syncDashboardWithUserEvents();
   cachedUserEvents = syncDashboardWithUserEvents() || [];
   originalDashEvents = cachedUserEvents.slice();
   
+  if (shouldRefresh || cachedUserEvents.length == 0) {
+    initializeDashEvents(); 
 
-  if (cachedUserEvents.length > 0) {
-    renderDashEvents(cachedUserEvents); // Render from cache immediately
+    urlParams.delete('refresh');
+  const newQueryString = urlParams.toString();
+  const newUrl = newQueryString ? `${window.location.pathname}?${newQueryString}` : window.location.pathname;
+  window.history.replaceState({}, document.title, newUrl);
+  } else {
+    renderDashEvents(cachedUserEvents); 
     populateDashFilters();
     addSearchAndFilterListenersDash();
-  } else {
-    initializeDashEvents(); // Fetch events if not in cache
   }
   const eventModalElement = document.getElementById("event-modal-2");
   if(eventModalElement){
@@ -36,11 +62,11 @@ document.addEventListener("turbo:load", () => {
   }
 
   const refreshButton = document.getElementById("refresh-dash-button");
-  if(refreshButton){
+  if(refreshButton && !refreshButtonDashListenerAdded){
     refreshButton.addEventListener("click", refreshDashEvents);
+    refreshButtonDashListenerAdded = true;
   }
-
-});
+}
 
 function populateDashFilters(){
   const categories = new Set();
@@ -164,7 +190,7 @@ function filterAndRenderDashEvents() {
 }
 
 function refreshDashEvents(){
-  localStorage.removeItem(cachedDashEvents);
+  localStorage.removeItem("cachedDashEvents");
   cachedDashEvents = [];
   originalDashEvents = [];
 
@@ -174,11 +200,11 @@ function refreshDashEvents(){
 }
 
 function clearDashFilters(){
-  const searchInput = document.getElementById("search-input");
-  const categoryFilter = document.getElementById("category-filter");
-  const hostFilter = document.getElementById("host-filter");
-  const clubFilter = document.getElementById("club-filter");
-  const locationFilter = document.getElementById("location-filter");
+  const searchInput = document.getElementById("search-input-dash");
+  const categoryFilter = document.getElementById("category-filter-dash");
+  const hostFilter = document.getElementById("host-filter-dash");
+  const clubFilter = document.getElementById("club-filter-dash");
+  const locationFilter = document.getElementById("location-filter-dash");
 
   if (searchInput) searchInput.value = "";
   if (categoryFilter) categoryFilter.innerHTML = `<option value="">All Categories</option>`;
@@ -339,8 +365,18 @@ function openEventModal2(eventId) {
 
   // Update modal content
   document.getElementById("eventModalLabel").textContent = event.title;
-  document.getElementById("eventModalBody").textContent = event.description;
+  document.getElementById("eventDescription").textContent = event.description;
 
+  const eventLocation = event.location || 'Default Location';
+  document.getElementById("eventModalMap").innerHTML = `<iframe
+    width="100%"
+    height="100%"
+    frameborder="0"
+    style="border:0"
+    src="https://www.google.com/maps?q=${encodeURIComponent(eventLocation)}&output=embed"
+    allowfullscreen>
+  </iframe>`;
+  
   eventDashModal.show();
 }
-
+})();

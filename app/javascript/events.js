@@ -1,23 +1,59 @@
 import "@hotwired/turbo-rails"
 import "controllers"
-
+(function() {
 let cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
 let originalEvents = cachedEvents.slice();
-
 let eventCardListenersAdded = false; 
 let FilterSortlistenersAdded = false;
-
+let refreshButtonListenerAdded = false;
 let eventModal;
 
-document.addEventListener("turbo:load", () => {
+// validateCache();
+
+document.addEventListener("turbo:load", initializeHome);
+
+document.addEventListener('turbo:before-cache', function() {
+  // Reset flags
+  eventCardListenersAdded = false;
+  FilterSortlistenersAdded = false;
+  refreshButtonListenerAdded = false;
+
+  // Remove event listeners if necessary
+  const refreshButton = document.getElementById("refresh-button");
+  if (refreshButton) {
+    refreshButton.removeEventListener("click", refreshEvents);
+  }
+
+});
+
+function validateCache() {
+  cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+  console.log("cachedEvents: ", cachedEvents);
+  originalEvents = cachedEvents.slice();
   eventCardListenersAdded = false; 
   FilterSortlistenersAdded = false;
-  if (cachedEvents.length > 0) {
+  refreshButtonListenerAdded = false;
+
+  if (cachedEvents.length != 0) {
     renderEvents(cachedEvents); // Render from cache immediately
     populateFilters();
     addSearchAndFilterListeners();
+  }
+}
+
+function initializeHome() {
+  cachedEvents = JSON.parse(localStorage.getItem("cachedEvents")) || [];
+  originalEvents = cachedEvents.slice();
+  eventCardListenersAdded = false; 
+  FilterSortlistenersAdded = false;
+  refreshButtonListenerAdded = false;
+
+  if (cachedEvents.length == 0) {
+    initializeEvents();
   } else {
-    initializeEvents(); // Fetch events if not in cache
+    renderEvents(cachedEvents); // Render from cache immediately
+    populateFilters();
+    addSearchAndFilterListeners();
   }
   const eventModalElement = document.getElementById("event-modal");
   if(eventModalElement){
@@ -27,15 +63,11 @@ document.addEventListener("turbo:load", () => {
   }
 
   const refreshButton = document.getElementById("refresh-button");
-  if (refreshButton){
+  if (refreshButton && !refreshButtonListenerAdded) {
     refreshButton.addEventListener("click", refreshEvents);
+    refreshButtonListenerAdded = true;
   }
   
-});
-
-function arraysAreEqual(arr1, arr2) {
-  if (arr1.length !== arr2.length) return false;
-  return arr1.every((event, index) => event.id === arr2[index].id);
 }
 
 function populateFilters(){
@@ -150,7 +182,7 @@ function filterAndRenderEvents() {
 
 
 function refreshEvents(){
-  localStorage.removeItem(cachedEvents);
+  localStorage.removeItem("cachedEvents");
   cachedEvents = [];
   originalEvents = [];
 
@@ -196,9 +228,6 @@ function initializeEvents() {
       .then((events) => {
         // Hide the loading message
         console.log("API Response:", events);
-        loadingMessage.style.display = "none";
-        
-        if (arraysAreEqual(events, cachedEvents)) return; 
         
 
         //overwrite event array
@@ -214,7 +243,6 @@ function initializeEvents() {
       })
       .catch((error) => {
         console.error("Error fetching events:", error);
-        loadingMessage.style.display = "none"; // Hide loading message on error
         if(eventsContainer){
           eventsContainer.innerHTML = `<p class="text-center text-danger">Failed to load events. Please try again later.</p>`;
         }
@@ -260,7 +288,24 @@ function initializeEvents() {
     const eventTypeName = eventType.type_name || 'Event';
     const loadParticipants = event.users ? event.users.map(user => nameToAvatar(user.first_name, user.last_name)).join("")
     : '<div> No participants in the event </div>';
-  
+    
+    // Check if user logged in and retrieve user id
+    const userId = document.body.dataset.userId;
+    const loggedIn = document.body.dataset.loggedIn === 'true';
+    const isParticipant = event.users && loggedIn && event.users.some(user => user.id == userId);
+    // console.log("event user is participatn: ", isParticipant)
+
+    let buttonHTML = '';
+    if (loggedIn) {
+      if (isParticipant) {
+        buttonHTML = '<button class="btn btn-secondary join-button disabled" disabled>Joined</button>';
+      } else {
+        buttonHTML = '<button class="btn btn-primary join-button">Join</button>';
+      }
+    } else {
+      buttonHTML = '<button class="btn btn-primary join-button disabled">Login to Join</button>';
+    }
+
     return `
       <article class="card custom-card mb-3 hover-shadow" role="article" data-event-id="${event.id}">
     <div class="card-body">
@@ -287,8 +332,9 @@ function initializeEvents() {
         </div>` : ""}
 
         <!-- Row 3: Date and Time -->
-        <div class="d-flex">
+        <div class="d-flex justify-content-between align-items-center">
           <p class="card-text"><i class="bi bi-calendar-event icon-yellow"></i> ${eventDate}</p>
+          ${buttonHTML}
         </div>
       </div>
 
@@ -304,6 +350,60 @@ function initializeEvents() {
   `;
 }
 
+function handleJoinButtonClick(event, eventId) {
+  event.stopPropagation(); // Prevent the card click event
+
+  const loggedIn = document.body.dataset.loggedIn === 'true';
+
+  if (loggedIn) {
+    // Send AJAX request to join the event
+    joinEvent(eventId, event.target);
+  } else {
+    // Display a message prompting the user to log in
+    alert("Please log in to join the event.");
+  }
+}
+
+function joinEvent(eventId, buttonElement) {
+  // Disable the button to prevent multiple clicks
+  buttonElement.disabled = true;
+  buttonElement.textContent = 'Joining...';
+
+  fetch(`/events/${eventId}/join`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    },
+    body: JSON.stringify({ event_id: eventId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'success') {
+      // Update the button to show that the user has joined
+      buttonElement.classList.remove('btn-primary');
+      buttonElement.classList.add('btn-secondary', 'disabled');
+      buttonElement.disabled = true;
+      buttonElement.textContent = 'Joined';
+      refreshEvents();
+
+      // Optionally, update the participant list on the card
+      // updateParticipantList(eventId);
+    } else {
+      // Handle errors
+      alert(data.message || 'An error occurred while joining the event.');
+      buttonElement.disabled = false;
+      buttonElement.textContent = 'Join';
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred while joining the event.');
+    buttonElement.disabled = false;
+    buttonElement.textContent = 'Join';
+  });
+}
+
 // Function to add event listeners to event cards
 function addEventCardListeners() {
 
@@ -317,7 +417,11 @@ function addEventCardListeners() {
       const card = event.target.closest("[data-event-id]");
       if (card) {
         const eventId = card.getAttribute("data-event-id");
-        openEventModal(eventId);
+        if (event.target.classList.contains("join-button")) {
+          handleJoinButtonClick(event, eventId);
+        } else {
+          openEventModal(eventId);
+        }
       }
     });
   }
@@ -330,7 +434,20 @@ function openEventModal(eventId) {
 
   // Update modal content
   document.getElementById("eventModalLabel").textContent = event.title;
-  document.getElementById("eventModalBody").textContent = event.description;
+  document.getElementById("eventDescription").textContent = event.description;
+
+  // Update map
+  const eventLocation = event.location || 'Default Location';
+  document.getElementById("eventModalMap").innerHTML = `<iframe
+    width="100%"
+    height="100%"
+    frameborder="0"
+    style="border:0"
+    src="https://www.google.com/maps?q=${encodeURIComponent(eventLocation)}&output=embed"
+    allowfullscreen>
+  </iframe>`;
 
   eventModal.show();
 }
+
+})();

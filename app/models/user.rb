@@ -2,8 +2,8 @@ class User < ApplicationRecord
     # set and authenticate against a BCrypt password
     has_secure_password
 
-
-    has_many :participants
+    has_many :hosting_events, class_name: "Event", foreign_key: "host_id", dependent: :destroy
+    has_many :participants, dependent: :destroy
     has_many :events, through: :participants
 
     # validation

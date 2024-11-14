@@ -1,0 +1,112 @@
+<!-- app/views/events/new.html.erb -->
+
+<div class="event-container container">
+  <h2>New Event</h2>
+
+  <%= form_with(model: @event, url: newEvent_path, id: "create_event_form", data: { turbo: "true" }) do |form| %>
+    <!-- Title -->
+    <div class="input-box">
+        <%= form.label :title %>
+        <%= form.text_field :title, 
+                id: "event_title", 
+                class: "form-control", 
+                    required: true %>
+        <% if @event.errors[:title].any? %>
+        <span class="error-message"><%= @event.errors[:title].first %></span>
+    <% end %>
+    </div>
+
+    <!-- Description -->
+    <div class="">
+        <%= form.label :description %>
+        <%= form.text_area :description, 
+            id: "event_description", 
+            class: "form-control", 
+            rows: 5,
+            required: true %>
+        <% if @event.errors[:description].any? %>
+        <span class="error-message"><%= @event.errors[:description].first %></span>
+    <% end %>
+    </div>
+
+    <!-- Event Date and Time -->
+    <div class="input-box">
+        <%= form.label :event_datetime, "Event Date and Time" %>
+        <%= form.datetime_field :event_datetime, 
+        id: "event_event_datetime", 
+        class: "form-control", 
+            required: true %>
+        <% if @event.errors[:event_datetime].any? %>
+        <span class="error-message"><%= @event.errors[:event_datetime].first %></span>
+    <% end %>
+    </div>
+
+    <!-- Capacity -->
+    <div class="input-box">
+      <%= form.label :capacity %>
+      <%= form.number_field :capacity, id: "event_capacity", class: "form-control", min: 1, required: true %>
+      <% if @event.errors[:capacity].any? %>
+        <span class="error-message"><%= @event.errors[:capacity].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Location -->
+    <div class="input-box">
+      <%= form.label :location %>
+      <%= form.text_field :location, id: "event_location", class: "form-control", required: true %>
+      <% if @event.errors[:location].any? %>
+        <span class="error-message"><%= @event.errors[:location].first %></span>
+      <% end %>
+    </div>
+
+    <!-- Category -->
+    <div class="input-box">
+      <%= form.label :category_id, "Category" %>
+      <%= form.collection_select :category_id, @categories, :id, :name,
+          { prompt: "Select Category" },
+          { id: "event_category_id", class: "form-control", required: true } %>
+        <% if @event.errors[:category_id].any? %>
+            <span class="error-message"><%= @event.errors[:category_id].first %></span>
+        <% end %>
+    </div>
+
+    <!-- Event Type -->
+    <div class="input-box">
+      <%= form.label :event_type_id, "Event Type" %>
+      <%= form.collection_select :event_type_id, @event_types, :id, :type_name,
+          { prompt: "Select Event Type" },
+          { id: "event_event_type_id", class: "form-control", required: true } %>
+        <% if @event.errors[:event_type_id].any? %>
+            <span class="error-message"><%= @event.errors[:event_type_id].first %></span>
+        <% end %>
+    </div>
+
+    <!-- Club (Optional) -->
+    <div class="input-box">
+      <%= form.label :club_id, "Club (Optional)" %>
+      <%= form.collection_select :club_id, @clubs, :id, :club_name,
+          { prompt: "Select Club" },
+          { id: "event_club_id", class: "form-control" } %>
+        <% if @event.errors[:club_id].any? %>
+            <span class="error-message"><%= @event.errors[:club_id].first %></span>
+        <% end %>
+    </div>
+
+    <!-- Submit Button -->
+    <!--
+    <div class="input-box button">
+      <%= form.submit "Create Event", class: "btn event-btn" %>
+      <%= link_to "Cancel", dashboard_path(refresh: true), class: "btn btn-secondary event-btn" %>
+    </div>
+    -->
+    <div class="input-box button">
+      <%= form.submit 'Create Event', class: 'btn' %>
+    </div>
+
+    <div class="text">
+      <%= link_to 'Cancel', dashboard_path(refresh: true) %>
+    </div>
+  <% end %>
+</div>
+
+

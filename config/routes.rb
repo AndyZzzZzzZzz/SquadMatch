@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "events/new"
+  get "events/create"
+  get "events/index"
   get "users/new"
   get "users/create"
   root "home#index"
@@ -7,7 +10,13 @@ Rails.application.routes.draw do
   resources :login, only: [ :index ]
   resources :clubs, only: [ :index ]
   resources :dashboard, only: [ :index ]
-  resources :profile, only: [ :index ]
+  resources :profile, only: [ :index, :edit, :update, :destroy ]
+  resources :events, only: [ :new, :create, :edit, :update, :destroy ] do
+    member do
+      post "join"
+    end
+  end
+
 
   get "login", to: "login#index", as: "login"
   post "login", to: "login#create"
@@ -16,9 +25,13 @@ Rails.application.routes.draw do
   get "signup", to: "users#new", as: "signup"
   post "signup", to: "users#create"
 
+
   get "dashboard", to: "dashboard#index", as: "dashboard"
-  get "profile", to: "profile#index", as: "profile"
+  # get "profile", to: "profile#index", as: "profile"
   get "home", to: "home#index", as: "home"
+
+  get "newEvent", to: "events#new", as: "newEvent"
+  post "newEvent", to: "events#create"
 
   # Routes for AJAX uniqueness checks
   get "users/check_username", to: "users#check_username"
@@ -28,6 +41,11 @@ Rails.application.routes.draw do
   namespace :api do
     resources :events, only: [ :index ]
     resources :news, only: [ :index ]
+    # resources :events do
+    #   member do
+    #     post 'join'
+    #   end
+    # end
   end
 
   # Health check endpoint

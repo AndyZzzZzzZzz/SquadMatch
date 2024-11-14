@@ -31,7 +31,14 @@
       </select>
     </div>
     <div class="col-md-1">
-      <button class="btn btn-primary" id="refresh-dash-button"> <i class="bi bi-arrow-clockwise"></i> </button>
+      <div class="d-flex justify-content-between">
+        <button class="btn btn-primary" style="width: 48%;" id="refresh-dash-button" data-bs-toggle="tooltip" data-bs-placement="top" title="Refresh">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+        <%= link_to new_event_path, class: "btn btn-success", style: "width: 48%;", id: "create-event-button", data: { bs_toggle: "tooltip", bs_placement: "top", bs_title: "Create a new event" } do %>
+          <i class="bi bi-plus-lg"></i>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
